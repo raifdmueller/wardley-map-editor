@@ -1,0 +1,58 @@
+/* Wardley Map Editor Styles */
+/* To be developed during live session */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+header p {
+    margin: 0.5rem 0 0 0;
+    opacity: 0.8;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#editor-container {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+    border-top: 1px solid #eee;
+}
+
+/* Placeholder styles - will be replaced during live development */
+.coming-soon {
+    color: #7f8c8d;
+    font-style: italic;
+}

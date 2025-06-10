@@ -1,0 +1,118 @@
+== ADR-003: Modular JavaScript Architecture mit ES6 Classes
+
+|===
+| Date:    h| June 10, 2025
+| Authors: h| Ralf D. Müller & Claude
+| Status:  h| Accepted
+|===
+
+=== Problem Description and Context
+
+Nach den Entscheidungen für SVG-Rendering und separates Data Model muss die JavaScript-Code-Struktur für die 1-Stunden-Entwicklung definiert werden.
+
+**Spezielle Anforderungen:**
+- **AI-Development**: Claude muss effizient mit der Code-Struktur arbeiten können
+- **Live-Debugging**: Code muss während Stream schnell versteh- und änderbar sein
+- **Time-to-Market**: Struktur darf Entwicklungsgeschwindigkeit nicht bremsen
+- **Modularität**: Separate Concerns entsprechend unserem Data Model Ansatz
+
+=== Alternative Evaluation (Pugh Matrix)
+
+Als Baseline dient **Monolithic Approach** - alles in einer `app.js` Datei.
+
+[cols="4*", options="header"]
+|===
+| Kriterium | Monolithic (Baseline) | Modular Files | ES6 Classes
+| AI-Development Efficiency | 0 | +1 | +2
+| Live-Debugging Clarity | 0 | +1 | +1
+| Implementation Speed | 0 | -1 | 0
+| Code Organization | 0 | +1 | +2
+| Browser Compatibility | 0 | 0 | 0
+| Refactoring Ease | 0 | +2 | +2
+| Stream Comprehension | 0 | 0 | +1
+| **Total Score** | **0** | **+4** | **+8**
+|===
+
+==== Verworfene Alternativen:
+
+**Monolithic Approach**: Eine große `app.js` Datei mit allen Funktionen. Einfach zu deployen, aber schwer zu strukturieren bei wachsender Komplexität. Erschwert parallele Konzeptentwicklung.
+
+**Modular Files**: Separate Dateien für verschiedene Concerns (`model.js`, `renderer.js`, `exporter.js`). Bessere Organisation, aber erfordert mehrere `<script>` Tags und Dependency-Management.
+
+=== Decision
+
+**ES6 Classes mit modularer Struktur** in separaten Dateien wird gewählt.
+
+==== Technische Umsetzung:
+
+**File Structure:**
+```
+src/
+├── index.html
+├── styles.css
+├── app.js              // Main application bootstrap
+├── model/
+│   └── WardleyMap.js   // Data model with Map, Component, Connection classes
+├── renderer/
+│   └── SVGRenderer.js  // SVG rendering and DOM manipulation
+├── editor/
+│   └── MapEditor.js    // User interaction and editing logic
+└── export/
+    └── DrawIOExporter.js // XML export functionality
+```
+
+**Class Architecture:**
+```javascript
+// Clear separation of concerns
+class WardleyMap { /* Data model */ }
+class Component { /* Individual component */ }
+class SVGRenderer { /* Rendering logic */ }
+class MapEditor { /* Interaction handling */ }
+class DrawIOExporter { /* Export functionality */ }
+```
+
+==== Module Loading Strategy:
+```html
+<!-- ES6 modules for clean imports -->
+<script type="module" src="app.js"></script>
+```
+
+=== Decision
+
+**ES6 Classes mit modularer Datei-Struktur** wird implementiert.
+
+=== Consequences
+
+==== Positive Effects
+- **AI-Efficiency**: Klare Klassenstruktur ist optimal für AI-Code-Generation
+- **Debugging**: Separate Files ermöglichen isolierte Entwicklung und Tests
+- **Code Clarity**: OOP-Struktur macht Abhängigkeiten und Verantwortlichkeiten explizit
+- **Stream Value**: Publikum sieht professionelle Software-Architektur live
+- **Extensibility**: Neue Features können als neue Klassen hinzugefügt werden
+
+==== Risks
+- **Browser Support**: ES6 modules nicht in älteren Browsern (akzeptabel laut Constraints)
+- **Setup Overhead**: Mehr initiale Struktur als monolithischer Ansatz
+- **Loading Complexity**: Multiple HTTP-Requests für JavaScript-Files
+
+==== Technical Debt
+- **Build Process**: Später eventuell Bundling für Performance notwendig
+- **Dependency Management**: Aktuell manuelle Import-Reihenfolge
+- **Testing**: Mocking wird komplexer bei Klassen-Abhängigkeiten
+
+=== Additional Information
+
+Diese Entscheidung priorisiert **AI-Development-Efficiency** und **Code-Qualität** über minimale Komplexität. Die Struktur ermöglicht es Claude, effizienter separate Concerns zu entwickeln und macht die Live-Entwicklung für das Publikum lehrreicher.
+
+**Entwicklungsreihenfolge:**
+1. `WardleyMap.js` - Core Data Model
+2. `SVGRenderer.js` - Basic SVG Setup
+3. `MapEditor.js` - User Interactions
+4. `DrawIOExporter.js` - Export Functionality
+
+**ES6 Features verwendet:**
+- Classes with constructor/methods
+- Import/Export modules
+- Arrow functions
+- Destructuring assignment
+- Template literals

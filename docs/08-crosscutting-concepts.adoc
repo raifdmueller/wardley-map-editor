@@ -1,0 +1,552 @@
+== Chapter 8: Cross-cutting Concepts
+
+=== 8.1 Domain Concepts
+
+==== Wardley Map Coordinate System
+
+The application manages two coordinate systems that must be kept synchronized:
+
+**Wardley Semantics (Business Domain):**
+```javascript
+// Business meaning coordinates
+const wardleyCoordinates = {
+  evolution: 0.0 - 1.0,    // 0=Genesis, 1=Commodity
+  visibility: 0.0 - 1.0    // 0=Infrastructure, 1=User-Visible
+};
+```
+
+**SVG Pixel Coordinates (Rendering Domain):**
+```javascript
+// Visual representation coordinates
+const pixelCoordinates = {
+  x: evolution * CANVAS_WIDTH + MARGIN_LEFT,
+  y: (1 - visibility) * CANVAS_HEIGHT + MARGIN_TOP  // Y-axis inverted
+};
+```
+
+**Transformation Functions:**
+```javascript
+class CoordinateMapper {
+  static wardleyToPixel(evolution, visibility) {
+    return {
+      x: evolution * CONFIG.CANVAS_WIDTH + CONFIG.MARGIN_LEFT,
+      y: (1 - visibility) * CONFIG.CANVAS_HEIGHT + CONFIG.MARGIN_TOP
+    };
+  }
+  
+  static pixelToWardley(x, y) {
+    return {
+      evolution: (x - CONFIG.MARGIN_LEFT) / CONFIG.CANVAS_WIDTH,
+      visibility: 1 - ((y - CONFIG.MARGIN_TOP) / CONFIG.CANVAS_HEIGHT)
+    };
+  }
+}
+```
+
+==== Component Evolution Stages
+
+Wardley Maps use standardized evolution stages with semantic meaning:
+
+[cols="2,1,3,2", options="header"]
+|===
+| Stage | Evolution Value | Characteristics | Visual Positioning
+| **Genesis** | 0.0 - 0.25 | Novel, uncertain, rapidly changing | Left side of map
+| **Custom** | 0.25 - 0.50 | Emerging practices, customized solutions | Left-center
+| **Product** | 0.50 - 0.75 | Standardized products and services | Right-center  
+| **Commodity** | 0.75 - 1.0 | Utility, standardized, well-defined | Right side of map
+|===
+
+=== 8.2 User Experience Patterns
+
+==== Interaction Feedback
+
+**Immediate Visual Feedback:**
+```javascript
+// Hover states for interactive elements
+.component:hover {
+  stroke-width: 2px;
+  stroke: #007acc;
+  cursor: move;
+}
+
+// Drag operation visual feedback
+.component.dragging {
+  opacity: 0.8;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+// Selection states
+.component.selected {
+  stroke: #ff6b35;
+  stroke-width: 2px;
+}
+```
+
+**Progressive Disclosure:**
+- Basic functionality visible immediately
+- Advanced features revealed through interaction
+- Context menus for component-specific actions
+- Tooltips for evolution stage guidance
+
+**Error Communication:**
+```javascript
+class UserFeedback {
+  static showError(message) {
+    this.showNotification(message, 'error', 5000);
+  }
+  
+  static showWarning(message) {
+    this.showNotification(message, 'warning', 3000);
+  }
+  
+  static showSuccess(message) {
+    this.showNotification(message, 'success', 2000);
+  }
+}
+```
+
+=== 8.3 Error Handling Strategy
+
+==== Error Categories and Responses
+
+**User Input Errors (Recoverable):**
+```javascript
+// Validation with user-friendly recovery
+function validateComponentPosition(x, y) {
+  if (x < 0 || x > CANVAS_WIDTH) {
+    const correctedX = Math.max(0, Math.min(CANVAS_WIDTH, x));
+    UserFeedback.showWarning(`Component moved to valid horizontal position`);
+    return { x: correctedX, y, corrected: true };
+  }
+  return { x, y, corrected: false };
+}
+```
+
+**Business Logic Errors (Preventable):**
+```javascript
+// Prevent invalid operations
+function addConnection(sourceId, targetId) {
+  if (sourceId === targetId) {
+    UserFeedback.showError("Components cannot connect to themselves");
+    return null;
+  }
+  
+  if (this.wouldCreateCycle(sourceId, targetId)) {
+    UserFeedback.showError("Connection would create circular dependency");
+    return null;
+  }
+  
+  return new Connection(sourceId, targetId);
+}
+```
+
+**System Errors (Graceful Degradation):**
+```javascript
+// Fallback mechanisms
+function exportToDrawIO(wardleyMap) {
+  try {
+    const xml = DrawIOExporter.generate(wardleyMap);
+    const url = `https://app.diagrams.net/?xml=${encodeURIComponent(xml)}`;
+    window.open(url, '_blank');
+  } catch (webExportError) {
+    try {
+      // Fallback to file download
+      downloadAsFile(xml, 'wardley-map.xml');
+      UserFeedback.showWarning("Opened as download instead of web editor");
+    } catch (downloadError) {
+      UserFeedback.showError("Export failed. Please try again.");
+      console.error("Export failure:", downloadError);
+    }
+  }
+}
+```
+
+==== Error Boundary Pattern
+
+```javascript
+class ErrorBoundary {
+  static wrap(operation, fallback, context = '') {
+    try {
+      return operation();
+    } catch (error) {
+      console.error(`Error in ${context}:`, error);
+      
+      // Log for debugging in development
+      if (CONFIG.DEBUG_MODE) {
+        console.trace();
+      }
+      
+      // User-friendly fallback
+      if (typeof fallback === 'function') {
+        return fallback(error);
+      }
+      
+      UserFeedback.showError(`An error occurred. Please try again.`);
+      return null;
+    }
+  }
+}
+```
+
+=== 8.4 State Management Patterns
+
+==== Observer Pattern for Model-View Synchronization
+
+**Event Publisher (Model Layer):**
+```javascript
+class EventEmitter {
+  constructor() {
+    this.listeners = new Map();
+  }
+  
+  on(event, callback) {
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, []);
+    }
+    this.listeners.get(event).push(callback);
+  }
+  
+  emit(event, data) {
+    const callbacks = this.listeners.get(event) || [];
+    callbacks.forEach(callback => {
+      ErrorBoundary.wrap(
+        () => callback(data),
+        (error) => console.error(`Event handler error for ${event}:`, error),
+        `event:${event}`
+      );
+    });
+  }
+}
+```
+
+**Model Integration:**
+```javascript
+class WardleyMap extends EventEmitter {
+  addComponent(component) {
+    this.components.set(component.id, component);
+    this.emit('componentAdded', component);
+  }
+  
+  updateComponent(id, updates) {
+    const component = this.components.get(id);
+    Object.assign(component, updates);
+    this.emit('componentUpdated', component);
+  }
+}
+```
+
+**View Synchronization:**
+```javascript
+class SVGRenderer {
+  constructor(wardleyMap) {
+    this.wardleyMap = wardleyMap;
+    
+    // Subscribe to model changes
+    wardleyMap.on('componentAdded', (component) => this.renderComponent(component));
+    wardleyMap.on('componentUpdated', (component) => this.updateComponent(component));
+    wardleyMap.on('componentRemoved', (componentId) => this.removeComponent(componentId));
+  }
+}
+```
+
+==== State Validation and Invariants
+
+**Model Invariants:**
+```javascript
+class WardleyMap {
+  validateInvariants() {
+    // All components have valid coordinates
+    for (const component of this.components.values()) {
+      if (component.evolution < 0 || component.evolution > 1) {
+        throw new Error(`Invalid evolution value: ${component.evolution}`);
+      }
+      if (component.visibility < 0 || component.visibility > 1) {
+        throw new Error(`Invalid visibility value: ${component.visibility}`);
+      }
+    }
+    
+    // All connections reference existing components
+    for (const connection of this.connections.values()) {
+      if (!this.components.has(connection.sourceId)) {
+        throw new Error(`Connection references missing source: ${connection.sourceId}`);
+      }
+      if (!this.components.has(connection.targetId)) {
+        throw new Error(`Connection references missing target: ${connection.targetId}`);
+      }
+    }
+  }
+}
+```
+
+=== 8.5 Performance Patterns
+
+==== Efficient DOM Manipulation
+
+**Batch Updates:**
+```javascript
+class SVGRenderer {
+  batchUpdate(updates) {
+    // Collect all DOM changes
+    const fragment = document.createDocumentFragment();
+    
+    updates.forEach(update => {
+      const element = this.applyUpdate(update);
+      if (element) fragment.appendChild(element);
+    });
+    
+    // Single DOM operation
+    this.svgContainer.appendChild(fragment);
+  }
+}
+```
+
+**Throttled Events:**
+```javascript
+class DragHandler {
+  constructor() {
+    this.throttledMouseMove = this.throttle(this.handleMouseMove.bind(this), 16); // 60fps
+  }
+  
+  throttle(func, delay) {
+    let timeoutId;
+    let lastExecTime = 0;
+    
+    return function (...args) {
+      const currentTime = Date.now();
+      
+      if (currentTime - lastExecTime > delay) {
+        func.apply(this, args);
+        lastExecTime = currentTime;
+      } else {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+          lastExecTime = Date.now();
+        }, delay - (currentTime - lastExecTime));
+      }
+    };
+  }
+}
+```
+
+==== Memory Management
+
+**Event Listener Cleanup:**
+```javascript
+class Component {
+  destroy() {
+    // Remove DOM event listeners
+    if (this.domElement) {
+      this.domElement.removeEventListener('mousedown', this.handleMouseDown);
+      this.domElement.removeEventListener('mouseup', this.handleMouseUp);
+    }
+    
+    // Clear model references
+    this.wardleyMap = null;
+    this.domElement = null;
+  }
+}
+```
+
+**Object Pooling for Temporary Objects:**
+```javascript
+class PositionPool {
+  static pool = [];
+  
+  static acquire(x = 0, y = 0) {
+    const position = this.pool.pop() || { x: 0, y: 0 };
+    position.x = x;
+    position.y = y;
+    return position;
+  }
+  
+  static release(position) {
+    this.pool.push(position);
+  }
+}
+```
+
+=== 8.6 Security Considerations
+
+==== Input Sanitization
+
+**XSS Prevention:**
+```javascript
+function escapeXML(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function sanitizeComponentName(name) {
+  // Remove potentially dangerous characters
+  return name.replace(/[<>\"'&]/g, '').trim().substring(0, 50);
+}
+```
+
+**URL Safety:**
+```javascript
+function createDrawIOURL(xml) {
+  try {
+    // Validate XML before encoding
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xml, 'application/xml');
+    const errorNode = doc.querySelector('parsererror');
+    
+    if (errorNode) {
+      throw new Error('Invalid XML structure');
+    }
+    
+    const encodedXML = encodeURIComponent(xml);
+    
+    // Validate URL length (browsers have limits)
+    if (encodedXML.length > 32768) {
+      throw new Error('Generated XML too large for URL');
+    }
+    
+    return `https://app.diagrams.net/?xml=${encodedXML}`;
+  } catch (error) {
+    throw new Error(`URL generation failed: ${error.message}`);
+  }
+}
+```
+
+=== 8.7 Logging and Debugging
+
+==== Development vs Production Logging
+
+```javascript
+class Logger {
+  static debug(message, data = null) {
+    if (CONFIG.DEBUG_MODE) {
+      console.log(`[DEBUG] ${message}`, data);
+    }
+  }
+  
+  static info(message, data = null) {
+    console.info(`[INFO] ${message}`, data);
+  }
+  
+  static warn(message, data = null) {
+    console.warn(`[WARN] ${message}`, data);
+  }
+  
+  static error(message, error = null) {
+    console.error(`[ERROR] ${message}`, error);
+    
+    // In production, could send to error tracking service
+    if (CONFIG.PRODUCTION_MODE && CONFIG.ERROR_TRACKING_URL) {
+      this.sendErrorToTracking(message, error);
+    }
+  }
+}
+```
+
+==== Performance Monitoring
+
+```javascript
+class PerformanceMonitor {
+  static time(label) {
+    if (CONFIG.DEBUG_MODE) {
+      console.time(label);
+    }
+  }
+  
+  static timeEnd(label) {
+    if (CONFIG.DEBUG_MODE) {
+      console.timeEnd(label);
+    }
+  }
+  
+  static measure(name, operation) {
+    const startTime = performance.now();
+    const result = operation();
+    const endTime = performance.now();
+    
+    Logger.debug(`${name} took ${(endTime - startTime).toFixed(2)}ms`);
+    
+    return result;
+  }
+}
+```
+
+=== 8.8 Configuration Management
+
+==== Environment Configuration
+
+```javascript
+const CONFIG = {
+  // Canvas dimensions
+  CANVAS_WIDTH: 800,
+  CANVAS_HEIGHT: 600,
+  MARGIN_LEFT: 50,
+  MARGIN_TOP: 50,
+  
+  // Interaction settings
+  DOUBLE_CLICK_DELAY: 300,
+  DRAG_THRESHOLD: 5,
+  
+  // Performance settings
+  MAX_COMPONENTS: 100,
+  THROTTLE_DELAY: 16, // 60fps
+  
+  // Feature flags
+  DEBUG_MODE: window.location.hostname === 'localhost',
+  ENABLE_KEYBOARD_SHORTCUTS: true,
+  ENABLE_TOUCH_SUPPORT: false,
+  
+  // Export settings
+  DRAWIO_BASE_URL: 'https://app.diagrams.net',
+  MAX_XML_SIZE: 32768,
+  
+  // Styling
+  COMPONENT_COLORS: {
+    genesis: '#ff9999',
+    custom: '#ffcc99', 
+    product: '#99ccff',
+    commodity: '#99ff99'
+  }
+};
+```
+
+=== 8.9 Testing Strategies
+
+==== Unit Testing Patterns
+
+```javascript
+// Model testing (business logic)
+describe('WardleyMap', () => {
+  test('should maintain coordinate invariants', () => {
+    const map = new WardleyMap();
+    const component = new Component('test', 'Test Component', 0.5, 0.7);
+    
+    map.addComponent(component);
+    
+    expect(component.evolution).toBeGreaterThanOrEqual(0);
+    expect(component.evolution).toBeLessThanOrEqual(1);
+    expect(component.visibility).toBeGreaterThanOrEqual(0);
+    expect(component.visibility).toBeLessThanOrEqual(1);
+  });
+});
+```
+
+**Integration Testing:**
+```javascript
+// DOM integration testing
+describe('SVGRenderer', () => {
+  test('should synchronize with model changes', () => {
+    const container = document.createElement('div');
+    const map = new WardleyMap();
+    const renderer = new SVGRenderer(map, container);
+    
+    const component = new Component('test', 'Test', 0.5, 0.5);
+    map.addComponent(component);
+    
+    const domElement = container.querySelector('[data-component-id="test"]');
+    expect(domElement).toBeTruthy();
+  });
+});
+```

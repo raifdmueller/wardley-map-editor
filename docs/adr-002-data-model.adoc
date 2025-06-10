@@ -1,0 +1,117 @@
+== ADR-002: Separate Data Model für Wardley Map State Management
+
+|===
+| Date:    h| June 10, 2025
+| Authors: h| Ralf D. Müller & Claude
+| Status:  h| Accepted
+|===
+
+=== Problem Description and Context
+
+Nach der Entscheidung für SVG-basierte Rendering muss die Datenstruktur für die Wardley Map definiert werden. Live-Editing Performance ist prioritär, aber die Lösung soll auch als Grundlage für zukünftige Erweiterungen dienen.
+
+Anforderungen:
+- **Live-Editing**: Schnelle Reaktion bei Drag&Drop und Interaktionen
+- **Erweiterbarkeit**: Basis für Features wie Undo/Redo, Persistence, Validierung
+- **Debugging**: Datenstruktur soll im Browser Inspector sichtbar sein
+- **Implementation Speed**: Muss in 1-Stunden-Session umsetzbar sein
+
+=== Alternative Evaluation (Pugh Matrix)
+
+Als Baseline dient **Direct DOM** - SVG-Attribute als einzige Datenquelle.
+
+[cols="4*", options="header"]
+|===
+| Kriterium | Direct DOM (Baseline) | Separate Data Model | Hybrid Approach
+| Drag&Drop Performance | 0 | -1 | -1
+| Event-Handling Einfachheit | 0 | +1 | 0
+| Live-Debugging | 0 | +2 | +1
+| Implementierungsgeschwindigkeit | 0 | -1 | -2
+| State-Synchronisation | 0 | -2 | -2
+| Undo/Redo Vorbereitung | 0 | +2 | +1
+| Memory Footprint | 0 | -1 | -1
+| **Total Score** | **0** | **0** | **-4**
+|===
+
+==== Verworfene Alternativen:
+
+**Direct DOM**: Komponenten-Daten nur in SVG-Attributen (`x`, `y`, `data-name`). Einfach zu implementieren, aber schwer erweiterbar. Keine zentrale Datenstruktur für komplexere Operationen.
+
+**Hybrid Approach**: Teilweise Daten in DOM, teilweise in JavaScript-Objekten. Führt zu Komplexität bei Synchronisation und ist fehleranfällig.
+
+=== Decision
+
+**Separate Data Model** mit JavaScript-Objekten als Master-Datenquelle wird gewählt.
+
+==== Technische Umsetzung:
+
+[source,javascript]
+----
+const mapModel = {
+  meta: {
+    title: "My Wardley Map",
+    author: "User",
+    created: new Date()
+  },
+  components: [
+    {
+      id: "comp-1",
+      name: "User Need",
+      x: 100,
+      y: 50,
+      evolution: 0.9,
+      visibility: 0.8
+    }
+  ],
+  connections: [
+    {
+      id: "conn-1", 
+      from: "comp-1",
+      to: "comp-2",
+      type: "dependency"
+    }
+  ]
+};
+----
+
+==== Synchronisation-Strategie:
+- **Model → DOM**: Bei Datenänderung DOM-Update
+- **DOM → Model**: Bei User-Interaktion Model-Update
+- **Single Source of Truth**: JavaScript-Model ist autoritativ
+
+=== Consequences
+
+==== Positive Effects
+- **Erweiterbarkeit**: Basis für Undo/Redo, Serialisierung, Validierung
+- **Debugging**: Datenstruktur über `console.log(mapModel)` inspizierbar
+- **Testbarkeit**: Model-Logik isoliert testbar
+- **Export-Freundlich**: Strukturierte Daten → draw.io XML Transformation
+- **State Management**: Zentrale Kontrolle über alle Map-Änderungen
+
+==== Risks
+- **Synchronisation-Overhead**: DOM und Model müssen konsistent gehalten werden
+- **Initial Complexity**: Mehr Setup-Code als Direct DOM Approach
+- **Performance**: Zusätzliche Abstraktionsschicht kann bei vielen Updates langsamer sein
+
+==== Technical Debt
+- **Sync-Bugs**: Inkonsistenzen zwischen Model und DOM möglich
+- **Memory Overhead**: Doppelte Datenhaltung (Model + DOM)
+- **Event-Chain**: Komplexere Event-Weiterleitung zwischen Layern
+
+=== Additional Information
+
+Diese Entscheidung priorisiert **langfristige Wartbarkeit** über kurzfristige Implementierungsgeschwindigkeit. Das separate Data Model ermöglicht professionelle Features und erleichtert zukünftige Erweiterungen erheblich.
+
+**Implementation Pattern:**
+```javascript
+// Model Update triggers DOM Sync
+function updateComponent(id, changes) {
+  const component = mapModel.components.find(c => c.id === id);
+  Object.assign(component, changes);
+  syncComponentToDOM(component);
+}
+```
+
+**Referenzen:**
+- Model-View Patterns: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+- State Management Best Practices

@@ -1,0 +1,510 @@
+== Chapter 5: Building Block View
+
+=== 5.1 Whitebox Overall System
+
+The Wardley Map Editor follows a layered architecture with clear separation of concerns between data management, rendering, user interaction, and export functionality.
+
+[plantuml, system-overview, svg]
+....
+!include <C4/C4_Container>
+
+title Building Block View - System Overview
+
+Container_Boundary(c1, "Wardley Map Editor") {
+    Container(app, "Application Controller", "JavaScript", "Main application orchestration and initialization")
+    
+    Container_Boundary(model, "Data Layer") {
+        Container(wardleymap, "WardleyMap", "ES6 Class", "Central data model with components and connections")
+        Container(component, "Component", "ES6 Class", "Individual map component with position and metadata")
+        Container(connection, "Connection", "ES6 Class", "Dependencies between components")
+    }
+    
+    Container_Boundary(view, "Presentation Layer") {
+        Container(renderer, "SVGRenderer", "ES6 Class", "DOM manipulation and visual rendering")
+        Container(editor, "MapEditor", "ES6 Class", "User interaction handling and event management")
+    }
+    
+    Container_Boundary(export, "Export Layer") {
+        Container(exporter, "DrawIOExporter", "ES6 Class", "XML generation and format conversion")
+    }
+}
+
+System_Ext(browser, "Web Browser", "SVG rendering and DOM manipulation")
+System_Ext(drawio, "draw.io", "External diagramming tool")
+
+Rel(app, wardleymap, "Creates and manages")
+Rel(app, renderer, "Initializes")
+Rel(app, editor, "Configures")
+
+Rel(editor, wardleymap, "Updates", "Component positions, connections")
+Rel(wardleymap, renderer, "Notifies", "State changes")
+Rel(renderer, browser, "Manipulates", "SVG DOM")
+
+Rel(exporter, wardleymap, "Reads", "Map data")
+Rel(exporter, drawio, "Exports to", "XML format")
+
+SHOW_LEGEND()
+....
+
+==== Interfaces and Dependencies
+
+[cols="2,3,3", options="header"]
+|===
+| Component | Provides Interface | Uses Interface
+| **WardleyMap** | Data management, component lifecycle, state notifications | None (core domain model)
+| **SVGRenderer** | Visual rendering, DOM synchronization | WardleyMap (read access)
+| **MapEditor** | User interaction handling, drag&drop management | WardleyMap (read/write), SVGRenderer (coordinates)
+| **DrawIOExporter** | XML generation, format conversion | WardleyMap (read access)
+|===
+
+=== 5.2 Level 2: Data Layer Components
+
+The data layer implements the core domain model for Wardley Maps with clean separation between different entity types.
+
+[plantuml, data-layer, svg]
+....
+@startuml
+!theme plain
+
+class WardleyMap {
+  -components: Map<string, Component>
+  -connections: Map<string, Connection>
+  -metadata: MapMetadata
+  +addComponent(component: Component): void
+  +removeComponent(id: string): void
+  +addConnection(connection: Connection): void
+  +getComponent(id: string): Component
+  +getAllComponents(): Component[]
+  +serialize(): JSON
+  +deserialize(data: JSON): void
+  +notify(event: string, data: any): void
+}
+
+class Component {
+  +id: string
+  +name: string
+  +evolution: number
+  +visibility: number
+  +x: number
+  +y: number
+  +constructor(id, name, evolution, visibility)
+  +updatePosition(x: number, y: number): void
+  +updateEvolution(evolution: number): void
+  +clone(): Component
+  +toJSON(): object
+}
+
+class Connection {
+  +id: string
+  +sourceId: string
+  +targetId: string
+  +type: ConnectionType
+  +label: string
+  +constructor(sourceId, targetId, type, label)
+  +isValid(): boolean
+  +toJSON(): object
+}
+
+enum ConnectionType {
+  DEPENDENCY
+  FLOW
+  CONSTRAINT
+}
+
+class MapMetadata {
+  +title: string
+  +author: string
+  +created: Date
+  +lastModified: Date
+  +description: string
+}
+
+WardleyMap *-- "0..*" Component : contains
+WardleyMap *-- "0..*" Connection : contains
+WardleyMap *-- "1" MapMetadata : has
+Connection --> "2" Component : references
+
+@enduml
+....
+
+==== WardleyMap (Central Data Model)
+
+**Responsibility:** Central data store and business logic coordinator
+
+**Key Methods:**
+```javascript
+class WardleyMap {
+  // Component Management
+  addComponent(component) { /* Add component with validation */ }
+  removeComponent(id) { /* Remove component and related connections */ }
+  updateComponent(id, updates) { /* Update component properties */ }
+  
+  // Connection Management
+  addConnection(sourceId, targetId, type) { /* Create valid connection */ }
+  removeConnection(id) { /* Remove connection */ }
+  
+  // Coordinate Transformation
+  toPixelCoordinates(evolution, visibility) { /* Wardley → SVG conversion */ }
+  toWardleyCoordinates(x, y) { /* SVG → Wardley conversion */ }
+  
+  // State Management
+  serialize() { /* Export to JSON */ }
+  deserialize(data) { /* Import from JSON */ }
+  notify(event, data) { /* Observer pattern for UI updates */ }
+}
+```
+
+**Invariants:**
+- All components must have unique IDs
+- Evolution values must be between 0.0 and 1.0
+- Visibility values must be between 0.0 and 1.0
+- Connections can only reference existing components
+
+==== Component (Domain Entity)
+
+**Responsibility:** Individual map component with position and business metadata
+
+**Properties:**
+- **Business Properties**: `name`, `evolution`, `visibility`
+- **Rendering Properties**: `x`, `y` (calculated from evolution/visibility)
+- **Identity**: `id` (UUID for uniqueness)
+
+**Coordinate System:**
+```javascript
+// Business coordinates (Wardley semantics)
+evolution: 0.0 = Genesis, 1.0 = Commodity
+visibility: 0.0 = Infrastructure, 1.0 = User-Visible
+
+// Rendering coordinates (SVG pixels)
+x = evolution * CANVAS_WIDTH + MARGIN_LEFT
+y = (1 - visibility) * CANVAS_HEIGHT + MARGIN_TOP
+```
+
+==== Connection (Relationship Entity)
+
+**Responsibility:** Dependency relationships between components
+
+**Types:**
+- **DEPENDENCY**: Component A depends on Component B
+- **FLOW**: Data/value flow between components
+- **CONSTRAINT**: Business constraint relationship
+
+=== 5.3 Level 2: Presentation Layer Components
+
+The presentation layer handles all user interface concerns including rendering and interaction management.
+
+[plantuml, presentation-layer, svg]
+....
+@startuml
+!theme plain
+
+class SVGRenderer {
+  -svgElement: SVGElement
+  -componentElements: Map<string, SVGElement>
+  -connectionElements: Map<string, SVGElement>
+  +constructor(containerId: string)
+  +renderComponent(component: Component): void
+  +updateComponent(component: Component): void
+  +removeComponent(id: string): void
+  +renderConnection(connection: Connection): void
+  +updateConnection(connection: Connection): void
+  +removeConnection(id: string): void
+  +clear(): void
+  +getElementAtPosition(x: number, y: number): Element
+}
+
+class MapEditor {
+  -wardleyMap: WardleyMap
+  -renderer: SVGRenderer
+  -dragState: DragState
+  -selectedComponent: string
+  +constructor(wardleyMap: WardleyMap, renderer: SVGRenderer)
+  +enableDragDrop(): void
+  +handleMouseDown(event: MouseEvent): void
+  +handleMouseMove(event: MouseEvent): void
+  +handleMouseUp(event: MouseEvent): void
+  +selectComponent(id: string): void
+  +addComponentAtPosition(x: number, y: number): void
+}
+
+class DragState {
+  +isDragging: boolean
+  +draggedElement: string
+  +offset: {x: number, y: number}
+  +startPosition: {x: number, y: number}
+}
+
+class EventManager {
+  -listeners: Map<string, Function[]>
+  +addEventListener(event: string, callback: Function): void
+  +removeEventListener(event: string, callback: Function): void
+  +emit(event: string, data: any): void
+}
+
+SVGRenderer --> SVGElement : manipulates
+MapEditor --> WardleyMap : updates
+MapEditor --> SVGRenderer : coordinates with
+MapEditor *-- DragState : manages
+MapEditor --> EventManager : uses
+
+@enduml
+....
+
+==== SVGRenderer (View Layer)
+
+**Responsibility:** DOM manipulation and visual representation
+
+**Core Rendering Methods:**
+```javascript
+class SVGRenderer {
+  renderComponent(component) {
+    const element = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    
+    // Create visual representation
+    const rect = this.createComponentShape(component);
+    const text = this.createComponentLabel(component);
+    
+    element.appendChild(rect);
+    element.appendChild(text);
+    element.setAttribute('data-component-id', component.id);
+    
+    this.svgElement.appendChild(element);
+    this.componentElements.set(component.id, element);
+  }
+  
+  updateComponent(component) {
+    const element = this.componentElements.get(component.id);
+    // Update position and properties without recreating
+    element.setAttribute('transform', `translate(${component.x}, ${component.y})`);
+  }
+}
+```
+
+**Performance Optimizations:**
+- Element reuse instead of recreation
+- Batch DOM updates during drag operations
+- Event delegation for scalable interaction handling
+
+==== MapEditor (Controller Layer)
+
+**Responsibility:** User interaction coordination and business logic bridging
+
+**Drag&Drop Implementation:**
+```javascript
+class MapEditor {
+  handleMouseDown(event) {
+    const target = event.target.closest('[data-component-id]');
+    if (target) {
+      this.dragState.isDragging = true;
+      this.dragState.draggedElement = target.dataset.componentId;
+      this.dragState.offset = this.calculateOffset(event, target);
+    }
+  }
+  
+  handleMouseMove(event) {
+    if (this.dragState.isDragging) {
+      const newPosition = this.calculatePosition(event);
+      const wardleyCoords = this.renderer.toWardleyCoordinates(newPosition);
+      this.wardleyMap.updateComponent(this.dragState.draggedElement, wardleyCoords);
+    }
+  }
+}
+```
+
+=== 5.4 Level 2: Export Layer Components
+
+The export layer handles format conversion and external system integration.
+
+[plantuml, export-layer, svg]
+....
+@startuml
+!theme plain
+
+class DrawIOExporter {
+  -xmlTemplate: string
+  -shapeTemplates: Map<string, string>
+  +constructor()
+  +export(wardleyMap: WardleyMap): string
+  +generateXML(components: Component[], connections: Connection[]): string
+  +validateXML(xml: string): ValidationResult
+  +openInDrawIO(xml: string): void
+}
+
+class XMLTemplate {
+  +header: string
+  +footer: string
+  +componentTemplate: string
+  +connectionTemplate: string
+  +generateComponent(component: Component): string
+  +generateConnection(connection: Connection): string
+}
+
+class CoordinateMapper {
+  +EVOLUTION_STAGES: Map<string, number>
+  +CANVAS_DIMENSIONS: {width: number, height: number}
+  +wardleyToDrawIO(evolution: number, visibility: number): {x: number, y: number}
+  +drawIOToWardley(x: number, y: number): {evolution: number, visibility: number}
+}
+
+class ValidationResult {
+  +isValid: boolean
+  +errors: string[]
+  +warnings: string[]
+}
+
+DrawIOExporter --> XMLTemplate : uses
+DrawIOExporter --> CoordinateMapper : uses
+DrawIOExporter --> ValidationResult : returns
+
+@enduml
+....
+
+==== DrawIOExporter (Format Converter)
+
+**Responsibility:** XML generation and draw.io integration
+
+**Template-Based Generation:**
+```javascript
+class DrawIOExporter {
+  export(wardleyMap) {
+    const components = wardleyMap.getAllComponents();
+    const connections = wardleyMap.getAllConnections();
+    
+    const componentXML = components.map(c => this.generateComponentXML(c)).join('');
+    const connectionXML = connections.map(c => this.generateConnectionXML(c)).join('');
+    
+    return this.xmlTemplate
+      .replace('{{COMPONENTS}}', componentXML)
+      .replace('{{CONNECTIONS}}', connectionXML)
+      .replace('{{METADATA}}', this.generateMetadata(wardleyMap));
+  }
+  
+  openInDrawIO(xml) {
+    const encodedXML = encodeURIComponent(xml);
+    const url = `https://app.diagrams.net/?xml=${encodedXML}`;
+    window.open(url, '_blank');
+  }
+}
+```
+
+**XML Template Structure:**
+```xml
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    {{COMPONENTS}}
+    {{CONNECTIONS}}
+  </root>
+</mxGraphModel>
+```
+
+=== 5.5 Level 3: Detailed Component Interfaces
+
+==== Component State Management Interface
+
+```javascript
+// Observer Pattern for Model-View Synchronization
+interface ModelObserver {
+  onComponentAdded(component: Component): void;
+  onComponentUpdated(component: Component): void;
+  onComponentRemoved(componentId: string): void;
+  onConnectionAdded(connection: Connection): void;
+  onConnectionRemoved(connectionId: string): void;
+}
+
+// Command Pattern for Undo/Redo (Future Extension)
+interface Command {
+  execute(): void;
+  undo(): void;
+  getDescription(): string;
+}
+```
+
+==== Rendering Pipeline Interface
+
+```javascript
+// Strategy Pattern for Different Component Types
+interface ComponentRenderer {
+  render(component: Component, svgContainer: SVGElement): SVGElement;
+  update(component: Component, element: SVGElement): void;
+  getStyle(component: Component): ComponentStyle;
+}
+
+// Factory Pattern for Component Creation
+interface ComponentFactory {
+  createComponent(type: string, position: {x: number, y: number}): Component;
+  getAvailableTypes(): string[];
+}
+```
+
+=== 5.6 Deployment View Integration
+
+The building blocks are deployed as static files served by GitHub Pages:
+
+```
+src/
+├── index.html              // Application entry point
+├── styles.css              // Styling and layout
+├── app.js                  // Application bootstrap and orchestration
+├── model/
+│   ├── WardleyMap.js       // Central data model
+│   ├── Component.js        // Component entity
+│   └── Connection.js       // Connection entity
+├── renderer/
+│   └── SVGRenderer.js      // DOM manipulation and rendering
+├── editor/
+│   └── MapEditor.js        // User interaction handling
+└── export/
+    └── DrawIOExporter.js   // XML generation and export
+```
+
+**Module Loading Strategy:**
+```html
+<!-- ES6 Modules for clean dependency management -->
+<script type="module" src="app.js"></script>
+```
+
+```javascript
+// app.js - Module orchestration
+import { WardleyMap } from './model/WardleyMap.js';
+import { SVGRenderer } from './renderer/SVGRenderer.js';
+import { MapEditor } from './editor/MapEditor.js';
+import { DrawIOExporter } from './export/DrawIOExporter.js';
+```
+
+=== 5.7 Quality Attributes in Building Blocks
+
+==== Separation of Concerns
+
+**Data Layer**: Pure business logic, no UI dependencies
+- Components understand Wardley Map semantics
+- Clear validation rules and invariants
+- Framework-agnostic data structures
+
+**Presentation Layer**: UI-specific logic only
+- SVG manipulation isolated in renderer
+- Event handling separated from business logic
+- Coordinate system transformations encapsulated
+
+**Export Layer**: Format-specific transformations
+- Template-based generation for maintainability
+- Validation pipeline for quality assurance
+- External system integration isolated
+
+==== Extensibility Points
+
+**Plugin Architecture (Future):**
+- Component types through factory pattern
+- Export formats through strategy pattern
+- Rendering styles through template system
+
+**Configuration Management:**
+- Layout parameters externalized
+- Styling through CSS variables
+- Behavior configuration through data attributes
+
+**Testing Integration:**
+- Business logic isolated for unit testing
+- UI components mockable through interfaces
+- Export functionality testable with fixtures

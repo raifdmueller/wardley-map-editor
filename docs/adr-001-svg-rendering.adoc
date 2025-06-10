@@ -1,0 +1,89 @@
+== ADR-001: SVG-basierte Rendering-Engine für Wardley Map Editor
+
+|===
+| Date:    h| June 10, 2025
+| Authors: h| Ralf D. Müller & Claude
+| Status:  h| Accepted
+|===
+
+=== Problem Description and Context
+
+Für den Wardley Map Editor muss eine Rendering-Technologie gewählt werden, die folgende Anforderungen erfüllt:
+
+- **Time-to-Market**: Implementierung in 1 Stunde Live-Stream
+- **Usability**: Intuitive Drag&Drop-Funktionalität für Komponenten
+- **draw.io Export**: Strukturelle Kompatibilität für XML-Export
+- **Browser-Kompatibilität**: Funktioniert ohne zusätzliche Dependencies
+
+Die Hauptfunktionen umfassen:
+- Interaktive Positionierung von Wardley Map Komponenten
+- Visueller Editor mit Drag&Drop
+- Export zu draw.io XML Format
+
+=== Alternative Evaluation (Pugh Matrix)
+
+Als Baseline dient **SVG + DOM-Manipulation** als bewährte Webtechnologie.
+
+[cols="4*", options="header"]
+|===
+| Criterion | SVG+DOM (Baseline) | Canvas+Events | Hybrid SVG+Canvas
+| Implementierungsgeschwindigkeit | 0 | -1 | -2
+| Debugging-Freundlichkeit | 0 | -2 | -1
+| Browser-Kompatibilität | 0 | +1 | 0
+| Drag&Drop Performance | 0 | +1 | +1
+| Event-Handling Einfachheit | 0 | -2 | -1
+| draw.io Export-Kompatibilität | 0 | -2 | -1
+| Live-Stream Tauglichkeit | 0 | -1 | -2
+| **Total Score** | **0** | **-6** | **-6**
+|===
+
+==== Verworfene Alternativen:
+
+**Canvas + Events**: Obwohl performanter für Animationen, erfordert Canvas komplette Eigenimplementierung von Hit-Detection, Event-Handling und Koordinaten-Management. Der Export zu draw.io XML wäre deutlich komplexer, da Pixel-Daten zu Vektor-Strukturen konvertiert werden müssten.
+
+**Hybrid-Ansatz**: Kombiniert die Komplexität beider Technologien ohne deren Vorteile voll auszuschöpfen. Für eine 1-Stunden-Implementation zu riskant.
+
+=== Decision
+
+**SVG + DOM-Manipulation** wird als Rendering-Technologie gewählt.
+
+==== Technische Umsetzung:
+- SVG-Container für Wardley Map Canvas
+- SVG-Elemente (`<rect>`, `<circle>`, `<text>`) für Komponenten
+- Native DOM-Events für Mouse-Interaktionen
+- Direkte SVG-Attribut-Manipulation für Drag&Drop
+
+==== Drag&Drop Implementation:
+[source,javascript]
+----
+// Smooth Mouse-Event basierte Lösung
+element.addEventListener('mousedown', startDrag);
+document.addEventListener('mousemove', doDrag);
+document.addEventListener('mouseup', endDrag);
+----
+
+=== Consequences
+
+==== Positive Effects
+- **Schnelle Entwicklung**: DOM-APIs sind bekannt und gut dokumentiert
+- **Einfaches Debugging**: Browser DevTools funktionieren nativ
+- **Struktureller Export**: SVG → draw.io XML ist semantisch ähnlich
+- **Accessibility**: Screen-Reader können SVG-Elemente interpretieren
+- **CSS-Integration**: Styling über Standard-CSS möglich
+
+==== Risks
+- **Performance-Limits**: Bei >100 Komponenten könnte DOM-Manipulation langsam werden
+- **Smooth Drag&Drop**: Möglicherweise nicht so flüssig wie Canvas-Lösung
+- **Browser-Unterschiede**: Subtile SVG-Rendering-Differenzen zwischen Browsern
+
+==== Technical Debt
+- **Refactoring zu Canvas**: Falls Performance-Probleme auftreten, müsste komplette Rendering-Engine neu geschrieben werden
+- **Event-System**: Aktuell einfache Mouse-Events, später eventuell Touch-Support notwendig
+
+=== Additional Information
+
+Diese Entscheidung priorisiert **Entwicklungsgeschwindigkeit** und **Live-Stream-Tauglichkeit** über optimale Performance. Für den geplanten MVP mit wenigen Komponenten ist SVG vollkommen ausreichend.
+
+**Referenzen:**
+- SVG Drag&Drop Patterns: https://developer.mozilla.org/en-US/docs/Web/SVG
+- draw.io XML Format: Analyse während Implementation

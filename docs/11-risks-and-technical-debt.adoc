@@ -1,0 +1,150 @@
+== Chapter 11: Risks and Technical Debt
+
+=== 11.1 Risk Assessment
+
+Based on our architectural decisions and constraints, the following risks have been identified and evaluated for the live development session:
+
+==== Technical Implementation Risks
+
+[cols="3,2,2,3", options="header"]
+|===
+| Risk | Probability | Impact | Mitigation Strategy
+| **draw.io XML Format Complexity** | Medium | High | Comprehensive research completed (512+ sources), template-based approach reduces complexity
+| **Wardley Map Coordinate Mapping** | Medium | Medium | Systematic coordinate transformation with predefined evolution stages
+| **SVG Drag&Drop Performance** | Low | Medium | Modern browsers handle SVG manipulation well, fallback to simpler interactions if needed
+|===
+
+==== Live Stream Specific Risks
+
+[cols="3,2,2,3", options="header"]
+|===
+| Risk | Probability | Impact | Mitigation Strategy
+| **Time Pressure Debugging** | High | Low | Focus on architecture over perfect implementation, embrace transparent problem-solving
+| **Cross-Origin Browser Issues** | Low | Medium | Test draw.io URL integration beforehand, have fallback export method ready
+| **Audience Expectations** | Low | Low | Clear communication that architecture design is primary goal, working demo is bonus
+|===
+
+=== 11.2 Technical Debt Analysis
+
+The following technical debt has been intentionally incurred to meet the 1-hour development constraint:
+
+==== Acceptable Short-term Debt
+
+**No Input Validation**
+- **Debt**: User can create invalid maps without feedback
+- **Rationale**: MVP focus, validation adds complexity without architectural value
+- **Payoff Strategy**: Implement validation in post-stream development
+
+**Hardcoded Layout Values**
+- **Debt**: Magic numbers for component sizes, spacing, and coordinates
+- **Rationale**: Configuration systems would consume valuable development time
+- **Payoff Strategy**: Extract constants to configuration objects
+
+**Minimal Error Handling**
+- **Debt**: Limited error recovery and user feedback
+- **Rationale**: Happy path development maximizes demo success probability
+- **Payoff Strategy**: Add try-catch blocks and user-friendly error messages
+
+==== Architectural Technical Debt
+
+**Manual State Synchronization**
+- **Debt**: Model ↔ DOM synchronization handled manually rather than framework-based
+- **Impact**: Potential for synchronization bugs as complexity grows
+- **Rationale**: Avoids framework dependency and learning curve
+- **Future Resolution**: Consider state management library for larger applications
+
+**Monolithic Component Structure**
+- **Debt**: All functionality in single application class rather than microcomponents
+- **Impact**: Reduced modularity and testability
+- **Rationale**: Faster development for single-purpose application
+- **Future Resolution**: Extract specialized components (MapCanvas, ComponentManager, ExportHandler)
+
+=== 11.3 Non-Risks (Explicitly Excluded)
+
+The following concerns are **not considered risks** based on our architectural constraints:
+
+**Memory Overhead from Separate Data Model**
+- **Analysis**: Typical Wardley Maps contain <20 components, minimal memory impact
+- **Decision**: Acceptable trade-off for maintainability benefits
+
+**Browser Compatibility Issues**
+- **Analysis**: Modern browser requirement explicitly defined in constraints
+- **Decision**: ES6+ features and SVG support assumed available
+
+**Network Performance for Module Loading**
+- **Analysis**: 3-4 JavaScript files totaling <50KB, negligible load time
+- **Decision**: Development speed prioritized over micro-optimizations
+
+**Implementation Completeness During Stream**
+- **Analysis**: Architecture demonstration is primary objective
+- **Decision**: Working prototype is bonus, not requirement for success
+
+=== 11.4 Risk Monitoring Strategy
+
+==== Live Development Indicators
+
+**Green Signals (Continue Current Approach):**
+- SVG elements render correctly across browsers
+- Drag operations feel responsive
+- XML generation produces valid draw.io format
+
+**Yellow Signals (Simplify Implementation):**
+- Drag operations become laggy
+- Coordinate mapping produces unexpected results
+- Time pressure affects code quality
+
+**Red Signals (Pivot to Fallback):**
+- SVG performance becomes unacceptable
+- draw.io integration fails completely
+- Critical bugs consume >15 minutes debugging time
+
+==== Success Metrics
+
+**Primary Success (Architecture Demonstration):**
+- Complete architectural decision documentation
+- Clear separation of concerns in code structure
+- Transparent decision-making process visible to audience
+
+**Secondary Success (Working Prototype):**
+- Basic component placement functionality
+- Functional coordinate mapping
+- Successful draw.io XML export
+
+**Bonus Success (Polished Demo):**
+- Smooth drag&drop interactions
+- Visual feedback and error handling
+- Live draw.io integration working
+
+=== 11.5 Post-Stream Technical Debt Roadmap
+
+==== Immediate (Next Sprint)
+- Add input validation and error handling
+- Extract configuration constants
+- Implement comprehensive test suite
+
+==== Short-term (Month 1)
+- Performance optimization for larger maps
+- Enhanced user experience features
+- Mobile device support
+
+==== Long-term (Months 2-3)
+- Undo/redo functionality
+- Real-time collaboration features
+- Plugin architecture for extensibility
+
+=== 11.6 Lessons for Future Live Development
+
+**Architecture-First Approach Validated:**
+- Systematic decision-making provides clear development path
+- ADR documentation creates shared understanding
+- Research-driven decisions reduce implementation surprises
+
+**Time-Boxing Technical Debt:**
+- Conscious debt decisions enable rapid prototyping
+- Clear debt documentation facilitates future improvements
+- Transparent trade-offs maintain code quality awareness
+
+**AI-Assisted Research Value:**
+- Comprehensive research (512+ sources in 8:20) significantly reduces implementation risk
+- Technical feasibility confirmed before development begins
+- Alternative approaches identified and evaluated systematically

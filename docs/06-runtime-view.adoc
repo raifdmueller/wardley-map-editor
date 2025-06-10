@@ -1,0 +1,373 @@
+== Chapter 6: Runtime View
+
+=== 6.1 Runtime Scenarios Overview
+
+This chapter describes the most important runtime scenarios showing how the building blocks interact to fulfill the main use cases.
+
+==== Key Scenarios
+
+[cols="2,3,2", options="header"]
+|===
+| Scenario | Description | Complexity
+| **Component Creation & Placement** | User adds new component to map | Basic
+| **Drag & Drop Interaction** | User repositions component via mouse | Core
+| **Connection Management** | User creates dependency between components | Intermediate
+| **Export to draw.io** | User exports map to external tool | Advanced
+|===
+
+=== 6.2 Scenario: Component Creation & Placement
+
+**Goal:** User adds a new component to the Wardley Map
+
+[plantuml, component-creation, svg]
+....
+@startuml
+!theme plain
+
+actor User
+participant MapEditor
+participant WardleyMap
+participant Component
+participant SVGRenderer
+participant Browser
+
+User -> MapEditor: Click on canvas at (x,y)
+activate MapEditor
+
+MapEditor -> MapEditor: Convert pixel coordinates\nto Wardley coordinates
+MapEditor -> WardleyMap: addComponent(name, evolution, visibility)
+activate WardleyMap
+
+WardleyMap -> Component: new Component(id, name, evolution, visibility)
+activate Component
+Component -> Component: Calculate pixel coordinates\nfrom Wardley semantics
+Component --> WardleyMap: component instance
+deactivate Component
+
+WardleyMap -> WardleyMap: Add to components collection
+WardleyMap -> WardleyMap: notify("componentAdded", component)
+WardleyMap --> MapEditor: component created
+deactivate WardleyMap
+
+MapEditor -> SVGRenderer: renderComponent(component)
+activate SVGRenderer
+SVGRenderer -> Browser: Create SVG elements\n(rect, text, group)
+SVGRenderer -> Browser: Set attributes\n(position, style, data-id)
+SVGRenderer -> Browser: Append to DOM
+Browser --> SVGRenderer: DOM updated
+SVGRenderer --> MapEditor: rendering complete
+deactivate SVGRenderer
+
+MapEditor --> User: Visual feedback\n(component appears)
+deactivate MapEditor
+
+@enduml
+....
+
+**Key Coordination Points:**
+1. **Coordinate Transformation**: Pixel coordinates → Wardley semantics
+2. **State Synchronization**: Model update → View update
+3. **User Feedback**: Immediate visual response
+
+**Error Handling:**
+- Invalid coordinates (outside canvas) → Snap to nearest valid position
+- Duplicate names → Auto-generate unique name
+- Component limit exceeded → Show warning message
+
+=== 6.3 Scenario: Drag & Drop Interaction
+
+**Goal:** User repositions an existing component through mouse interaction
+
+[plantuml, drag-drop, svg]
+....
+@startuml
+!theme plain
+
+actor User
+participant MapEditor
+participant DragState
+participant WardleyMap
+participant Component
+participant SVGRenderer
+
+== Mouse Down Phase ==
+User -> MapEditor: mouseDown on component
+activate MapEditor
+MapEditor -> DragState: isDragging = true
+MapEditor -> DragState: draggedElement = componentId
+MapEditor -> DragState: Store initial offset
+MapEditor -> SVGRenderer: Highlight component\n(visual feedback)
+
+== Mouse Move Phase ==
+loop While dragging
+    User -> MapEditor: mouseMove(x, y)
+    MapEditor -> DragState: Check if dragging
+    alt isDragging == true
+        MapEditor -> MapEditor: Calculate new position\n(apply offset)
+        MapEditor -> SVGRenderer: updateComponentPosition(tempPosition)
+        SVGRenderer -> SVGRenderer: Update SVG transform\n(visual feedback only)
+    end
+end
+
+== Mouse Up Phase ==
+User -> MapEditor: mouseUp
+MapEditor -> MapEditor: Calculate final Wardley coordinates
+MapEditor -> WardleyMap: updateComponent(id, newPosition)
+activate WardleyMap
+WardleyMap -> Component: updatePosition(evolution, visibility)
+WardleyMap -> WardleyMap: notify("componentUpdated", component)
+WardleyMap --> MapEditor: update confirmed
+deactivate WardleyMap
+
+MapEditor -> SVGRenderer: finalizePosition(component)
+MapEditor -> DragState: Reset drag state\n(isDragging = false)
+MapEditor --> User: Component positioned
+deactivate MapEditor
+
+@enduml
+....
+
+**Performance Optimizations:**
+- **Temporary Positioning**: Visual updates during drag without model changes
+- **Batch Updates**: Final model update only on mouse-up
+- **Event Throttling**: Limit mousemove event processing to 60fps
+
+**Interaction Details:**
+```javascript
+// Drag state management
+dragState = {
+  isDragging: false,
+  draggedElement: null,
+  offset: { x: 0, y: 0 },
+  startPosition: { x: 0, y: 0 }
+};
+
+// Coordinate transformation during drag
+const pixelPosition = {
+  x: event.clientX - dragState.offset.x,
+  y: event.clientY - dragState.offset.y
+};
+
+const wardleyPosition = {
+  evolution: pixelPosition.x / CANVAS_WIDTH,
+  visibility: 1 - (pixelPosition.y / CANVAS_HEIGHT)
+};
+```
+
+=== 6.4 Scenario: Connection Management
+
+**Goal:** User creates dependency relationship between two components
+
+[plantuml, connection-creation, svg]
+....
+@startuml
+!theme plain
+
+actor User
+participant MapEditor
+participant WardleyMap
+participant Connection
+participant SVGRenderer
+
+User -> MapEditor: Click on source component
+MapEditor -> MapEditor: Store sourceId
+MapEditor -> SVGRenderer: Highlight source\n(visual feedback)
+
+User -> MapEditor: Shift+Click on target component
+MapEditor -> MapEditor: Store targetId
+MapEditor -> WardleyMap: addConnection(sourceId, targetId, "dependency")
+activate WardleyMap
+
+WardleyMap -> WardleyMap: Validate connection\n(no cycles, valid components)
+alt Validation successful
+    WardleyMap -> Connection: new Connection(sourceId, targetId, type)
+    WardleyMap -> WardleyMap: Add to connections collection
+    WardleyMap -> WardleyMap: notify("connectionAdded", connection)
+    WardleyMap --> MapEditor: connection created
+else Validation failed
+    WardleyMap --> MapEditor: error(reason)
+end
+deactivate WardleyMap
+
+alt Connection successful
+    MapEditor -> SVGRenderer: renderConnection(connection)
+    SVGRenderer -> SVGRenderer: Calculate path between components
+    SVGRenderer -> SVGRenderer: Create SVG line with arrow
+    MapEditor -> SVGRenderer: Clear highlights
+    MapEditor --> User: Connection visible
+else Connection failed
+    MapEditor -> MapEditor: Show error message
+    MapEditor -> SVGRenderer: Clear highlights
+    MapEditor --> User: Error feedback
+end
+
+@enduml
+....
+
+**Business Rules:**
+- No circular dependencies allowed
+- Maximum one connection per component pair
+- Connections must reference existing components
+- Self-connections are prohibited
+
+=== 6.5 Scenario: Export to draw.io
+
+**Goal:** User exports current map to draw.io for further editing
+
+[plantuml, export-workflow, svg]
+....
+@startuml
+!theme plain
+
+actor User
+participant MapEditor
+participant DrawIOExporter
+participant WardleyMap
+participant XMLTemplate
+participant Browser
+participant DrawIO as "draw.io Web App"
+
+User -> MapEditor: Click "Export to draw.io"
+activate MapEditor
+
+MapEditor -> DrawIOExporter: export(wardleyMap)
+activate DrawIOExporter
+
+DrawIOExporter -> WardleyMap: getAllComponents()
+DrawIOExporter -> WardleyMap: getAllConnections()
+
+DrawIOExporter -> DrawIOExporter: Transform coordinates\n(Wardley → draw.io pixel space)
+
+loop For each component
+    DrawIOExporter -> XMLTemplate: generateComponentXML(component)
+    XMLTemplate -> XMLTemplate: Apply styling and positioning
+end
+
+loop For each connection
+    DrawIOExporter -> XMLTemplate: generateConnectionXML(connection)
+    XMLTemplate -> XMLTemplate: Calculate line routing
+end
+
+DrawIOExporter -> DrawIOExporter: Assemble complete XML
+DrawIOExporter -> DrawIOExporter: validateXML(xmlString)
+
+alt XML valid
+    DrawIOExporter -> Browser: Generate draw.io URL\nwith encoded XML
+    Browser -> DrawIO: Open new tab with\nhttps://app.diagrams.net/?xml=...
+    DrawIO -> DrawIO: Parse and render\nWardley Map
+    DrawIO --> User: Editable diagram
+    DrawIOExporter --> MapEditor: Export successful
+else XML invalid
+    DrawIOExporter --> MapEditor: Validation error
+    MapEditor --> User: Error message
+end
+
+deactivate DrawIOExporter
+deactivate MapEditor
+
+@enduml
+....
+
+**Export Transformation:**
+```javascript
+// Coordinate space conversion
+const drawIOCoords = {
+  x: component.evolution * 600 + 50,  // draw.io canvas width
+  y: (1 - component.visibility) * 400 + 50  // Invert Y-axis
+};
+
+// XML template injection
+const componentXML = `
+<mxCell id="${component.id}" 
+        value="${escapeXML(component.name)}" 
+        style="rounded=1;fillColor=#e1d5e7;" 
+        vertex="1" parent="1">
+  <mxGeometry x="${drawIOCoords.x}" y="${drawIOCoords.y}" 
+              width="80" height="40" as="geometry"/>
+</mxCell>`;
+```
+
+=== 6.6 Error Handling Patterns
+
+==== User Input Validation
+
+**Invalid Component Placement:**
+```javascript
+// Boundary checking
+if (x < 0 || x > CANVAS_WIDTH || y < 0 || y > CANVAS_HEIGHT) {
+  const snappedPosition = snapToNearestValidPosition(x, y);
+  showWarning("Component positioned at nearest valid location");
+  return snappedPosition;
+}
+```
+
+**Connection Validation:**
+```javascript
+// Cycle detection
+if (wouldCreateCycle(sourceId, targetId)) {
+  showError("Connection would create circular dependency");
+  return false;
+}
+```
+
+==== System Error Recovery
+
+**DOM Synchronization Errors:**
+```javascript
+// Graceful degradation
+try {
+  renderer.updateComponent(component);
+} catch (error) {
+  console.warn("Rendering failed, rebuilding component", error);
+  renderer.removeComponent(component.id);
+  renderer.renderComponent(component);
+}
+```
+
+**Export Failures:**
+```javascript
+// Fallback mechanisms
+try {
+  openInDrawIO(xmlString);
+} catch (error) {
+  downloadAsFile(xmlString, "wardley-map.xml");
+  showInfo("Opened as file download instead of web editor");
+}
+```
+
+=== 6.7 Performance Characteristics
+
+==== Response Time Requirements
+
+[cols="3,2,2,3", options="header"]
+|===
+| Scenario | Target Response | Max Acceptable | User Perception
+| **Component Creation** | < 100ms | < 200ms | Immediate
+| **Drag Operation** | < 16ms (60fps) | < 33ms (30fps) | Smooth
+| **Connection Creation** | < 200ms | < 500ms | Responsive  
+| **Export Generation** | < 1s | < 3s | Working
+|===
+
+==== Scalability Limits
+
+**Component Count:**
+- Optimal: < 20 components
+- Acceptable: < 50 components  
+- Performance degradation: > 50 components
+
+**Memory Usage:**
+- Target: < 10MB total application memory
+- Model data: ~1KB per component
+- DOM overhead: ~5KB per rendered component
+
+==== Optimization Strategies
+
+**Rendering Optimizations:**
+- Use `transform` instead of position updates for smooth dragging
+- Batch DOM updates using `requestAnimationFrame`
+- Implement virtual scrolling for large component lists
+
+**Memory Management:**
+- Remove DOM event listeners when components are deleted
+- Use object pooling for temporary drag state objects
+- Lazy-load export templates only when needed

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardley Map Editor - Test Suite</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8fafc;
+        }
+        .header {
+            background: #2563eb;
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .test-output {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+        .btn:hover {
+            background: #1d4ed8;
+        }
+        .info {
+            background: #e0f2fe;
+            border: 1px solid #81d4fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .navigation a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 Wardley Map Editor Test Suite</h1>
+        <p>Automated testing for core functionality</p>
+    </div>
+
+    <div class="info">
+        <strong>📝 Test Coverage:</strong>
+        <ul>
+            <li>WardleyMap data model (CRUD, validation, import/export)</li>
+            <li>DrawIOExporter (XML generation, coordinate mapping)</li>
+            <li>Component and connection management</li>
+            <li>Selection and state management</li>
+        </ul>
+    </div>
+
+    <div>
+        <button class="btn" onclick="runTests()">▶️ Run Tests</button>
+        <button class="btn" onclick="clearOutput()">🗑️ Clear Output</button>
+        <button class="btn" onclick="runPerformanceTests()">⚡ Performance Tests</button>
+    </div>
+
+    <div id="test-output" class="test-output">
+        Click "Run Tests" to execute the test suite...
+    </div>
+
+    <div class="navigation">
+        <a href="../index.html">← Back to Wardley Map Editor</a> |
+        <a href="../docs/requirements.md">📋 Requirements</a> |
+        <a href="../docs/drawio-implementation-guide.md">🔧 Implementation Guide</a>
+    </div>
+
+    <script type="module">
+        import { testRunner } from './test-suite.js';
+
+        // Capture console output for display
+        const originalLog = console.log;
+        const originalError = console.error;
+        let testOutput = '';
+
+        function captureConsole() {
+            testOutput = '';
+            console.log = (...args) => {
+                testOutput += args.join(' ') + '\n';
+                originalLog(...args);
+            };
+            console.error = (...args) => {
+                testOutput += args.join(' ') + '\n';
+                originalError(...args);
+            };
+        }
+
+        function restoreConsole() {
+            console.log = originalLog;
+            console.error = originalError;
+        }
+
+        function updateOutput() {
+            document.getElementById('test-output').textContent = testOutput;
+        }
+
+        // Global functions for buttons
+        window.runTests = async function() {
+            captureConsole();
+            updateOutput();
+            
+            try {
+                await testRunner.run();
+                updateOutput();
+            } catch (error) {
+                testOutput += `\n💥 Test execution failed: ${error.message}`;
+                updateOutput();
+            } finally {
+                restoreConsole();
+            }
+        };
+
+        window.clearOutput = function() {
+            document.getElementById('test-output').textContent = 'Output cleared. Click "Run Tests" to execute the test suite...';
+        };
+
+        window.runPerformanceTests = async function() {
+            captureConsole();
+            
+            console.log('⚡ Running Performance Tests...\n');
+            
+            // Test 1: Component creation performance
+            const start1 = performance.now();
+            const { WardleyMap } = await import('../js/models/WardleyMap.js');
+            const map = new WardleyMap();
+            
+            for (let i = 0; i < 1000; i++) {
+                map.addComponent({
+                    name: `Component ${i}`,
+                    x: Math.random() * 800,
+                    y: Math.random() * 600,
+                    evolution: Math.floor(Math.random() * 4)
+                });
+            }
+            const end1 = performance.now();
+            console.log(`✅ Created 1000 components in ${(end1 - start1).toFixed(2)}ms`);
+            
+            // Test 2: Export performance
+            const start2 = performance.now();
+            const { DrawIOExporter } = await import('../js/export/DrawIOExporter.js');
+            const exporter = new DrawIOExporter();
+            const xml = exporter.export(map);
+            const end2 = performance.now();
+            console.log(`✅ Exported ${map.getAllComponents().length} components to XML in ${(end2 - start2).toFixed(2)}ms`);
+            console.log(`📊 XML size: ${(xml.length / 1024).toFixed(1)} KB`);
+            
+            // Test 3: Memory usage estimation
+            const memoryEstimate = JSON.stringify(map.export()).length;
+            console.log(`💾 Estimated memory usage: ${(memoryEstimate / 1024).toFixed(1)} KB`);
+            
+            console.log('\n🎯 Performance tests completed!');
+            updateOutput();
+            restoreConsole();
+        };
+
+        // Auto-run tests on load if requested
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('autorun') === 'true') {
+            window.addEventListener('load', () => {
+                setTimeout(() => window.runTests(), 1000);
+            });
+        }
+    </script>
+</body>
+</html>

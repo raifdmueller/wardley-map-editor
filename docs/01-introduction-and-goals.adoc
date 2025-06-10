@@ -1,0 +1,57 @@
+== Chapter 1: Introduction and Goals
+
+=== 1.1 Requirements Overview
+
+The Wardley Map Editor is a web-based application developed live during "Software Architektur im Stream" to demonstrate practical AI-assisted architecture work.
+
+**Core Purpose:**
+> Create a functional Wardley Map editor with draw.io export capability in a 1-hour live development session, proving that LLMs can contribute real value beyond "architecture theater."
+
+=== 1.2 Quality Goals
+
+The following quality goals are prioritized in order of importance:
+
+[cols="1,3,2", options="header"]
+|===
+| Priority | Quality Goal | Rationale
+| 1 | **Time-to-Market** | Must deliver working prototype in exactly 1 hour live stream
+| 2 | **Usability** | Intuitive operation without tooltips or complex tutorials
+| 3 | **Wow-Effect** | Smooth drag&drop and polished interactions for demo impact
+|===
+
+**Critical Trade-off Decision:**
+Usability is prioritized over visual effects when conflicts arise. The application should work intuitively rather than look fancy.
+
+=== 1.3 Stakeholders
+
+[cols="2,3,3", options="header"]
+|===
+| Stakeholder | Role | Expectations
+| **Ralf D. Müller** | Stream Host, Architect, Product Owner | Working demo, architectural learning, successful stream content
+| **Stream Audience** | Observers, Learners | Educational value, witnessing real human-AI collaboration, entertainment
+|===
+
+**Excluded Stakeholders:**
+- Wardley Map Community (future potential users)
+- docToolchain/arc42 Community (potential reference case)
+
+These groups are explicitly excluded to maintain focus on the immediate live demonstration goals.
+
+=== 1.4 System Features (MVP)
+
+**Must-Have Features:**
+- Interactive canvas with Wardley Map axes (Genesis-Custom, Visible-Invisible)
+- Component placement via drag&drop
+- Basic connections between components  
+- Export to draw.io XML format
+
+**Should-Have Features (if time permits):**
+- Component editing (names, positions)
+- Local storage persistence
+- Basic visual styling
+
+**Could-Have Features (likely out of scope):**
+- Advanced UI controls
+- DSL parser for text input
+- Comprehensive validation
+- Multi-map management

@@ -1,0 +1,50 @@
+= Wardley Map Editor - Architecture Documentation
+
+== Introduction
+
+This architecture documentation follows the arc42 template and documents the live-developed Wardley Map Editor created during "Software Architektur im Stream" on June 13, 2025.
+
+== Document Structure
+
+=== Core Architecture
+* link:01-introduction-and-goals.adoc[Chapter 1: Introduction and Goals]
+* link:02-architecture-constraints.adoc[Chapter 2: Architecture Constraints] 
+* link:03-system-scope-and-context.adoc[Chapter 3: System Scope and Context]
+* link:04-solution-strategy.adoc[Chapter 4: Solution Strategy]
+* link:10-quality-requirements.adoc[Chapter 10: Quality Requirements]
+
+=== Architecture Decisions
+* link:adr-001-svg-rendering.adoc[ADR-001: SVG-based Rendering Engine]
+* link:adr-002-data-model.adoc[ADR-002: Separate Data Model]
+
+=== Implementation Details
+* link:05-building-block-view.adoc[Chapter 5: Building Block View] _(in progress)_
+* link:08-concepts.adoc[Chapter 8: Cross-cutting Concepts] _(planned)_
+* link:09-design-decisions.adoc[Chapter 9: Design Decisions] _(ADRs collection)_
+
+== Development Context
+
+**Live Development Session:**
+- Date: June 13, 2025
+- Duration: 1 hour
+- Participants: Ralf D. Müller & Claude (AI Assistant)
+- Stream: Software Architektur im Stream
+
+**Quality Goals Priority:**
+1. Time-to-Market (1 hour implementation)
+2. Usability (intuitive operation) 
+3. Wow-Effect (smooth drag&drop)
+
+== Architecture at a Glance
+
+**Technology Stack:**
+- Frontend: HTML5, CSS3, JavaScript ES6+
+- Rendering: SVG + DOM manipulation
+- Data: Separate JavaScript data model
+- Export: draw.io XML format
+- Hosting: GitHub Pages (client-only)
+
+**Core Decisions:**
+- SVG over Canvas for development speed and debugging
+- Separate data model over direct DOM for extensibility
+- Browser-only solution with no server dependencies

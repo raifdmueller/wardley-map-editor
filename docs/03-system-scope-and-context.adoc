@@ -1,0 +1,94 @@
+== Chapter 3: System Scope and Context
+
+=== 3.1 Business Context
+
+The Wardley Map Editor operates in a simple context with minimal external dependencies:
+
+[plantuml, business-context, svg]
+....
+!include <C4/C4_Context>
+
+title Business Context - Wardley Map Editor
+
+Person(user, "Stream Viewer / User", "Creates and edits Wardley Maps during live demonstration")
+System(editor, "Wardley Map Editor", "Web-based editor for creating and editing Wardley Maps")
+System_Ext(browser, "Web Browser", "Chrome, Firefox, Safari - renders the application")
+System_Ext(drawio, "draw.io", "Diagram tool that imports the exported XML files")
+System_Ext(github, "GitHub Pages", "Static hosting for the web application")
+
+Rel(user, browser, "Interacts via", "Mouse, Keyboard")
+Rel(browser, editor, "Loads and runs", "HTTPS")
+Rel(github, browser, "Serves application", "HTTPS")
+Rel(editor, browser, "Renders UI", "SVG, DOM")
+Rel(editor, drawio, "Exports to", "XML file download")
+
+SHOW_LEGEND()
+....
+
+=== 3.2 Technical Context
+
+**System Boundaries:**
+The Wardley Map Editor is a self-contained web application with clearly defined interfaces:
+
+**Inputs:**
+- **User Interactions**: Mouse clicks, drag operations, keyboard input
+- **Browser APIs**: LocalStorage for persistence, File API for downloads
+
+**Outputs:**  
+- **Visual Rendering**: SVG-based Wardley Map display
+- **File Downloads**: draw.io compatible XML files
+- **Browser Storage**: Serialized map data in LocalStorage
+
+=== 3.3 External Interfaces
+
+[cols="2,2,4", options="header"]
+|===
+| Interface | Type | Description
+| **Browser DOM** | Bidirectional | SVG rendering and event handling
+| **LocalStorage API** | Output | Persisting map data locally
+| **File Download API** | Output | Generating downloadable draw.io XML files
+| **Mouse/Keyboard Events** | Input | User interaction capture
+|===
+
+**No External APIs:**
+- No server-side communication required
+- No third-party web services
+- No authentication or user management systems
+- No real-time collaboration features
+
+=== 3.4 Data Flow
+
+The system follows a simple data flow pattern:
+
+1. **User Input** → Browser Events → Editor Logic
+2. **Editor Logic** → Data Model Update → DOM Synchronization  
+3. **Data Model** → Serialization → LocalStorage
+4. **Data Model** → Transformation → draw.io XML Export
+
+**Data Formats:**
+- **Internal**: JavaScript objects in memory
+- **Persistence**: JSON in LocalStorage
+- **Export**: XML in draw.io format
+- **Rendering**: SVG elements in DOM
+
+=== 3.5 Quality Attributes at System Boundary
+
+**Reliability:**
+- No external dependencies to fail
+- Offline-capable once loaded
+- Browser-native persistence
+
+**Performance:**
+- Client-side only, no network latency for operations
+- Direct DOM manipulation for fast updates
+- Minimal data transformation overhead
+
+**Security:**
+- No server-side attack surface
+- No sensitive data handling
+- Standard browser security model
+
+**Usability:**
+- Standard web interaction patterns
+- No installation or setup required
+- Immediate availability via URL

@@ -64,3 +64,6 @@ logs
 
 # Local development
 .local/
+
+# Gradle
+.gradle/

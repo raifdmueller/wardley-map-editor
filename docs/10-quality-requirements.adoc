@@ -1,0 +1,114 @@
+== Chapter 10: Quality Requirements
+
+=== 10.1 Quality Tree
+
+Based on the prioritized quality goals, the following quality tree shows the breakdown into specific scenarios:
+
+[plantuml, quality-tree, svg]
+....
+@startmindmap
+* Quality Goals
+** Time-to-Market (Priority 1)
+*** Development Speed
+*** Implementation Simplicity
+*** Live Demo Readiness
+** Usability (Priority 2)
+*** Intuitive Operation
+*** Immediate Feedback
+*** Error Prevention
+** Wow-Effect (Priority 3)
+*** Smooth Interactions
+*** Visual Polish
+*** Demo Impact
+@endmindmap
+....
+
+=== 10.2 Quality Scenarios
+
+==== QS-001: Time-to-Market
+
+**Quality Attribute:** Development Speed +
+**Scenario:** Live development session constraint +
+**Source:** Development team and stream audience +
+**Stimulus:** Start of 1-hour development window +
+**Environment:** Live streaming environment with time pressure +
+**Response:** Deliver working prototype with core functionality +
+**Response Measure:** Complete functional demo within exactly 60 minutes
+
+**Risk Mitigation:**
+- Focus on MVP features only
+- Use familiar technologies (vanilla JS, SVG)
+- Avoid complex abstractions initially
+
+==== QS-002: Usability Assessment  
+
+**Quality Attribute:** Usability +
+**Scenario:** First-time user interaction evaluation +
+**Source:** Stream audience observing demo +
+**Stimulus:** User attempts to create basic Wardley Map +
+**Environment:** Live demonstration without tutorials +
+**Response:** Intuitive interface allows successful completion +
+**Response Measure:** Stream audience consensus: "I could use this without help"
+
+**Acceptance Criteria:**
+- Component placement works on first attempt
+- Drag operations feel natural and responsive
+- Export function is discoverable and functional
+
+==== QS-003: Smooth Drag&Drop Performance
+
+**Quality Attribute:** Wow-Effect through smooth interactions +
+**Scenario:** Component manipulation during demo +
+**Source:** User performing drag operations +
+**Stimulus:** Dragging components across the canvas +
+**Environment:** Modern browser on typical hardware +
+**Response:** Fluid, lag-free visual feedback +
+**Response Measure:** No visible stuttering or delay during drag operations
+
+**Technical Requirements:**
+- 60fps during drag operations
+- Immediate visual feedback on mousedown
+- Smooth movement tracking cursor position
+
+=== 10.3 Quality Requirements Priority Matrix
+
+[cols="3,1,1,1,4", options="header"]
+|===
+| Quality Scenario | Priority | Measurable | Critical | Implementation Strategy
+| **Time-to-Market (QS-001)** | 1 | Yes | High | Simple tech stack, focus on core features
+| **Usability Assessment (QS-002)** | 2 | Yes | Medium | Intuitive interactions, standard patterns  
+| **Smooth Drag&Drop (QS-003)** | 3 | Yes | Low | SVG manipulation optimization
+|===
+
+=== 10.4 Quality Trade-offs
+
+**Primary Trade-off: Usability vs. Development Speed**
+
+When time pressure conflicts with usability improvements:
+- **Decision Rule**: Choose simpler implementation that works reliably
+- **Rationale**: A working simple solution beats a broken complex one
+- **Example**: Standard HTML inputs instead of custom UI components
+
+**Secondary Trade-off: Wow-Effect vs. Stability**
+
+When visual polish conflicts with functional stability:
+- **Decision Rule**: Prioritize functional completeness
+- **Rationale**: Demo must work first, look good second
+- **Example**: Basic styling over animated transitions
+
+=== 10.5 Non-Functional Requirements
+
+**Performance:**
+- Page load time: < 3 seconds on broadband
+- Component creation: < 200ms response time
+- Export generation: < 2 seconds for typical maps
+
+**Compatibility:**
+- Chrome 90+, Firefox 88+, Safari 14+
+- No mobile browser support required for MVP
+- JavaScript ES6+ features assumed available
+
+**Maintainability:**
+- Self-documenting code with clear variable names
+- Minimal complexity for future extensibility
+- Separate concerns (model, view, export)

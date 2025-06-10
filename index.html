@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardley Map Editor</title>
+    <meta name="description" content="Create and edit Wardley Maps with drag-and-drop interface and export to draw.io">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>Wardley Map Editor</h1>
+        <p class="subtitle">Create strategic maps with ease</p>
+    </header>
+
+    <main class="app-main">
+        <!-- Toolbar -->
+        <aside class="toolbar" role="toolbar" aria-label="Map editing tools">
+            <div class="tool-section">
+                <h3>Components</h3>
+                <button class="tool-btn" data-tool="component" aria-label="Add component">
+                    <span class="icon">📦</span>
+                    Component
+                </button>
+                <button class="tool-btn" data-tool="connection" aria-label="Add connection">
+                    <span class="icon">🔗</span>
+                    Connection
+                </button>
+            </div>
+            
+            <div class="tool-section">
+                <h3>Evolution</h3>
+                <div class="evolution-controls">
+                    <label for="evolution-slider">Evolution Stage:</label>
+                    <input type="range" id="evolution-slider" min="0" max="3" value="1" step="1" 
+                           aria-label="Evolution stage from Genesis to Commodity">
+                    <div class="evolution-labels">
+                        <span>Genesis</span>
+                        <span>Custom</span>
+                        <span>Product</span>
+                        <span>Commodity</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <h3>Actions</h3>
+                <button class="action-btn" id="clear-map" aria-label="Clear all components">
+                    <span class="icon">🗑️</span>
+                    Clear
+                </button>
+                <button class="action-btn" id="export-drawio" aria-label="Export to draw.io format">
+                    <span class="icon">💾</span>
+                    Export
+                </button>
+                <button class="action-btn" id="load-example" aria-label="Load example map">
+                    <span class="icon">📋</span>
+                    Example
+                </button>
+            </div>
+        </aside>
+
+        <!-- Map Canvas -->
+        <section class="map-container" role="main" aria-label="Wardley map canvas">
+            <div class="map-header">
+                <input type="text" id="map-title" placeholder="Enter map title..." 
+                       aria-label="Map title" class="map-title-input">
+                <div class="map-info">
+                    <span id="component-count">0 components</span>
+                    <span id="connection-count">0 connections</span>
+                </div>
+            </div>
+            
+            <!-- SVG Canvas for Wardley Map -->
+            <svg id="wardley-canvas" 
+                 width="800" 
+                 height="600" 
+                 viewBox="0 0 800 600"
+                 aria-label="Interactive Wardley map"
+                 role="img">
+                
+                <!-- Background Grid -->
+                <defs>
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+                
+                <!-- Axis Labels -->
+                <g class="axis-labels">
+                    <!-- Value Chain (Y-axis) -->
+                    <text x="20" y="30" class="axis-label" text-anchor="start">High Value</text>
+                    <text x="20" y="580" class="axis-label" text-anchor="start">Low Value</text>
+                    <text x="15" y="300" class="axis-title" text-anchor="middle" 
+                          transform="rotate(-90, 15, 300)">Value Chain</text>
+                    
+                    <!-- Evolution (X-axis) -->
+                    <text x="50" y="590" class="axis-label" text-anchor="start">Genesis</text>
+                    <text x="200" y="590" class="axis-label" text-anchor="middle">Custom Built</text>
+                    <text x="400" y="590" class="axis-label" text-anchor="middle">Product (+rental)</text>
+                    <text x="650" y="590" class="axis-label" text-anchor="end">Commodity (+utility)</text>
+                    <text x="400" y="615" class="axis-title" text-anchor="middle">Evolution</text>
+                </g>
+                
+                <!-- Evolution Stage Lines -->
+                <g class="evolution-lines">
+                    <line x1="200" y1="50" x2="200" y2="550" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
+                    <line x1="400" y1="50" x2="400" y2="550" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
+                    <line x1="600" y1="50" x2="600" y2="550" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
+                </g>
+                
+                <!-- Container for connections (lines) -->
+                <g id="connections-layer" class="connections-layer"></g>
+                
+                <!-- Container for components -->
+                <g id="components-layer" class="components-layer"></g>
+                
+                <!-- Temporary elements during interaction -->
+                <g id="temp-layer" class="temp-layer"></g>
+            </svg>
+        </section>
+    </main>
+
+    <!-- Status Bar -->
+    <footer class="status-bar">
+        <span id="status-message">Ready</span>
+        <span class="mode-indicator" id="mode-indicator">Select</span>
+    </footer>
+
+    <!-- Hidden Elements -->
+    <div id="export-modal" class="modal hidden" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <h3>Export to draw.io</h3>
+            <p>Your Wardley Map will be exported as XML compatible with draw.io</p>
+            <div class="modal-actions">
+                <button id="confirm-export" class="btn-primary">Download XML</button>
+                <button id="cancel-export" class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

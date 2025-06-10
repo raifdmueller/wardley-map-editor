@@ -1,0 +1,70 @@
+== Chapter 2: Architecture Constraints
+
+=== 2.1 Technical Constraints
+
+**Development Environment:**
+[cols="2,4", options="header"]
+|===
+| Constraint | Description
+| **Live Development** | Complete implementation during 1-hour live stream with audience
+| **Browser-Only** | No server-side components, purely client-side application
+| **No Dependencies** | Pure HTML5, CSS3, JavaScript ES6+ without external libraries
+| **GitHub Pages Hosting** | Static file hosting, no build process or server configuration
+| **Modern Browser Support** | Chrome, Firefox, Safari current versions (no IE support needed)
+|===
+
+**Technology Stack Limitations:**
+- No Node.js build tools or bundlers
+- No external CSS/JS frameworks (Bootstrap, React, etc.)
+- No server-side APIs or databases
+- No authentication or user management
+- No file system access beyond browser LocalStorage
+
+=== 2.2 Organizational Constraints
+
+**Development Process:**
+[cols="2,4", options="header"]
+|===
+| Constraint | Impact
+| **Live Stream Format** | All development visible to audience, including failures and debugging
+| **Time Limit** | Hard 1-hour deadline, no preparation or pre-built components
+| **Educational Purpose** | Code must be understandable and well-commented for learning
+| **Human-AI Collaboration** | Decision-making process must be transparent and documented
+|===
+
+**Quality Constraints:**
+- No unit tests or automated testing (time constraint)
+- Basic error handling only (happy path focus)
+- Minimal documentation during development
+- No performance optimization beyond basic good practices
+
+=== 2.3 Legal and Business Constraints
+
+**Open Source:**
+- MIT License for unrestricted use and modification
+- All code publicly available on GitHub
+- No proprietary components or third-party licenses
+
+**Intellectual Property:**
+- Content created live on stream, no pre-existing IP conflicts
+- draw.io XML format is publicly documented
+- Wardley Mapping methodology is open and unrestricted
+
+=== 2.4 Deployment and Runtime Constraints
+
+**Infrastructure:**
+- **Hosting**: GitHub Pages static hosting only
+- **CDN**: GitHub's global CDN for asset delivery
+- **Storage**: Browser LocalStorage (5-10MB limit per domain)
+- **Offline**: Basic offline functionality through browser caching
+
+**Performance Requirements:**
+- Loading time: < 3 seconds on modern broadband
+- Interaction response: < 100ms for drag operations
+- Memory usage: < 50MB for typical maps (< 20 components)
+- Mobile support: Not required for MVP
+
+**Security:**
+- No sensitive data handling required
+- Client-side only, no server attack surface
+- Standard browser security model sufficient

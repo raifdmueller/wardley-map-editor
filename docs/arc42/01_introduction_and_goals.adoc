@@ -1,0 +1,102 @@
+== 1. Einführung und Ziele
+
+[role="arc42help"]
+****
+Beschreibt die wesentlichen Anforderungen und treibenden Kräfte, die bei der Umsetzung der Softwarearchitektur und Entwicklung des Systems berücksichtigt werden müssen.
+****
+
+=== 1.1 Aufgabenstellung
+
+==== Was ist der Wardley Map Editor?
+
+Ein web-basierter Editor zur visuellen Erstellung von Wardley Maps mit Export-Funktionalität zu draw.io.
+
+**KRITISCHE FRAGE:** Warum brauchen wir das?
+
+Existierende Tools:
+* https://onlinewardleymaps.com/[Online Wardley Maps] - bereits verfügbar
+* Verschiedene draw.io Templates
+* Text-basierte Tools
+
+**Was macht unseren Editor einzigartig?**
+
+[PLACEHOLDER - Ralf, hier brauchen wir eine ehrliche Antwort: Was ist unser Alleinstellungsmerkmal?]
+
+==== Wesentliche Features (MVP)
+
+1. **Visuelle Map-Erstellung**
+   * Drag & Drop für Komponenten
+   * Positionierung auf Evolution/Value-Achsen
+   * Abhängigkeiten zwischen Komponenten
+
+2. **draw.io Export**
+   * XML-Generierung für draw.io Import
+   * Erhaltung der Map-Struktur
+
+3. **Browser-basiert**
+   * Keine Installation erforderlich
+   * LocalStorage für Persistierung
+
+=== 1.2 Qualitätsziele
+
+[role="arc42help"]
+****
+Die drei (!) wichtigsten Qualitätsziele für die Architektur. 
+Maximal fünf Ziele sollten hier genannt werden.
+****
+
+[cols="1,2,2" options="header"]
+|===
+| Priorität | Qualitätsziel | Szenario/Messbarkeit
+
+| 1 | **Usability** 
+| Ein Wardley Map-Neuling kann in <10 Minuten eine Map mit 5 Komponenten erstellen
+
+| 2 | **Performance** 
+| Rendering von Maps mit 100 Komponenten in <200ms auf Standard-Hardware
+
+| 3 | **Kompatibilität** 
+| Exportierte draw.io-Dateien sind 100% kompatibel und bearbeitbar
+|===
+
+**KRITISCHE ANMERKUNG:** 
+Diese Ziele sind noch zu vage! Wir brauchen konkretere Metriken:
+* Was ist "Standard-Hardware"?
+* Wie messen wir "100% kompatibel"?
+* Welche Browser-Versionen unterstützen wir?
+
+=== 1.3 Stakeholder
+
+[role="arc42help"]
+****
+Überblick über die Stakeholder des Systems, d.h. alle Personen, Rollen oder Organisationen, die
+* das System kennen sollten oder
+* von der Architektur überzeugt werden müssen oder
+* mit dem System oder seiner Entwicklung zu tun haben.
+****
+
+[cols="1,2,2" options="header"]
+|===
+| Rolle | Kontakt | Erwartungen
+
+| **Stream-Zuschauer** 
+| Software Architektur im Stream Community
+| Lernen, wie AI-assistierte Architektur funktioniert
+
+| **Wardley Map Praktiker** 
+| Simon Wardley Community
+| Einfaches Tool für Map-Erstellung
+
+| **Enterprise Architects** 
+| Unternehmen mit draw.io-Infrastruktur
+| Integration in bestehende Tool-Landschaft
+
+| **Entwickler-Team** 
+| Ralf + Claude (AI)
+| Demonstrieren von Human-AI Collaboration
+|===
+
+**REALITÄTS-CHECK:** 
+Haben wir tatsächlich mit echten Wardley Map-Nutzern gesprochen? Oder entwickeln wir "ins Blaue hinein"?
+
+[PLACEHOLDER - Ralf: User Research/Feedback aus der Community?]

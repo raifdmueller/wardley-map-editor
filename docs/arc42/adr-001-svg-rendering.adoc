@@ -66,8 +66,7 @@ For our demo scope (10-20 components max), Canvas's performance advantages are n
 
 ==== Technical Debt
 
-- **Future Scalability:** If the tool evolves beyond demo scope, Canvas migration might be needed
-- **Advanced Graphics:** Complex visual effects would require Canvas re-implementation
+**None.** The decision aligns with our demo scope and requirements. Performance limitations and animation constraints are not relevant for our intended use case of 10-20 components in a live demo context.
 
 === Implementation Notes
 

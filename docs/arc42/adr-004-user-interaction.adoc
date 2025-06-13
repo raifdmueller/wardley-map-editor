@@ -1,0 +1,80 @@
+== ADR-004: User Interface Strategy - Mouse-Only Interaction
+
+|===
+| Date:    h| 2025-06-13
+| Authors: h| Ralf D. Müller, Claude (AI Assistant)
+| Status:  h| Final
+|===
+
+=== Problem Description and Context
+
+We need to define the user interaction model for the Wardley Map Editor. The solution must be implementable within our remaining 20 minutes while providing intuitive map editing capabilities.
+
+=== Alternative Evaluation (Pugh Matrix)
+
+|===
+| Criterion | Mouse-Only (Baseline) | Touch Support | Keyboard Shortcuts
+| Implementation Speed | 0 | -2 | -1
+| Code Complexity | 0 | -2 | -1
+| Browser Testing | 0 | -2 | 0
+| Demo Focus | 0 | -1 | -1
+| User Experience | 0 | +1 | +1
+| **Total Score** | 0 | -6 | -2
+|===
+
+**Rejected Alternatives:**
+
+**Touch Support:** Requires handling touchstart/touchmove/touchend events with different coordinate systems. Additional complexity for device testing.
+
+**Keyboard Shortcuts:** Would require key binding management and user documentation. Not essential for basic demo functionality.
+
+=== Decision
+
+**We choose Mouse-Only interaction** for the initial implementation.
+
+**Rationale:**
+- **Time Efficiency:** Single event model (mousedown/mousemove/mouseup)
+- **Demo Environment:** Live stream likely uses desktop browser
+- **Testing Simplicity:** No cross-device testing required
+- **Clear Implementation:** Straightforward drag & drop implementation
+
+=== Consequences
+
+==== Positive Effects
+
+- **Rapid Development:** Single interaction model to implement
+- **Predictable Behavior:** Consistent mouse event handling across browsers
+- **Easy Debugging:** Clear event flow for live demonstration
+
+==== Risks
+
+- **Limited Accessibility:** No keyboard navigation support
+- **Mobile Limitation:** Not usable on touch devices
+
+==== Technical Debt
+
+**Minor.** Touch support could be added later with minimal refactoring by extending existing mouse event handlers.
+
+=== Implementation Notes
+
+**Event Handling:**
+```javascript
+// Component drag & drop
+component.addEventListener('mousedown', startDrag);
+document.addEventListener('mousemove', drag);
+document.addEventListener('mouseup', endDrag);
+
+// Canvas click for new components
+canvas.addEventListener('click', addComponent);
+```
+
+**Coordinate Handling:**
+```javascript
+function getMousePosition(event, svg) {
+  const rect = svg.getBoundingClientRect();
+  return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
+  };
+}
+```

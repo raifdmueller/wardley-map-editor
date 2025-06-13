@@ -1,0 +1,37 @@
+= Architecture Documentation: Wardley Map Editor
+Ralf D. Müller <ralf.d.mueller@gmail.com>
+:doctype: book
+:toc: left
+:toclevels: 3
+:sectnum:
+:sectanchors:
+:sectnums:
+:source-highlighter: highlight.js
+:icons: font
+:imagesdir: images
+
+// Master document including all arc42 chapters
+
+include::01_introduction_and_goals.adoc[]
+
+include::02_architecture_constraints.adoc[]
+
+include::03_system_scope_and_context.adoc[]
+
+include::04_solution_strategy.adoc[]
+
+include::05_building_block_view.adoc[]
+
+include::06_runtime_view.adoc[]
+
+include::07_deployment_view.adoc[]
+
+include::08_concepts.adoc[]
+
+include::09_architecture_decisions.adoc[]
+
+include::10_quality_requirements.adoc[]
+
+include::11_risks_and_technical_debt.adoc[]
+
+include::12_glossary.adoc[]

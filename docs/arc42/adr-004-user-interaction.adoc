@@ -1,3 +1,5 @@
+:jbake-menu: -
+
 == ADR-004: User Interface Strategy - Mouse-Only Interaction
 
 |===

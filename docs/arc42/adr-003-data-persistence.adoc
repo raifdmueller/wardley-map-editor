@@ -1,3 +1,5 @@
+:jbake-menu: -
+
 == ADR-003: Data Persistence Strategy - LocalStorage Only
 
 |===

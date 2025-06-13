@@ -1,3 +1,5 @@
+:jbake-menu: -
+
 == ADR-002: Architecture Pattern Selection - Simple Event Handlers
 
 |===

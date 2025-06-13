@@ -309,6 +309,7 @@
 <li><a href="#_2_2_organisatorische_randbedingungen">2.2 Organisatorische Randbedingungen</a></li>
 <li><a href="#_2_3_konventionen">2.3 Konventionen</a></li>
 <li><a href="#_2_4_wardley_map_spezifische_constraints">2.4 Wardley Map Spezifische Constraints</a></li>
+<li><a href="#_2_5_offene_technische_entscheidungen">2.5 Offene technische Entscheidungen</a></li>
 </ul>
 </li>
 </ul>
@@ -347,35 +348,38 @@
 <h3 id="_2_1_technische_randbedingungen">2.1 Technische Randbedingungen</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Randbedingung</th>
 <th class="tableblock halign-left valign-top">Beschreibung</th>
+<th class="tableblock halign-left valign-top">Begründung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Browser-Support</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
-Grund: ES6+ Features, Canvas/SVG APIs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ES6+ Features, Canvas/SVG APIs needed
+Legacy browser support würde zu viel Zeit kosten</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Client-Side Only</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Server-Komponente erforderlich
-Grund: Demo-Projekt, einfache Bereitstellung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Server-Komponente, Backend, Datenbank</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Zeitbudget: 1 Stunde</strong> - kein Setup von Server-Infrastruktur möglich</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>JavaScript ES6+</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Moderne JavaScript-Features
-Grund: Entwicklungseffizienz, bessere Code-Struktur</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Vanilla JavaScript</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Frameworks (React, Vue, Angular)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Zeitbudget: 1 Stunde</strong> - kein Build-Setup, direktes HTML/JS</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>draw.io Kompatibilität</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">XML-Export muss draw.io-Format entsprechen
-Grund: Integration in bestehende Tool-Landschaft</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML-Export muss draw.io-Format entsprechen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Demo-Ziel: Integration in bestehende Tools zeigen</p></td>
 </tr>
 </tbody>
 </table>
@@ -384,35 +388,37 @@ Grund: Integration in bestehende Tool-Landschaft</p></td>
 <h3 id="_2_2_organisatorische_randbedingungen">2.2 Organisatorische Randbedingungen</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Randbedingung</th>
 <th class="tableblock halign-left valign-top">Beschreibung</th>
+<th class="tableblock halign-left valign-top">Begründung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Entwicklungszeit</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">~1 Stunde Live-Stream
-Grund: Stream-Format, MVP-Fokus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~1 Stunde Live-Stream für MVP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Stream-Format</strong> - feste Sendezeit, experimenteller Charakter</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Open Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MIT License, GitHub Repository
-Grund: Community-Projekt, Lernzweck</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIT License, GitHub Repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Community-Projekt, Bildungszweck, Nachnutzung erwünscht</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Keine externen Dependencies</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Vanilla JavaScript, keine Frameworks
-Grund: Einfachheit, Nachvollziehbarkeit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine npm packages, CDNs, Build-Tools</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Zeitbudget: 1 Stunde</strong> - kein Setup von Build-Pipeline möglich</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Live-Entwicklung</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transparenter Entwicklungsprozess
-Grund: Bildungszweck, Community</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transparenter, ungeschönter Entwicklungsprozess</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Stream-Ziel:</strong> Echte AI-Human Collaboration zeigen</p></td>
 </tr>
 </tbody>
 </table>
@@ -487,6 +493,25 @@ Erhaltung der relationalen Positionen</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_2_5_offene_technische_entscheidungen">2.5 Offene technische Entscheidungen</h3>
+<div class="paragraph">
+<p>Die folgenden technischen Entscheidungen werden als <strong>Architecture Decision Records (ADRs)</strong> dokumentiert:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Canvas vs. SVG für Rendering → ADR-001 (geplant)</p>
+</li>
+<li>
+<p>LocalStorage vs. InMemory für Persistierung → ADR-002 (geplant)</p>
+</li>
+<li>
+<p>Mouse-Only vs. Touch-Support → ADR-003 (geplant)</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>

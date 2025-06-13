@@ -774,7 +774,7 @@ Erhaltung der relationalen Positionen</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Mouse/Keyboard-Interaktionen
 Drag &amp; Drop, Clicks, Text-Input</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Visuelle Wardley Map
-draw.io XML-Datei</p></td>
+draw.io XML-Datei (Download)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>draw.io</strong></p></td>
@@ -789,6 +789,13 @@ LocalStorage-Zugriff</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong>Abgrenzung - Was unser System NICHT macht:</strong>
+* Kein Import von existierenden Maps
+* Keine Kollaboration/Multi-User
+* Keine Cloud-Synchronisation
+* Keine Versionierung</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_3_2_technischer_kontext">3.2 Technischer Kontext</h3>
@@ -818,7 +825,7 @@ LocalStorage-Zugriff</p></td>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Canvas/SVG Rendering</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Browser Canvas API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browser Canvas/SVG API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Map Data (JSON)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Visual Representation</p></td>
 </tr>
@@ -826,22 +833,29 @@ LocalStorage-Zugriff</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>LocalStorage</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Web Storage API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Map Objects (JSON)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Persistent Storage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persistent Storage (Browser-lokal)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>File Download</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Browser Download API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">draw.io XML</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">.drawio File</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.drawio File (Download)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Mouse/Touch Events</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOM Events</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User Interactions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Component Positions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component Positions/Updates</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong>Technische Abgrenzung:</strong>
+* Kein Server-Backend
+* Keine REST APIs
+* Keine WebSocket-Verbindungen
+* Keine externe Cloud-Services</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_3_3_externe_schnittstellen">3.3 Externe Schnittstellen</h3>
@@ -882,7 +896,7 @@ LocalStorage-Zugriff</p></td>
 <div class="sect3">
 <h4 id="_browser_localstorage">Browser LocalStorage</h4>
 <div class="paragraph">
-<p><strong>Zweck:</strong> Lokale Persistierung der Map-Daten</p>
+<p><strong>Zweck:</strong> Lokale Persistierung der Map-Daten (nur Browser-lokal)</p>
 </div>
 <div class="paragraph">
 <p><strong>Datenformat:</strong></p>

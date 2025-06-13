@@ -2,14 +2,14 @@
 <html lang="de">
 <head>
     
-    <!-- sourceuri: arc42/adr-002-architecture-pattern.html -->
+    <!-- sourceuri: arc42/11_risks_and_technical_debt.html -->
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <meta content="jbake" name="generator">
     <meta content="INDEX, FOLLOW" name="ROBOTS">
 
-    <title>ADR-002: Architecture Pattern Selection - Simple Event Handlers</title>
+    <title>11. Risiken und technische Schulden</title>
     <meta content="docToolchain" property="og:title">
     <meta content="build your dev docs the easy way..." property="og:description">
     <meta content="website" property="og:type">
@@ -263,7 +263,7 @@
                                 
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
                                    href="../arc42/adr-002-architecture-pattern.html" title="ADR-002: Architecture Pattern Selection - Simple Event Handlers">ADR-002: Architecture Pattern Selection - Simple Event Handlers</a>
                                 
                             </li>
@@ -308,7 +308,7 @@
                                 
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
                                    href="../arc42/11_risks_and_technical_debt.html" title="11. Risiken und technische Schulden">11. Risiken und technische Schulden</a>
                                 
                             </li>
@@ -324,11 +324,11 @@
 				<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 					
 
-        <a href="##git-repo-url##/arc42/adr-002-architecture-pattern.adoc"
+        <a href="##git-repo-url##/arc42/11_risks_and_technical_debt.adoc"
            target="_blank"><i class="fa fa-edit fa-fw"></i> Improve this doc</a>
 
 
-        <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-002%3A+Architecture+Pattern+Selection+-+Simple+Event+Handlers%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/adr-002-architecture-pattern.adoc%0A%23branch:%20main" target="_blank"><i
+        <a href="##issue-url##?title=Docs%3A+Feedback+for+%2711.+Risiken+und+technische+Schulden%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/11_risks_and_technical_debt.adoc%0A%23branch:%20main" target="_blank"><i
                 class="fab fa-github fa-fw"></i> Create an issue</a>
 
         
@@ -338,12 +338,12 @@
         <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_adr_002_architecture_pattern_selection_simple_event_handlers">ADR-002: Architecture Pattern Selection - Simple Event Handlers</a>
+<li><a href="#_11_risiken_und_technische_schulden">11. Risiken und technische Schulden</a>
 <ul class="sectlevel2">
-<li><a href="#_problem_description_and_context">Problem Description and Context</a></li>
-<li><a href="#_alternative_evaluation_pugh_matrix">Alternative Evaluation (Pugh Matrix)</a></li>
-<li><a href="#_decision">Decision</a></li>
-<li><a href="#_consequences">Consequences</a></li>
+<li><a href="#_11_1_risiken">11.1 Risiken</a></li>
+<li><a href="#_11_2_technische_schulden">11.2 Technische Schulden</a></li>
+<li><a href="#_11_3_risiko_mitigation">11.3 Risiko-Mitigation</a></li>
+<li><a href="#_11_4_monitoring">11.4 Monitoring</a></li>
 </ul>
 </li>
 </ul>
@@ -369,151 +369,154 @@
         <p>
             
 <div class="sect1">
-<h2 id="_adr_002_architecture_pattern_selection_simple_event_handlers">ADR-002: Architecture Pattern Selection - Simple Event Handlers</h2>
+<h2 id="_11_risiken_und_technische_schulden">11. Risiken und technische Schulden</h2>
 <div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Eine nach Prioritäten geordnete Liste der erkannten Architekturrisiken und/oder technischen Schulden.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_11_1_risiken">11.1 Risiken</h3>
+<div class="paragraph">
+<p>Die folgenden Risiken wurden in den Architecture Decision Records identifiziert:</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 16.6668%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Risiko</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+<th class="tableblock halign-left valign-top">Auswirkung</th>
+<th class="tableblock halign-left valign-top">Quelle</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Date:</p></td>
-<th class="tableblock halign-left valign-top"><p class="tableblock">2025-06-13</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Performance Ceiling</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG Performance-Grenzen bei 100+ Komponenten</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niedrig</strong> - Demo-Scope nur 10-20 Komponenten</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-001</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Authors:</p></td>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Ralf D. Müller, Claude (AI Assistant)</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Animation Limitations</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Komplexe Animationen weniger smooth als Canvas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niedrig</strong> - Keine Animationen geplant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-001</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status:</p></td>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Final</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Code Organization</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simple Event Handlers können unübersichtlich werden</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niedrig</strong> - Demo-Scope begrenzt Komplexität</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-002</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Event Management</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manuelle Event Cleanup erforderlich</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niedrig</strong> - Wenige Events, kurze Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-002</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Storage Limits</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalStorage 5MB Browser-Limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niedrig</strong> - Demo Maps &lt;&lt; 1MB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-003</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Browser Clearing</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Daten verloren bei Browser Storage löschen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Akzeptabel</strong> - Demo-Kontext</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-003</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Limited Accessibility</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Keyboard-Navigation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niedrig</strong> - Desktop Demo-Fokus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-004</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Mobile Limitation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nicht nutzbar auf Touch-Devices</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Akzeptabel</strong> - Live-Stream Desktop-fokussiert</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-004</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="sect2">
-<h3 id="_problem_description_and_context">Problem Description and Context</h3>
+<h3 id="_11_2_technische_schulden">11.2 Technische Schulden</h3>
 <div class="paragraph">
-<p>We need to choose an architecture pattern for organizing the Wardley Map Editor code. The solution must be implementable within 25 minutes while providing clean separation of concerns for:
-- User interface interactions
-- Data management
-- Rendering logic
-- Export functionality</p>
+<p><strong>Aktuelle technische Schulden:</strong> <strong>Keine</strong></p>
 </div>
+<div class="paragraph">
+<p>Alle identifizierten Limitationen sind <strong>bewusste Scope-Entscheidungen</strong> für das Demo-Projekt, nicht technische Schulden:</p>
 </div>
-<div class="sect2">
-<h3 id="_alternative_evaluation_pugh_matrix">Alternative Evaluation (Pugh Matrix)</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Bereich</th>
+<th class="tableblock halign-left valign-top">Status</th>
+<th class="tableblock halign-left valign-top">Begründung</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Criterion</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Simple Event Handlers (Baseline)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MVC Pattern</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Component Architecture</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Rendering-Performance</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Schuld</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG ist angemessen für Demo-Scope (10-20 Komponenten)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Speed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Architektur-Pattern</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Schuld</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simple Event Handlers sind richtig für 25-Min Implementation</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code Complexity</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Daten-Persistierung</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Schuld</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalStorage erfüllt alle Demo-Anforderungen</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+2</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Learning Curve</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Demo Suitability</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total Score</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Touch-Support</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Minor Technical Debt</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Könnte später mit minimalem Refactoring ergänzt werden</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_11_3_risiko_mitigation">11.3 Risiko-Mitigation</h3>
 <div class="paragraph">
-<p><strong>Rejected Alternatives:</strong></p>
+<p><strong>Für den Demo-Kontext sind keine Mitigationsmaßnahmen erforderlich.</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>MVC Pattern:</strong> Would require separate Model, View, Controller classes and event bus implementation - too much boilerplate for 25-minute implementation.</p>
-</div>
-<div class="paragraph">
-<p><strong>Component Architecture:</strong> Modern but requires careful design of component interfaces and lifecycle management - complexity not justified for demo scope.</p>
+<p>Alle identifizierten Risiken haben niedrige Auswirkung auf unsere Demo-Ziele:
+- ✅ Funktionsfähiger Prototyp in 1 Stunde
+- ✅ Nachvollziehbare Architektur für Stream-Zuschauer
+- ✅ Demonstration von Human-AI Collaboration</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_decision">Decision</h3>
+<h3 id="_11_4_monitoring">11.4 Monitoring</h3>
 <div class="paragraph">
-<p><strong>We choose Simple Event Handlers</strong> with direct DOM manipulation.</p>
+<p><strong>Demo-relevante Überwachung:</strong>
+- Browser DevTools für SVG DOM Inspektion
+- Console Logs für Event-Debugging
+- LocalStorage Browser Inspector für Datenpersistierung</p>
 </div>
 <div class="paragraph">
-<p><strong>Rationale:</strong>
-- <strong>Minimal Boilerplate:</strong> Direct addEventListener() calls, no framework overhead
-- <strong>Fast Implementation:</strong> Straightforward JavaScript without architectural complexity
-- <strong>Easy Debugging:</strong> Clear event flow, no hidden abstractions
-- <strong>Demo Focus:</strong> Code remains readable and explainable during live stream</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_consequences">Consequences</h3>
-<div class="sect3">
-<h4 id="_positive_effects">Positive Effects</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Rapid Development:</strong> Minimal setup, direct implementation</p>
-</li>
-<li>
-<p><strong>Clear Code Flow:</strong> Easy to follow during live demonstration</p>
-</li>
-<li>
-<p><strong>No Dependencies:</strong> Pure JavaScript, no architectural libraries needed</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_risks">Risks</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Code Organization:</strong> May become messy if scope grows beyond demo</p>
-</li>
-<li>
-<p><strong>Event Management:</strong> Manual event cleanup required</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_technical_debt">Technical Debt</h4>
-<div class="paragraph">
-<p><strong>None.</strong> Simple event handlers are appropriate for our demo scope and timeline.</p>
-</div>
+<p><strong>Keine produktiven Monitoring-Anforderungen</strong> aufgrund des Demo-Charakters.</p>
 </div>
 </div>
 </div>
@@ -545,11 +548,11 @@
     <button class="feedback--answer feedback--answer-yes">Yes</button>
     <button class="feedback--answer feedback--answer-no">No</button>
     <p class="feedback--response feedback--response-yes">
-        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-002%3A+Architecture+Pattern+Selection+-+Simple+Event+Handlers%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/adr-002-architecture-pattern.adoc">tell us
+        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%2711.+Risiken+und+technische+Schulden%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/11_risks_and_technical_debt.adoc">tell us
     how we can improve</a>.
     </p>
     <p class="feedback--response feedback--response-no">
-        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-002%3A+Architecture+Pattern+Selection+-+Simple+Event+Handlers%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/adr-002-architecture-pattern.adoc">tell
+        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%2711.+Risiken+und+technische+Schulden%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/11_risks_and_technical_debt.adoc">tell
     us how we can improve</a>.
     </p>
 </div>

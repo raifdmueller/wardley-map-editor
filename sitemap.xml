@@ -17,6 +17,11 @@
     </url>
 
     <url>
+    	<loc>http://jbake.org/arc42/11_risks_and_technical_debt.html</loc>
+    	<lastmod>2025-06-13</lastmod>
+    </url>
+
+    <url>
     	<loc>http://jbake.org/arc42/09_architecture_decisions.html</loc>
     	<lastmod>2025-06-13</lastmod>
     </url>

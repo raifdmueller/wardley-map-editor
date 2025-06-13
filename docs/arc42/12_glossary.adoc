@@ -1,0 +1,76 @@
+== 12. Glossar
+
+[role="arc42help"]
+****
+Die wesentlichen fachlichen und technischen Begriffe, die Stakeholder im Zusammenhang mit dem System verwenden.
+****
+
+[cols="1,3" options="header"]
+|===
+| Begriff | Definition
+
+| **ADR** 
+| Architecture Decision Record - Dokumentation einer Architekturentscheidung mit Begründung und Alternativen
+
+| **arc42** 
+| Template für Architekturdokumentation mit 12 standardisierten Kapiteln
+
+| **Canvas API** 
+| Browser-Schnittstelle für pixel-basiertes Zeichnen auf HTML5 Canvas-Elementen
+
+| **Component** 
+| Einzelner Baustein in einer Wardley Map mit Position auf Evolution/Value-Achsen
+
+| **Dependency** 
+| Abhängigkeitsbeziehung zwischen zwei Komponenten in einer Wardley Map
+
+| **docToolchain** 
+| Tool für "docs-as-code" Ansatz, generiert Dokumentation aus AsciiDoc-Dateien
+
+| **draw.io** 
+| Web-basierte Diagramm-Software von JGraph, unterstützt XML-Import/Export
+
+| **Evolution Axis** 
+| X-Achse in Wardley Maps: Genesis → Custom Built → Product → Commodity
+
+| **LocalStorage** 
+| Browser Web Storage API für lokale Datenpersistierung (ca. 5MB Limit)
+
+| **MVP** 
+| Minimum Viable Product - funktionsfähige Grundversion mit essentiellen Features
+
+| **PlantUML** 
+| Textbasierte Diagramm-Sprache für UML und andere Diagrammtypen
+
+| **Pugh Matrix** 
+| Bewertungsmatrix für Alternativenvergleich mit gewichteten Kriterien
+
+| **SVG** 
+| Scalable Vector Graphics - XML-basiertes Vektorgrafikformat für Web
+
+| **Value Chain Axis** 
+| Y-Achse in Wardley Maps: Invisible → Visible → Customer
+
+| **Wardley Map** 
+| Strategische Visualisierungsmethode von Simon Wardley für Wertschöpfungsketten und Evolution
+
+| **XML** 
+| Extensible Markup Language - strukturiertes Datenformat für draw.io Export
+|===
+
+=== Abkürzungen
+
+[cols="1,3" options="header"]
+|===
+| Abkürzung | Bedeutung
+
+| **API** | Application Programming Interface
+| **CSS** | Cascading Style Sheets  
+| **DOM** | Document Object Model
+| **HTML** | HyperText Markup Language
+| **JSON** | JavaScript Object Notation
+| **MIT** | Massachusetts Institute of Technology (License)
+| **UI** | User Interface
+| **UX** | User Experience
+| **XML** | Extensible Markup Language
+|===

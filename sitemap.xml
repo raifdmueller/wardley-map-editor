@@ -17,6 +17,11 @@
     </url>
 
     <url>
+    	<loc>http://jbake.org/arc42/09_architecture_decisions.html</loc>
+    	<lastmod>2025-06-13</lastmod>
+    </url>
+
+    <url>
     	<loc>http://jbake.org/arc42/02_architecture_constraints.html</loc>
     	<lastmod>2025-06-13</lastmod>
     </url>

@@ -2,14 +2,14 @@
 <html lang="de">
 <head>
     
-    <!-- sourceuri: arc42/02_architecture_constraints.html -->
+    <!-- sourceuri: arc42/adr-001-svg-rendering.html -->
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <meta content="jbake" name="generator">
     <meta content="INDEX, FOLLOW" name="ROBOTS">
 
-    <title>2. Randbedingungen</title>
+    <title>ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization</title>
     <meta content="docToolchain" property="og:title">
     <meta content="build your dev docs the easy way..." property="og:description">
     <meta content="website" property="og:type">
@@ -258,7 +258,7 @@
                           
                         <ul class="td-sidebar-nav__section ul-0">
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
                                    href="../arc42/adr-001-svg-rendering.html" title="ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization">ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization</a>
                                 
                             </li>
@@ -273,7 +273,7 @@
                                 
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
                                    href="../arc42/02_architecture_constraints.html" title="2. Randbedingungen">2. Randbedingungen</a>
                                 
                             </li>
@@ -294,11 +294,11 @@
 				<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 					
 
-        <a href="##git-repo-url##/arc42/02_architecture_constraints.adoc"
+        <a href="##git-repo-url##/arc42/adr-001-svg-rendering.adoc"
            target="_blank"><i class="fa fa-edit fa-fw"></i> Improve this doc</a>
 
 
-        <a href="##issue-url##?title=Docs%3A+Feedback+for+%272.+Randbedingungen%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/02_architecture_constraints.adoc%0A%23branch:%20main" target="_blank"><i
+        <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-001%3A+Rendering+Technology+Selection+-+SVG+for+Wardley+Map+Visualization%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/adr-001-svg-rendering.adoc%0A%23branch:%20main" target="_blank"><i
                 class="fab fa-github fa-fw"></i> Create an issue</a>
 
         
@@ -308,13 +308,13 @@
         <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_2_randbedingungen">2. Randbedingungen</a>
+<li><a href="#_adr_001_rendering_technology_selection_svg_for_wardley_map_visualization">ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization</a>
 <ul class="sectlevel2">
-<li><a href="#_2_1_technische_randbedingungen">2.1 Technische Randbedingungen</a></li>
-<li><a href="#_2_2_organisatorische_randbedingungen">2.2 Organisatorische Randbedingungen</a></li>
-<li><a href="#_2_3_konventionen">2.3 Konventionen</a></li>
-<li><a href="#_2_4_wardley_map_spezifische_constraints">2.4 Wardley Map Spezifische Constraints</a></li>
-<li><a href="#_2_5_offene_technische_entscheidungen">2.5 Offene technische Entscheidungen</a></li>
+<li><a href="#_problem_description_and_context">Problem Description and Context</a></li>
+<li><a href="#_alternative_evaluation_pugh_matrix">Alternative Evaluation (Pugh Matrix)</a></li>
+<li><a href="#_decision">Decision</a></li>
+<li><a href="#_consequences">Consequences</a></li>
+<li><a href="#_implementation_notes">Implementation Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -340,182 +340,207 @@
         <p>
             
 <div class="sect1">
-<h2 id="_2_randbedingungen">2. Randbedingungen</h2>
+<h2 id="_adr_001_rendering_technology_selection_svg_for_wardley_map_visualization">ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date:</p></td>
+<th class="tableblock halign-left valign-top"><p class="tableblock">2025-06-13</p></th>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authors:</p></td>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Ralf D. Müller, Claude (AI Assistant)</p></th>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status:</p></td>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Final</p></th>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_problem_description_and_context">Problem Description and Context</h3>
 <div class="paragraph">
-<p>Randbedingungen und Vorgaben, die ihre Freiheiten bezüglich Entwurf, Implementierung oder Ihres Entwicklungsprozesses einschränken.</p>
+<p>We need to select a rendering technology for the Wardley Map Editor that allows:
+- Visual representation of map components (rectangles)
+- Interactive drag &amp; drop functionality
+- Line drawing for dependencies
+- Export to draw.io XML format</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2_1_technische_randbedingungen">2.1 Technische Randbedingungen</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Randbedingung</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-<th class="tableblock halign-left valign-top">Begründung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Browser-Support</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ES6+ Features, Canvas/SVG APIs needed
-Legacy browser support würde zu viel Zeit kosten</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Client-Side Only</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Server-Komponente, Backend, Datenbank</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Zeitbudget: 1 Stunde</strong> - kein Setup von Server-Infrastruktur möglich</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Vanilla JavaScript</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Frameworks (React, Vue, Angular)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Zeitbudget: 1 Stunde</strong> - kein Build-Setup, direktes HTML/JS</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>draw.io Kompatibilität</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">XML-Export muss draw.io-Format entsprechen</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Demo-Ziel: Integration in bestehende Tools zeigen</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_2_2_organisatorische_randbedingungen">2.2 Organisatorische Randbedingungen</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Randbedingung</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-<th class="tableblock halign-left valign-top">Begründung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Entwicklungszeit</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">~1 Stunde Live-Stream für MVP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Stream-Format</strong> - feste Sendezeit, experimenteller Charakter</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Open Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MIT License, GitHub Repository</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Community-Projekt, Bildungszweck, Nachnutzung erwünscht</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Keine externen Dependencies</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keine npm packages, CDNs, Build-Tools</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Zeitbudget: 1 Stunde</strong> - kein Setup von Build-Pipeline möglich</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Live-Entwicklung</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transparenter, ungeschönter Entwicklungsprozess</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Stream-Ziel:</strong> Echte AI-Human Collaboration zeigen</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_2_3_konventionen">2.3 Konventionen</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Bereich</th>
-<th class="tableblock halign-left valign-top">Konvention</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dokumentation</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">arc42 Template mit AsciiDoc
-docToolchain für Generierung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Code Style</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ES6+ Standards
-Kommentare in Englisch</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Versionierung</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Git Flow, semantische Versionierung
-GitHub Issues für Features</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Diagramme</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML für Architektur-Diagramme</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_2_4_wardley_map_spezifische_constraints">2.4 Wardley Map Spezifische Constraints</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Koordinatensystem</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">X-Achse: Evolution (Genesis → Commodity)
-Y-Achse: Value Chain (High → Low)
-Werte: 0-1 normalisiert</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Komponenten-Typen</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Standard Wardley Map Elemente:
-- Components (Rechtecke)
-- Dependencies (Linien)
-- Annotations (Text)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>draw.io Mapping</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wardley Koordinaten → draw.io Pixel-Koordinaten
-Erhaltung der relationalen Positionen</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_2_5_offene_technische_entscheidungen">2.5 Offene technische Entscheidungen</h3>
 <div class="paragraph">
-<p>Die folgenden technischen Entscheidungen werden als <strong>Architecture Decision Records (ADRs)</strong> dokumentiert:</p>
+<p>The decision must be made within our 1-hour live-stream timeframe, requiring a technology that can be implemented quickly while providing good user experience.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_alternative_evaluation_pugh_matrix">Alternative Evaluation (Pugh Matrix)</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criterion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Canvas (Baseline)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Speed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event Handling Complexity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance (Small Scale)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Debugging Capabilities</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Learning Curve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total Score</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+5</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Rejected Alternatives:</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Canvas:</strong> While Canvas offers superior performance for large-scale applications (1000+ elements), it requires:
+- Manual implementation of hit-testing for mouse events
+- Custom coordinate transformation logic
+- More complex drag &amp; drop implementation
+- No direct DOM inspection capabilities</p>
+</div>
+<div class="paragraph">
+<p>For our demo scope (10-20 components max), Canvas&#8217;s performance advantages are not needed, while its complexity would consume valuable implementation time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_decision">Decision</h3>
+<div class="paragraph">
+<p><strong>We choose SVG for rendering</strong> the Wardley Map visualization.</p>
+</div>
+<div class="paragraph">
+<p><strong>Rationale:</strong>
+- <strong>Time Efficiency:</strong> DOM-based event handling reduces implementation complexity
+- <strong>Demo Suitability:</strong> Elements are directly inspectable in browser dev tools
+- <strong>Sufficient Performance:</strong> SVG handles our target scale (10-20 components) without issues
+- <strong>Coordinate Simplicity:</strong> Direct pixel coordinates, no transformation matrices needed
+- <strong>CSS Integration:</strong> Styling can be handled through CSS classes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consequences">Consequences</h3>
+<div class="sect3">
+<h4 id="_positive_effects">Positive Effects</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Canvas vs. SVG für Rendering → ADR-001 (geplant)</p>
+<p><strong>Faster Development:</strong> Reduced implementation time for interactive features</p>
 </li>
 <li>
-<p>LocalStorage vs. InMemory für Persistierung → ADR-002 (geplant)</p>
+<p><strong>Better Debugging:</strong> All map elements visible in DOM inspector during live demo</p>
 </li>
 <li>
-<p>Mouse-Only vs. Touch-Support → ADR-003 (geplant)</p>
+<p><strong>Simpler Codebase:</strong> Less boilerplate code for basic functionality</p>
+</li>
+<li>
+<p><strong>CSS Styling:</strong> Standard web technologies for visual customization</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_risks">Risks</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Performance Ceiling:</strong> May not scale beyond 100+ components (not relevant for demo)</p>
+</li>
+<li>
+<p><strong>Animation Limitations:</strong> Complex animations less smooth than Canvas (not planned)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_technical_debt">Technical Debt</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Future Scalability:</strong> If the tool evolves beyond demo scope, Canvas migration might be needed</p>
+</li>
+<li>
+<p><strong>Advanced Graphics:</strong> Complex visual effects would require Canvas re-implementation</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementation_notes">Implementation Notes</h3>
+<div class="paragraph">
+<p><strong>SVG Structure for Wardley Maps:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;svg viewBox="0 0 1200 800"&gt;
+  &lt;!-- Axes --&gt;
+  &lt;line x1="100" y1="700" x2="1100" y2="700" /&gt; &lt;!-- Evolution --&gt;
+  &lt;line x1="100" y1="100" x2="100" y2="700" /&gt;   &lt;!-- Value --&gt;
+
+  &lt;!-- Components --&gt;
+  &lt;rect id="comp1" x="200" y="300" width="100" height="40" /&gt;
+  &lt;text x="250" y="325"&gt;User Needs&lt;/text&gt;
+
+  &lt;!-- Dependencies --&gt;
+  &lt;line x1="250" y1="340" x2="350" y2="450" /&gt;
+&lt;/svg&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Event Handling:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="javascript">component.addEventListener('mousedown', startDrag);
+component.addEventListener('mousemove', drag);
+component.addEventListener('mouseup', endDrag);</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -547,11 +572,11 @@ Erhaltung der relationalen Positionen</p></td>
     <button class="feedback--answer feedback--answer-yes">Yes</button>
     <button class="feedback--answer feedback--answer-no">No</button>
     <p class="feedback--response feedback--response-yes">
-        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%272.+Randbedingungen%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/02_architecture_constraints.adoc">tell us
+        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-001%3A+Rendering+Technology+Selection+-+SVG+for+Wardley+Map+Visualization%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/adr-001-svg-rendering.adoc">tell us
     how we can improve</a>.
     </p>
     <p class="feedback--response feedback--response-no">
-        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%272.+Randbedingungen%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/02_architecture_constraints.adoc">tell
+        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-001%3A+Rendering+Technology+Selection+-+SVG+for+Wardley+Map+Visualization%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/adr-001-svg-rendering.adoc">tell
     us how we can improve</a>.
     </p>
 </div>

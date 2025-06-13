@@ -2,6 +2,14 @@ var documents = [
 
 {
     "id": 0,
+    "uri": "arc42/adr-001-svg-rendering.html",
+    "menu": "arc42",
+    "title": "ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization",
+    "text": " Table of Contents ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization Problem Description and Context Alternative Evaluation (Pugh Matrix) Decision Consequences Implementation Notes ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization Date: 2025-06-13 Authors: Ralf D. Müller, Claude (AI Assistant) Status: Final Problem Description and Context We need to select a rendering technology for the Wardley Map Editor that allows: - Visual representation of map components (rectangles) - Interactive drag &amp; drop functionality - Line drawing for dependencies - Export to draw.io XML format The decision must be made within our 1-hour live-stream timeframe, requiring a technology that can be implemented quickly while providing good user experience. Alternative Evaluation (Pugh Matrix) Criterion Canvas (Baseline) SVG Implementation Speed 0 +1 Event Handling Complexity 0 +1 Performance (Small Scale) 0 0 Code Maintainability 0 +1 Debugging Capabilities 0 +1 Learning Curve 0 +1 Total Score 0 +5 Rejected Alternatives: Canvas: While Canvas offers superior performance for large-scale applications (1000+ elements), it requires: - Manual implementation of hit-testing for mouse events - Custom coordinate transformation logic - More complex drag &amp; drop implementation - No direct DOM inspection capabilities For our demo scope (10-20 components max), Canvas&#8217;s performance advantages are not needed, while its complexity would consume valuable implementation time. Decision We choose SVG for rendering the Wardley Map visualization. Rationale: - Time Efficiency: DOM-based event handling reduces implementation complexity - Demo Suitability: Elements are directly inspectable in browser dev tools - Sufficient Performance: SVG handles our target scale (10-20 components) without issues - Coordinate Simplicity: Direct pixel coordinates, no transformation matrices needed - CSS Integration: Styling can be handled through CSS classes Consequences Positive Effects Faster Development: Reduced implementation time for interactive features Better Debugging: All map elements visible in DOM inspector during live demo Simpler Codebase: Less boilerplate code for basic functionality CSS Styling: Standard web technologies for visual customization Risks Performance Ceiling: May not scale beyond 100+ components (not relevant for demo) Animation Limitations: Complex animations less smooth than Canvas (not planned) Technical Debt Future Scalability: If the tool evolves beyond demo scope, Canvas migration might be needed Advanced Graphics: Complex visual effects would require Canvas re-implementation Implementation Notes SVG Structure for Wardley Maps: &lt;svg viewBox=\"0 0 1200 800\"&gt; &lt;!-- Axes --&gt; &lt;line x1=\"100\" y1=\"700\" x2=\"1100\" y2=\"700\" /&gt; &lt;!-- Evolution --&gt; &lt;line x1=\"100\" y1=\"100\" x2=\"100\" y2=\"700\" /&gt; &lt;!-- Value --&gt; &lt;!-- Components --&gt; &lt;rect id=\"comp1\" x=\"200\" y=\"300\" width=\"100\" height=\"40\" /&gt; &lt;text x=\"250\" y=\"325\"&gt;User Needs&lt;/text&gt; &lt;!-- Dependencies --&gt; &lt;line x1=\"250\" y1=\"340\" x2=\"350\" y2=\"450\" /&gt; &lt;/svg&gt; Event Handling: component.addEventListener('mousedown', startDrag); component.addEventListener('mousemove', drag); component.addEventListener('mouseup', endDrag); "
+},
+
+{
+    "id": 1,
     "uri": "arc42/02_architecture_constraints.html",
     "menu": "arc42",
     "title": "2. Randbedingungen",
@@ -9,7 +17,7 @@ var documents = [
 },
 
 {
-    "id": 1,
+    "id": 2,
     "uri": "arc42/01_introduction_and_goals.html",
     "menu": "arc42",
     "title": "1. Einführung und Ziele",
@@ -17,7 +25,7 @@ var documents = [
 },
 
 {
-    "id": 2,
+    "id": 3,
     "uri": "arc42/arc42.html",
     "menu": "arc42",
     "title": "Architecture Documentation: Wardley Map Editor",
@@ -25,7 +33,7 @@ var documents = [
 },
 
 {
-    "id": 3,
+    "id": 4,
     "uri": "arc42/03_system_scope_and_context.html",
     "menu": "arc42",
     "title": "3. Kontextabgrenzung",
@@ -33,7 +41,7 @@ var documents = [
 },
 
 {
-    "id": 4,
+    "id": 5,
     "uri": "search.html",
     "menu": "-",
     "title": "search",
@@ -41,7 +49,7 @@ var documents = [
 },
 
 {
-    "id": 5,
+    "id": 6,
     "uri": "lunrjsindex.html",
     "menu": "-",
     "title": "null",

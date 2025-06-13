@@ -1,0 +1,100 @@
+== 11. Risiken und technische Schulden
+
+[role="arc42help"]
+****
+Eine nach Prioritäten geordnete Liste der erkannten Architekturrisiken und/oder technischen Schulden.
+****
+
+=== 11.1 Risiken
+
+Die folgenden Risiken wurden in den Architecture Decision Records identifiziert:
+
+[cols="1,2,2,1" options="header"]
+|===
+| Risiko | Beschreibung | Auswirkung | Quelle
+
+| **Performance Ceiling** 
+| SVG Performance-Grenzen bei 100+ Komponenten
+| **Niedrig** - Demo-Scope nur 10-20 Komponenten
+| ADR-001
+
+| **Animation Limitations** 
+| Komplexe Animationen weniger smooth als Canvas
+| **Niedrig** - Keine Animationen geplant
+| ADR-001
+
+| **Code Organization** 
+| Simple Event Handlers können unübersichtlich werden
+| **Niedrig** - Demo-Scope begrenzt Komplexität
+| ADR-002
+
+| **Event Management** 
+| Manuelle Event Cleanup erforderlich
+| **Niedrig** - Wenige Events, kurze Session
+| ADR-002
+
+| **Storage Limits** 
+| LocalStorage 5MB Browser-Limit
+| **Niedrig** - Demo Maps << 1MB
+| ADR-003
+
+| **Browser Clearing** 
+| Daten verloren bei Browser Storage löschen
+| **Akzeptabel** - Demo-Kontext
+| ADR-003
+
+| **Limited Accessibility** 
+| Keine Keyboard-Navigation
+| **Niedrig** - Desktop Demo-Fokus
+| ADR-004
+
+| **Mobile Limitation** 
+| Nicht nutzbar auf Touch-Devices
+| **Akzeptabel** - Live-Stream Desktop-fokussiert
+| ADR-004
+|===
+
+=== 11.2 Technische Schulden
+
+**Aktuelle technische Schulden:** **Keine**
+
+Alle identifizierten Limitationen sind **bewusste Scope-Entscheidungen** für das Demo-Projekt, nicht technische Schulden:
+
+[cols="1,2,2" options="header"]
+|===
+| Bereich | Status | Begründung
+
+| **Rendering-Performance** 
+| Keine Schuld
+| SVG ist angemessen für Demo-Scope (10-20 Komponenten)
+
+| **Architektur-Pattern** 
+| Keine Schuld  
+| Simple Event Handlers sind richtig für 25-Min Implementation
+
+| **Daten-Persistierung** 
+| Keine Schuld
+| LocalStorage erfüllt alle Demo-Anforderungen
+
+| **Touch-Support** 
+| **Minor Technical Debt**
+| Könnte später mit minimalem Refactoring ergänzt werden
+|===
+
+=== 11.3 Risiko-Mitigation
+
+**Für den Demo-Kontext sind keine Mitigationsmaßnahmen erforderlich.**
+
+Alle identifizierten Risiken haben niedrige Auswirkung auf unsere Demo-Ziele:
+- ✅ Funktionsfähiger Prototyp in 1 Stunde
+- ✅ Nachvollziehbare Architektur für Stream-Zuschauer  
+- ✅ Demonstration von Human-AI Collaboration
+
+=== 11.4 Monitoring
+
+**Demo-relevante Überwachung:**
+- Browser DevTools für SVG DOM Inspektion
+- Console Logs für Event-Debugging
+- LocalStorage Browser Inspector für Datenpersistierung
+
+**Keine produktiven Monitoring-Anforderungen** aufgrund des Demo-Charakters.

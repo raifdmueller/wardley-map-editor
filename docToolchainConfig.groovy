@@ -1,72 +1,48 @@
-// docToolchain configuration for Wardley Map Editor
-// Documentation: https://doctoolchain.org/docToolchain/v2.0.x/
+outputPath = 'build'
 
-// Output and input directories
-outputPath = 'build/docs'
-inputPath = 'docs'
+// Path where the docToolchain will search for the input files.
+// This path is appended to the docDir property specified in gradle.properties
+// or in the command line, and therefore must be relative to it.
 
-// Files to be converted
+inputPath = 'docs';
+
+// if you need to register custom Asciidoctor extensions, this is the right place
+// configure the name and path to your extension, relative to the root of your project
+// (relative to dtcw). For example: 'src/ruby/asciidoctor-lists.rb'.
+// this is the same as the `requires`-list of the asciidoctor gradle plugin. The extensions will be
+// registered for generateDeck, generateHTML, generatePDF and generateDocbook tasks, only.
+// rubyExtensions = []
+
+// the pdfThemeDir config in this file is outdated.
+// please check http://doctoolchain.org/doctoolchain/v2.0.x/020_tutorial/030_generateHTML.html#_pdf_style for further details
+// pdfThemeDir = './src/docs/pdfTheme'
+
 inputFiles = [
-    [file: 'arc42/arc42.adoc', formats: ['html']],
+        /** inputFiles **/
 ]
 
-// Where to find images
+//folders in which asciidoc will find images.
+//these will be copied as resources to ./images
+//folders are relative to inputPath
+// Hint: If you define an imagespath in your documents like
+// :imagesdir: ./whatsoever
+// define it conditional like
+// ifndef::imagesdir[:imagesdir: ./whatsoever]
+// as doctoolchain defines :imagesdir: during generation
 imageDirs = [
-    "${inputPath}/images",
-    "${inputPath}/arc42/images"
+        /** imageDirs **/
 ]
 
-// Site generation configuration for microsite
-microsite.with {
-    // Site metadata
-    title = 'Wardley Map Editor - Architecture Documentation'
-    
-    // CRITICAL: Use our custom landing page
-    landingPage = 'landingpage.gsp'
-    
-    // Footer configuration (NO HTML tags - causes serialization issues)
-    footerText = 'Built with docToolchain and jBake - Human-AI Collaboration in Software Architecture'
-    
-    // Context path for deployment
-    contextPath = '/wardley-map-editor'
-    
-    // Social Links for Footer
-    footerGithub = 'https://github.com/raifdmueller/wardley-map-editor'
-    footerMail = 'mailto:ralf.d.mueller@gmail.com'
-    
-    // Project specific branding
-    issueUrl = 'https://github.com/raifdmueller/wardley-map-editor/issues/new'
-    gitRepoUrl = 'https://github.com/raifdmueller/wardley-map-editor'
-    branch = 'main'
-    
-    // Navigation menu configuration
-    menu = [:]
-}
+// whether the build should fail when detecting broken image references
+// if this config is set to true all images will be embedded
+failOnMissingImages = true
 
-// Additional attributes for AsciiDoc
-jbake.asciidoctorAttributes = [
-    'toc': 'left',
-    'toclevels': '3',
-    'sectlinks': '',
-    'sectanchors': '',
-    'numbered': '',
-    'icons': 'font',
-    'source-highlighter': 'highlight.js',
-    'imagesdir': 'images',
-    'plantuml-server-url': 'http://www.plantuml.com/plantuml',
-    'allow-uri-read': ''
-]
-
-// PDF generation settings (optional)
-asciidoctor = [
-    'pdf-stylesdir': "${inputPath}/styles",
-    'pdf-style': 'basic'
-]
-
-// These are directories (dirs) and files which Gradle monitors for a change
+// these are directories (dirs) and files which Gradle monitors for a change
 // in order to decide if the docs have to be re-build
 taskInputsDirs = [
-    "${inputPath}",
-]
+                    "${inputPath}",
+//                    "${inputPath}/src",
+//                    "${inputPath}/images",
+                ]
 
 taskInputsFiles = []

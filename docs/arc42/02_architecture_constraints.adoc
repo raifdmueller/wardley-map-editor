@@ -7,48 +7,49 @@ Randbedingungen und Vorgaben, die ihre Freiheiten bezüglich Entwurf, Implementi
 
 === 2.1 Technische Randbedingungen
 
-[cols="1,2" options="header"]
+[cols="1,2,2" options="header"]
 |===
-| Randbedingung | Beschreibung
+| Randbedingung | Beschreibung | Begründung
 
 | **Browser-Support** 
 | Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
-Grund: ES6+ Features, Canvas/SVG APIs
+| ES6+ Features, Canvas/SVG APIs needed
+Legacy browser support würde zu viel Zeit kosten
 
 | **Client-Side Only** 
-| Keine Server-Komponente erforderlich
-Grund: Demo-Projekt, einfache Bereitstellung
+| Keine Server-Komponente, Backend, Datenbank
+| **Zeitbudget: 1 Stunde** - kein Setup von Server-Infrastruktur möglich
 
-| **JavaScript ES6+** 
-| Moderne JavaScript-Features
-Grund: Entwicklungseffizienz, bessere Code-Struktur
+| **Vanilla JavaScript** 
+| Keine Frameworks (React, Vue, Angular)
+| **Zeitbudget: 1 Stunde** - kein Build-Setup, direktes HTML/JS
 
 | **draw.io Kompatibilität** 
 | XML-Export muss draw.io-Format entsprechen
-Grund: Integration in bestehende Tool-Landschaft
+| Demo-Ziel: Integration in bestehende Tools zeigen
 |===
 
 === 2.2 Organisatorische Randbedingungen
 
-[cols="1,2" options="header"]
+[cols="1,2,2" options="header"]
 |===
-| Randbedingung | Beschreibung
+| Randbedingung | Beschreibung | Begründung
 
 | **Entwicklungszeit** 
-| ~1 Stunde Live-Stream
-Grund: Stream-Format, MVP-Fokus
+| ~1 Stunde Live-Stream für MVP
+| **Stream-Format** - feste Sendezeit, experimenteller Charakter
 
 | **Open Source** 
 | MIT License, GitHub Repository
-Grund: Community-Projekt, Lernzweck
+| Community-Projekt, Bildungszweck, Nachnutzung erwünscht
 
 | **Keine externen Dependencies** 
-| Vanilla JavaScript, keine Frameworks
-Grund: Einfachheit, Nachvollziehbarkeit
+| Keine npm packages, CDNs, Build-Tools
+| **Zeitbudget: 1 Stunde** - kein Setup von Build-Pipeline möglich
 
 | **Live-Entwicklung** 
-| Transparenter Entwicklungsprozess
-Grund: Bildungszweck, Community
+| Transparenter, ungeschönter Entwicklungsprozess
+| **Stream-Ziel:** Echte AI-Human Collaboration zeigen
 |===
 
 === 2.3 Konventionen
@@ -94,3 +95,11 @@ Werte: 0-1 normalisiert
 | Wardley Koordinaten → draw.io Pixel-Koordinaten
 Erhaltung der relationalen Positionen
 |===
+
+=== 2.5 Offene technische Entscheidungen
+
+Die folgenden technischen Entscheidungen werden als **Architecture Decision Records (ADRs)** dokumentiert:
+
+* Canvas vs. SVG für Rendering → ADR-001 (geplant)
+* LocalStorage vs. InMemory für Persistierung → ADR-002 (geplant)  
+* Mouse-Only vs. Touch-Support → ADR-003 (geplant)

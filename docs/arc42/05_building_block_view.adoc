@@ -1,0 +1,129 @@
+== 5. Bausteinsicht
+
+[role="arc42help"]
+****
+Diese Sicht zeigt die statische Zerlegung des Systems in Bausteine (Module, Komponenten, Subsysteme, Klassen, Interfaces, Pakete, Bibliotheken, Frameworks, Schichten, Partitionen, Tiers, Funktionen, Makros, Operationen, Datenstrukturen, ...) sowie deren Beziehungen.
+****
+
+=== 5.1 Whitebox Gesamtsystem
+
+[plantuml, building-blocks, svg]
+----
+!include <C4/C4_Component>
+
+title Wardley Map Editor - Bausteinsicht
+
+Container_Boundary(browser, "Browser Environment") {
+  Component(ui, "User Interface", "HTML/CSS", "Main editor interface with SVG canvas")
+  Component(map_engine, "Map Engine", "JavaScript", "Core logic for map creation and manipulation")
+  Component(event_handler, "Event Handler", "JavaScript", "Mouse events and user interactions")
+  Component(storage, "Storage Manager", "JavaScript", "LocalStorage operations")
+  Component(export, "Export Engine", "JavaScript", "draw.io XML generation")
+}
+
+Rel(ui, event_handler, "user interactions")
+Rel(event_handler, map_engine, "component updates")
+Rel(map_engine, ui, "renders changes")
+Rel(map_engine, storage, "save/load data")
+Rel(map_engine, export, "generate XML")
+----
+
+**Bausteine der Ebene 1:**
+
+[cols="1,2" options="header"]
+|===
+| Baustein | Verantwortung
+
+| **User Interface** 
+| SVG-Canvas für Wardley Map Darstellung, Toolbar für Aktionen
+
+| **Map Engine** 
+| Verwaltung der Map-Datenstruktur, Koordinaten-Transformation
+
+| **Event Handler** 
+| Mouse-Events verarbeiten, Drag & Drop Koordination
+
+| **Storage Manager** 
+| Persistierung in LocalStorage, JSON Serialisierung
+
+| **Export Engine** 
+| draw.io XML-Format Generierung, Download-Funktionalität
+|===
+
+=== 5.2 Whitebox Map Engine
+
+**Zweck/Verantwortung:**
+Zentrale Komponente für Wardley Map Logik und Datenmanagement.
+
+[plantuml, map-engine-detail, svg]
+----
+package "Map Engine" {
+  class MapData {
+    +components: Component[]
+    +dependencies: Dependency[]
+    +title: string
+    +addComponent()
+    +removeComponent()
+    +addDependency()
+  }
+  
+  class Component {
+    +id: string
+    +label: string
+    +x: number (0-1)
+    +y: number (0-1)
+    +evolution: string
+  }
+  
+  class Dependency {
+    +from: string
+    +to: string
+  }
+  
+  class CoordinateSystem {
+    +wardleyToPixel()
+    +pixelToWardley()
+    +validatePosition()
+  }
+}
+
+MapData *-- Component
+MapData *-- Dependency
+MapData --> CoordinateSystem
+----
+
+**Enthaltene Bausteine:**
+
+[cols="1,2" options="header"]
+|===
+| Baustein | Verantwortung
+
+| **MapData** 
+| Hauptdatenstruktur, CRUD-Operationen für Components/Dependencies
+
+| **Component** 
+| Einzelne Wardley Map Komponente mit Position und Label
+
+| **Dependency** 
+| Verbindung zwischen zwei Komponenten
+
+| **CoordinateSystem** 
+| Transformation zwischen Wardley-Koordinaten (0-1) und Pixel-Koordinaten
+|===
+
+=== 5.3 Whitebox Event Handler
+
+**Zweck/Verantwortung:**
+Verarbeitung aller Benutzerinteraktionen und UI-Events.
+
+**Schnittstellen:**
+- **Input:** Mouse Events (mousedown, mousemove, mouseup, click)
+- **Output:** Map Engine Updates (addComponent, moveComponent)
+
+**Algorithmus:**
+```
+Mouse Click auf Canvas → neue Komponente erstellen
+Mouse Down auf Komponente → Drag-Modus starten  
+Mouse Move (während Drag) → Komponente Position updaten
+Mouse Up → Drag-Modus beenden, Position speichern
+```

@@ -1,0 +1,156 @@
+== 3. Kontextabgrenzung
+
+[role="arc42help"]
+****
+Die Kontextabgrenzung grenzt das System gegen alle Kommunikationspartner (Nachbarsysteme und Benutzerrollen) ab. Sie legt damit die externen Schnittstellen fest.
+****
+
+=== 3.1 Fachlicher Kontext
+
+[plantuml, context-diagram, svg]
+----
+!include <C4/C4_Context>
+
+title Wardley Map Editor - Fachlicher Kontext
+
+Person(user, "Map Creator", "Creates and edits Wardley Maps")
+System(editor, "Wardley Map Editor", "Web-based visual editor for Wardley Maps")
+
+System_Ext(drawio, "draw.io", "Diagram editing platform")
+System_Ext(browser, "Web Browser", "Chrome, Firefox, Safari, Edge")
+
+Rel(user, editor, "Creates maps, exports")
+Rel(editor, drawio, "Exports XML", "XML file")
+Rel(editor, browser, "Runs in", "HTML/CSS/JS")
+Rel(user, browser, "Uses")
+
+SHOW_LEGEND()
+----
+
+**Kommunikationspartner:**
+
+[cols="1,2,2" options="header"]
+|===
+| Partner | Input | Output
+
+| **Map Creator (User)** 
+| Mouse/Keyboard-Interaktionen
+Drag & Drop, Clicks, Text-Input
+| Visuelle Wardley Map
+draw.io XML-Datei
+
+| **draw.io** 
+| XML-Import der generierten Datei
+| Editierbare Diagramme
+
+| **Web Browser** 
+| HTML/CSS/JavaScript-Ausführung
+LocalStorage-Zugriff
+| Gerenderte Benutzeroberfläche
+|===
+
+=== 3.2 Technischer Kontext
+
+[plantuml, technical-context, svg]
+----
+!include <C4/C4_Container>
+
+title Wardley Map Editor - Technischer Kontext
+
+Container(spa, "Single Page Application", "HTML5/CSS3/JavaScript", "Visual map editor with drag & drop")
+
+ContainerDb(localstorage, "Browser LocalStorage", "Web Storage API", "Persists map data")
+
+System_Ext(filesystem, "File System", "Browser download mechanism")
+
+Rel(spa, localstorage, "Stores/Loads", "JSON")
+Rel(spa, filesystem, "Downloads", "draw.io XML")
+
+note right of spa : Canvas/SVG Rendering\nMouse Event Handling\nXML Generation
+note right of localstorage : Map Components\nPositions\nDependencies
+----
+
+**Technische Schnittstellen:**
+
+[cols="1,2,2,2" options="header"]
+|===
+| Interface | Protokoll/Format | Input | Output
+
+| **Canvas/SVG Rendering** 
+| Browser Canvas API
+| Map Data (JSON)
+| Visual Representation
+
+| **LocalStorage** 
+| Web Storage API
+| Map Objects (JSON)
+| Persistent Storage
+
+| **File Download** 
+| Browser Download API
+| draw.io XML
+| .drawio File
+
+| **Mouse/Touch Events** 
+| DOM Events
+| User Interactions
+| Component Positions
+|===
+
+=== 3.3 Externe Schnittstellen
+
+==== draw.io XML Format
+
+**Zweck:** Export von Wardley Maps als editierbare draw.io-Diagramme
+
+**Format Spezifikation:**
+```xml
+<mxGraphModel dx="1422" dy="794" grid="1" gridSize="10">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <!-- Wardley Map Components -->
+    <mxCell id="component1" value="User Needs" 
+            style="rounded=0;whiteSpace=wrap;html=1;" 
+            vertex="1" parent="1">
+      <mxGeometry x="100" y="50" width="120" height="60" as="geometry"/>
+    </mxCell>
+    <!-- Dependencies -->
+    <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;" 
+            edge="1" parent="1" source="component1" target="component2">
+    </mxCell>
+  </root>
+</mxGraphModel>
+```
+
+**Koordinaten-Mapping:**
+- Wardley X (0-1) → draw.io X (0-1200px)  
+- Wardley Y (0-1) → draw.io Y (0-800px)
+
+==== Browser LocalStorage
+
+**Zweck:** Lokale Persistierung der Map-Daten
+
+**Datenformat:**
+```json
+{
+  "mapId": "uuid-v4",
+  "title": "My Wardley Map",
+  "components": [
+    {
+      "id": "comp1",
+      "label": "User Needs",
+      "x": 0.2,
+      "y": 0.9,
+      "evolution": "genesis"
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "comp1",
+      "to": "comp2"
+    }
+  ],
+  "lastModified": "2025-06-13T11:18:00Z"
+}
+```

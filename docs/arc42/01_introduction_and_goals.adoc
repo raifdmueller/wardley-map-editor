@@ -22,20 +22,19 @@ Existierende Tools:
 
 [PLACEHOLDER - Ralf, hier brauchen wir eine ehrliche Antwort: Was ist unser Alleinstellungsmerkmal?]
 
-==== Wesentliche Features (MVP)
+==== Wesentliche Features (MVP für Demo)
 
-1. **Visuelle Map-Erstellung**
-   * Drag & Drop für Komponenten
-   * Positionierung auf Evolution/Value-Achsen
-   * Abhängigkeiten zwischen Komponenten
+1. **Basis-Canvas**
+   * Wardley Map Koordinatensystem (Evolution/Value-Achsen)
+   * Einfache Komponenten-Platzierung
 
-2. **draw.io Export**
-   * XML-Generierung für draw.io Import
-   * Erhaltung der Map-Struktur
+2. **Minimaler Export**
+   * JSON-Export der Map-Daten
+   * Grundlegende draw.io XML-Generierung
 
-3. **Browser-basiert**
-   * Keine Installation erforderlich
-   * LocalStorage für Persistierung
+3. **Live-Demo tauglich**
+   * Funktioniert im Browser
+   * Visuell ansprechend für Stream
 
 === 1.2 Qualitätsziele
 
@@ -49,21 +48,18 @@ Maximal fünf Ziele sollten hier genannt werden.
 |===
 | Priorität | Qualitätsziel | Szenario/Messbarkeit
 
-| 1 | **Usability** 
-| Ein Wardley Map-Neuling kann in <10 Minuten eine Map mit 5 Komponenten erstellen
+| 1 | **Demo-Fähigkeit** 
+| Funktionierender Prototyp präsentierbar in 1 Stunde Live-Stream
 
-| 2 | **Performance** 
-| Rendering von Maps mit 100 Komponenten in <200ms auf Standard-Hardware
+| 2 | **Verständlichkeit** 
+| Zuschauer können den Architektur-Ansatz nachvollziehen und diskutieren
 
-| 3 | **Kompatibilität** 
-| Exportierte draw.io-Dateien sind 100% kompatibel und bearbeitbar
+| 3 | **Lernwert** 
+| Demonstration von Human-AI Collaboration in der praktischen Architekturarbeit
 |===
 
-**KRITISCHE ANMERKUNG:** 
-Diese Ziele sind noch zu vage! Wir brauchen konkretere Metriken:
-* Was ist "Standard-Hardware"?
-* Wie messen wir "100% kompatibel"?
-* Welche Browser-Versionen unterstützen wir?
+**Demo-Fokus:** 
+Diese Qualitätsziele spiegeln den experimentellen Charakter der Live-Session wider. Das Ziel ist nicht ein produktionsreifes System, sondern ein funktionierender Demonstrator für Architektur-Methoden.
 
 === 1.3 Stakeholder
 

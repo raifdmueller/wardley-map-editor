@@ -1,0 +1,96 @@
+== 2. Randbedingungen
+
+[role="arc42help"]
+****
+Randbedingungen und Vorgaben, die ihre Freiheiten bezüglich Entwurf, Implementierung oder Ihres Entwicklungsprozesses einschränken.
+****
+
+=== 2.1 Technische Randbedingungen
+
+[cols="1,2" options="header"]
+|===
+| Randbedingung | Beschreibung
+
+| **Browser-Support** 
+| Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+Grund: ES6+ Features, Canvas/SVG APIs
+
+| **Client-Side Only** 
+| Keine Server-Komponente erforderlich
+Grund: Demo-Projekt, einfache Bereitstellung
+
+| **JavaScript ES6+** 
+| Moderne JavaScript-Features
+Grund: Entwicklungseffizienz, bessere Code-Struktur
+
+| **draw.io Kompatibilität** 
+| XML-Export muss draw.io-Format entsprechen
+Grund: Integration in bestehende Tool-Landschaft
+|===
+
+=== 2.2 Organisatorische Randbedingungen
+
+[cols="1,2" options="header"]
+|===
+| Randbedingung | Beschreibung
+
+| **Entwicklungszeit** 
+| ~1 Stunde Live-Stream
+Grund: Stream-Format, MVP-Fokus
+
+| **Open Source** 
+| MIT License, GitHub Repository
+Grund: Community-Projekt, Lernzweck
+
+| **Keine externen Dependencies** 
+| Vanilla JavaScript, keine Frameworks
+Grund: Einfachheit, Nachvollziehbarkeit
+
+| **Live-Entwicklung** 
+| Transparenter Entwicklungsprozess
+Grund: Bildungszweck, Community
+|===
+
+=== 2.3 Konventionen
+
+[cols="1,2" options="header"]
+|===
+| Bereich | Konvention
+
+| **Dokumentation** 
+| arc42 Template mit AsciiDoc
+docToolchain für Generierung
+
+| **Code Style** 
+| ES6+ Standards
+Kommentare in Englisch
+
+| **Versionierung** 
+| Git Flow, semantische Versionierung
+GitHub Issues für Features
+
+| **Diagramme** 
+| PlantUML für Architektur-Diagramme
+|===
+
+=== 2.4 Wardley Map Spezifische Constraints
+
+[cols="1,2" options="header"]
+|===
+| Constraint | Beschreibung
+
+| **Koordinatensystem** 
+| X-Achse: Evolution (Genesis → Commodity)
+Y-Achse: Value Chain (High → Low)
+Werte: 0-1 normalisiert
+
+| **Komponenten-Typen** 
+| Standard Wardley Map Elemente:
+- Components (Rechtecke)
+- Dependencies (Linien)
+- Annotations (Text)
+
+| **draw.io Mapping** 
+| Wardley Koordinaten → draw.io Pixel-Koordinaten
+Erhaltung der relationalen Positionen
+|===

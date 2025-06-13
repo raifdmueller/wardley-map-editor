@@ -37,7 +37,7 @@ SHOW_LEGEND()
 | Mouse/Keyboard-Interaktionen
 Drag & Drop, Clicks, Text-Input
 | Visuelle Wardley Map
-draw.io XML-Datei
+draw.io XML-Datei (Download)
 
 | **draw.io** 
 | XML-Import der generierten Datei
@@ -48,6 +48,12 @@ draw.io XML-Datei
 LocalStorage-Zugriff
 | Gerenderte Benutzeroberfläche
 |===
+
+**Abgrenzung - Was unser System NICHT macht:**
+* Kein Import von existierenden Maps
+* Keine Kollaboration/Multi-User 
+* Keine Cloud-Synchronisation
+* Keine Versionierung
 
 === 3.2 Technischer Kontext
 
@@ -77,25 +83,31 @@ note right of localstorage : Map Components\nPositions\nDependencies
 | Interface | Protokoll/Format | Input | Output
 
 | **Canvas/SVG Rendering** 
-| Browser Canvas API
+| Browser Canvas/SVG API
 | Map Data (JSON)
 | Visual Representation
 
 | **LocalStorage** 
 | Web Storage API
 | Map Objects (JSON)
-| Persistent Storage
+| Persistent Storage (Browser-lokal)
 
 | **File Download** 
 | Browser Download API
 | draw.io XML
-| .drawio File
+| .drawio File (Download)
 
 | **Mouse/Touch Events** 
 | DOM Events
 | User Interactions
-| Component Positions
+| Component Positions/Updates
 |===
+
+**Technische Abgrenzung:**
+* Kein Server-Backend
+* Keine REST APIs  
+* Keine WebSocket-Verbindungen
+* Keine externe Cloud-Services
 
 === 3.3 Externe Schnittstellen
 
@@ -129,7 +141,7 @@ note right of localstorage : Map Components\nPositions\nDependencies
 
 ==== Browser LocalStorage
 
-**Zweck:** Lokale Persistierung der Map-Daten
+**Zweck:** Lokale Persistierung der Map-Daten (nur Browser-lokal)
 
 **Datenformat:**
 ```json

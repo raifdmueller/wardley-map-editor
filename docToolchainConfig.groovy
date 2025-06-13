@@ -54,19 +54,28 @@ microsite.with {
     // Site metadata
     title = 'Wardley Map Editor - Architecture Documentation'
     
+    // CRITICAL: Use our custom landing page
+    landingPage = 'landingpage.gsp'
+    
     // Navigation menu configuration
     // The menu will automatically include files based on folder structure
     // Files with :jbake-menu: - will be excluded
     menu = [:]
     
     // Footer configuration
-    footerText = '<small class="text-white">built with <a href="https://doctoolchain.org">docToolchain</a> and <a href="https://jbake.org">jBake</a> <br /> Architecture created via Human-AI collaboration</small>'
-    
-    // Landing page
-    landingPage = 'landingpage.gsp'
+    footerText = '<small class="text-white">built with <a href="https://doctoolchain.org">docToolchain</a> and <a href="https://jbake.org">jBake</a> <br /> Human-AI Collaboration in Software Architecture</small>'
     
     // Context path for deployment
     contextPath = '/wardley-map-editor'
+    
+    // Social Links for Footer
+    footerGithub = 'https://github.com/raifdmueller/wardley-map-editor'
+    footerMail = 'mailto:ralf.d.mueller@gmail.com'
+    
+    // Project specific branding
+    issueUrl = 'https://github.com/raifdmueller/wardley-map-editor/issues/new'
+    gitRepoUrl = 'https://github.com/raifdmueller/wardley-map-editor'
+    branch = 'main'
 }
 
 // These are directories (dirs) and files which Gradle monitors for a change

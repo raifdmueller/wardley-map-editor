@@ -2,6 +2,14 @@ var documents = [
 
 {
     "id": 0,
+    "uri": "arc42/adr-003-data-persistence.html",
+    "menu": "arc42",
+    "title": "ADR-003: Data Persistence Strategy - LocalStorage Only",
+    "text": " Table of Contents ADR-003: Data Persistence Strategy - LocalStorage Only Problem Description and Context Alternative Evaluation (Pugh Matrix) Decision Consequences Implementation Notes ADR-003: Data Persistence Strategy - LocalStorage Only Date: 2025-06-13 Authors: Ralf D. Müller, Claude (AI Assistant) Status: Final Problem Description and Context We need to decide how to persist Wardley Map data between browser sessions. The solution must work without server infrastructure and be implementable within our time constraints. Alternative Evaluation (Pugh Matrix) Criterion LocalStorage (Baseline) IndexedDB No Persistence Implementation Speed 0 -2 +1 Data Capacity 0 +1 -2 Browser Support 0 -1 +1 API Complexity 0 -2 +1 Demo Value 0 0 -2 Total Score 0 -4 -1 Rejected Alternatives: IndexedDB: More powerful but asynchronous API adds complexity. 5-10MB capacity not needed for demo maps. No Persistence: Would frustrate demo users who lose work on page refresh. Decision We choose LocalStorage for map data persistence. Rationale: - Simple API: Synchronous JSON.stringify/parse operations - Sufficient Capacity: 5MB limit more than adequate for demo maps - Universal Support: Available in all target browsers - Immediate Implementation: No complex async handling required Consequences Positive Effects Fast Implementation: Simple key-value storage, no complex data modeling User Experience: Maps persist across browser sessions No Infrastructure: Client-side only, no server dependencies Risks Storage Limits: 5MB browser limit (not relevant for demo scope) Browser Clearing: Data lost if user clears browser storage (acceptable for demo) Technical Debt None. LocalStorage meets all demo requirements without over-engineering. Implementation Notes Data Structure: const mapData = { id: crypto.randomUUID(), title: \"My Wardley Map\", components: [ {id: \"comp1\", label: \"User Needs\", x: 0.2, y: 0.9} ], dependencies: [ {from: \"comp1\", to: \"comp2\"} ], lastModified: new Date().toISOString() }; localStorage.setItem('wardley-map', JSON.stringify(mapData)); "
+},
+
+{
+    "id": 1,
     "uri": "arc42/adr-001-svg-rendering.html",
     "menu": "arc42",
     "title": "ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization",
@@ -9,7 +17,7 @@ var documents = [
 },
 
 {
-    "id": 1,
+    "id": 2,
     "uri": "arc42/02_architecture_constraints.html",
     "menu": "arc42",
     "title": "2. Randbedingungen",
@@ -17,7 +25,7 @@ var documents = [
 },
 
 {
-    "id": 2,
+    "id": 3,
     "uri": "arc42/01_introduction_and_goals.html",
     "menu": "arc42",
     "title": "1. Einführung und Ziele",
@@ -25,7 +33,7 @@ var documents = [
 },
 
 {
-    "id": 3,
+    "id": 4,
     "uri": "arc42/adr-002-architecture-pattern.html",
     "menu": "arc42",
     "title": "ADR-002: Architecture Pattern Selection - Simple Event Handlers",
@@ -33,7 +41,7 @@ var documents = [
 },
 
 {
-    "id": 4,
+    "id": 5,
     "uri": "arc42/arc42.html",
     "menu": "arc42",
     "title": "Architecture Documentation: Wardley Map Editor",
@@ -41,7 +49,7 @@ var documents = [
 },
 
 {
-    "id": 5,
+    "id": 6,
     "uri": "arc42/03_system_scope_and_context.html",
     "menu": "arc42",
     "title": "3. Kontextabgrenzung",
@@ -49,7 +57,7 @@ var documents = [
 },
 
 {
-    "id": 6,
+    "id": 7,
     "uri": "search.html",
     "menu": "-",
     "title": "search",
@@ -57,7 +65,7 @@ var documents = [
 },
 
 {
-    "id": 7,
+    "id": 8,
     "uri": "lunrjsindex.html",
     "menu": "-",
     "title": "null",

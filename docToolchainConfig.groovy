@@ -16,51 +16,13 @@ imageDirs = [
     "${inputPath}/arc42/images"
 ]
 
-// CRITICAL: Files to exclude from jbake navigation
-jbake = [
-    // Hide ADR files from menu
-    exclude: [
-        'adr-001-svg-rendering.adoc',
-        'adr-002-architecture-pattern.adoc', 
-        'adr-003-data-persistence.adoc',
-        'adr-004-user-interaction.adoc'
-    ],
-    
-    // Additional attributes for AsciiDoc
-    asciidoctorAttributes: [
-        'toc': 'left',
-        'toclevels': '3',
-        'sectlinks': '',
-        'sectanchors': '',
-        'numbered': '',
-        'icons': 'font',
-        'source-highlighter': 'highlight.js',
-        'imagesdir': 'images',
-        'plantuml-server-url': 'http://www.plantuml.com/plantuml',
-        'allow-uri-read': ''
-    ]
-]
-
-// PDF generation settings (optional)
-asciidoctor = [
-    'pdf-stylesdir': "${inputPath}/styles",
-    'pdf-style': 'basic'
-]
-
-// Site generation configuration
-microsite = [:]
-
+// Site generation configuration for microsite
 microsite.with {
     // Site metadata
     title = 'Wardley Map Editor - Architecture Documentation'
     
     // CRITICAL: Use our custom landing page
     landingPage = 'landingpage.gsp'
-    
-    // Navigation menu configuration
-    // The menu will automatically include files based on folder structure
-    // Files with :jbake-menu: - will be excluded
-    menu = [:]
     
     // Footer configuration
     footerText = '<small class="text-white">built with <a href="https://doctoolchain.org">docToolchain</a> and <a href="https://jbake.org">jBake</a> <br /> Human-AI Collaboration in Software Architecture</small>'
@@ -76,7 +38,30 @@ microsite.with {
     issueUrl = 'https://github.com/raifdmueller/wardley-map-editor/issues/new'
     gitRepoUrl = 'https://github.com/raifdmueller/wardley-map-editor'
     branch = 'main'
+    
+    // Navigation menu configuration
+    menu = [:]
 }
+
+// Additional attributes for AsciiDoc
+jbake.asciidoctorAttributes = [
+    'toc': 'left',
+    'toclevels': '3',
+    'sectlinks': '',
+    'sectanchors': '',
+    'numbered': '',
+    'icons': 'font',
+    'source-highlighter': 'highlight.js',
+    'imagesdir': 'images',
+    'plantuml-server-url': 'http://www.plantuml.com/plantuml',
+    'allow-uri-read': ''
+]
+
+// PDF generation settings (optional)
+asciidoctor = [
+    'pdf-stylesdir': "${inputPath}/styles",
+    'pdf-style': 'basic'
+]
 
 // These are directories (dirs) and files which Gradle monitors for a change
 // in order to decide if the docs have to be re-build

@@ -1,3 +1,5 @@
+:jbake-menu: -
+
 == ADR-001: Rendering Technology Selection - SVG for Wardley Map Visualization
 
 |===

@@ -2,14 +2,14 @@
 <html lang="de">
 <head>
     
-    <!-- sourceuri: arc42/arc42.html -->
+    <!-- sourceuri: arc42/03_system_scope_and_context.html -->
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <meta content="jbake" name="generator">
     <meta content="INDEX, FOLLOW" name="ROBOTS">
 
-    <title>Architecture Documentation: Wardley Map Editor</title>
+    <title>3. Kontextabgrenzung</title>
     <meta content="docToolchain" property="og:title">
     <meta content="build your dev docs the easy way..." property="og:description">
     <meta content="website" property="og:type">
@@ -258,7 +258,7 @@
                           
                         <ul class="td-sidebar-nav__section ul-0">
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
                                    href="../arc42/arc42.html" title="Architecture Documentation: Wardley Map Editor">Architecture Documentation: Wardley Map Editor</a>
                                 
                             </li>
@@ -273,7 +273,7 @@
                                 
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
                                    href="../arc42/03_system_scope_and_context.html" title="3. Kontextabgrenzung">3. Kontextabgrenzung</a>
                                 
                             </li>
@@ -289,11 +289,11 @@
 				<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 					
 
-        <a href="##git-repo-url##/arc42/arc42.adoc"
+        <a href="##git-repo-url##/arc42/03_system_scope_and_context.adoc"
            target="_blank"><i class="fa fa-edit fa-fw"></i> Improve this doc</a>
 
 
-        <a href="##issue-url##?title=Docs%3A+Feedback+for+%27Architecture+Documentation%3A+Wardley+Map+Editor%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/arc42.adoc%0A%23branch:%20main" target="_blank"><i
+        <a href="##issue-url##?title=Docs%3A+Feedback+for+%273.+Kontextabgrenzung%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/03_system_scope_and_context.adoc%0A%23branch:%20main" target="_blank"><i
                 class="fab fa-github fa-fw"></i> Create an issue</a>
 
         
@@ -303,37 +303,11 @@
         <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_architecture_documentation_wardley_map_editor">Architecture Documentation: Wardley Map Editor</a></li>
-<li><a href="#_1_einführung_und_ziele">1. Einführung und Ziele</a>
-<ul class="sectlevel2">
-<li><a href="#_1_1_aufgabenstellung">1.1 Aufgabenstellung</a>
-<ul class="sectlevel3">
-<li><a href="#_was_ist_der_wardley_map_editor">Was ist der Wardley Map Editor?</a></li>
-<li><a href="#_wesentliche_features_mvp">Wesentliche Features (MVP)</a></li>
-</ul>
-</li>
-<li><a href="#_1_2_qualitätsziele">1.2 Qualitätsziele</a></li>
-<li><a href="#_1_3_stakeholder">1.3 Stakeholder</a></li>
-</ul>
-</li>
-<li><a href="#_2_randbedingungen">2. Randbedingungen</a>
-<ul class="sectlevel2">
-<li><a href="#_2_1_technische_randbedingungen">2.1 Technische Randbedingungen</a></li>
-<li><a href="#_2_2_organisatorische_randbedingungen">2.2 Organisatorische Randbedingungen</a></li>
-<li><a href="#_2_3_konventionen">2.3 Konventionen</a></li>
-<li><a href="#_2_4_wardley_map_spezifische_constraints">2.4 Wardley Map Spezifische Constraints</a></li>
-</ul>
-</li>
 <li><a href="#_3_kontextabgrenzung">3. Kontextabgrenzung</a>
 <ul class="sectlevel2">
 <li><a href="#_3_1_fachlicher_kontext">3.1 Fachlicher Kontext</a></li>
 <li><a href="#_3_2_technischer_kontext">3.2 Technischer Kontext</a></li>
-<li><a href="#_3_3_externe_schnittstellen">3.3 Externe Schnittstellen</a>
-<ul class="sectlevel3">
-<li><a href="#_draw_io_xml_format">draw.io XML Format</a></li>
-<li><a href="#_browser_localstorage">Browser LocalStorage</a></li>
-</ul>
-</li>
+<li><a href="#_3_3_externe_schnittstellen">3.3 Externe Schnittstellen</a></li>
 </ul>
 </li>
 </ul>
@@ -358,364 +332,6 @@
     <div class="td-content">
         <p>
             
-<div class="sect1">
-<h2 id="_architecture_documentation_wardley_map_editor">Architecture Documentation: Wardley Map Editor</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Ralf D. Müller &lt;<a href="mailto:ralf.d.mueller@gmail.com">ralf.d.mueller@gmail.com</a>&gt;
-:doctype: book
-:toc: left
-:toclevels: 3
-:sectnum:
-:sectanchors:
-:sectnums:
-:source-highlighter: highlight.js
-:icons: font
-:imagesdir: images</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_1_einführung_und_ziele">1. Einführung und Ziele</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Beschreibt die wesentlichen Anforderungen und treibenden Kräfte, die bei der Umsetzung der Softwarearchitektur und Entwicklung des Systems berücksichtigt werden müssen.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_1_1_aufgabenstellung">1.1 Aufgabenstellung</h3>
-<div class="sect3">
-<h4 id="_was_ist_der_wardley_map_editor">Was ist der Wardley Map Editor?</h4>
-<div class="paragraph">
-<p>Ein web-basierter Editor zur visuellen Erstellung von Wardley Maps mit Export-Funktionalität zu draw.io.</p>
-</div>
-<div class="paragraph">
-<p><strong>KRITISCHE FRAGE:</strong> Warum brauchen wir das?</p>
-</div>
-<div class="paragraph">
-<p>Existierende Tools:
-* <a href="https://onlinewardleymaps.com/">Online Wardley Maps</a> - bereits verfügbar
-* Verschiedene draw.io Templates
-* Text-basierte Tools</p>
-</div>
-<div class="paragraph">
-<p><strong>Was macht unseren Editor einzigartig?</strong></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_wesentliche_features_mvp">Wesentliche Features (MVP)</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Visuelle Map-Erstellung</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Drag &amp; Drop für Komponenten</p>
-</li>
-<li>
-<p>Positionierung auf Evolution/Value-Achsen</p>
-</li>
-<li>
-<p>Abhängigkeiten zwischen Komponenten</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>draw.io Export</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>XML-Generierung für draw.io Import</p>
-</li>
-<li>
-<p>Erhaltung der Map-Struktur</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Browser-basiert</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Keine Installation erforderlich</p>
-</li>
-<li>
-<p>LocalStorage für Persistierung</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_1_2_qualitätsziele">1.2 Qualitätsziele</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Die drei (!) wichtigsten Qualitätsziele für die Architektur.
-Maximal fünf Ziele sollten hier genannt werden.</p>
-</div>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Priorität</th>
-<th class="tableblock halign-left valign-top">Qualitätsziel</th>
-<th class="tableblock halign-left valign-top">Szenario/Messbarkeit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Usability</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ein Wardley Map-Neuling kann in &lt;10 Minuten eine Map mit 5 Komponenten erstellen</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Performance</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rendering von Maps mit 100 Komponenten in &lt;200ms auf Standard-Hardware</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Kompatibilität</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exportierte draw.io-Dateien sind 100% kompatibel und bearbeitbar</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><strong>KRITISCHE ANMERKUNG:</strong>
-Diese Ziele sind noch zu vage! Wir brauchen konkretere Metriken:
-* Was ist "Standard-Hardware"?
-* Wie messen wir "100% kompatibel"?
-* Welche Browser-Versionen unterstützen wir?</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_1_3_stakeholder">1.3 Stakeholder</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Überblick über die Stakeholder des Systems, d.h. alle Personen, Rollen oder Organisationen, die
-* das System kennen sollten oder
-* von der Architektur überzeugt werden müssen oder
-* mit dem System oder seiner Entwicklung zu tun haben.</p>
-</div>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Rolle</th>
-<th class="tableblock halign-left valign-top">Kontakt</th>
-<th class="tableblock halign-left valign-top">Erwartungen</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Stream-Zuschauer</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Software Architektur im Stream Community</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lernen, wie AI-assistierte Architektur funktioniert</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Wardley Map Praktiker</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Simon Wardley Community</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Einfaches Tool für Map-Erstellung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Enterprise Architects</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unternehmen mit draw.io-Infrastruktur</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integration in bestehende Tool-Landschaft</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Entwickler-Team</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ralf + Claude (AI)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Demonstrieren von Human-AI Collaboration</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><strong>REALITÄTS-CHECK:</strong>
-Haben wir tatsächlich mit echten Wardley Map-Nutzern gesprochen? Oder entwickeln wir "ins Blaue hinein"?</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_2_randbedingungen">2. Randbedingungen</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Randbedingungen und Vorgaben, die ihre Freiheiten bezüglich Entwurf, Implementierung oder Ihres Entwicklungsprozesses einschränken.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2_1_technische_randbedingungen">2.1 Technische Randbedingungen</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Randbedingung</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Browser-Support</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
-Grund: ES6+ Features, Canvas/SVG APIs</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Client-Side Only</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keine Server-Komponente erforderlich
-Grund: Demo-Projekt, einfache Bereitstellung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>JavaScript ES6+</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Moderne JavaScript-Features
-Grund: Entwicklungseffizienz, bessere Code-Struktur</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>draw.io Kompatibilität</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">XML-Export muss draw.io-Format entsprechen
-Grund: Integration in bestehende Tool-Landschaft</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_2_2_organisatorische_randbedingungen">2.2 Organisatorische Randbedingungen</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Randbedingung</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Entwicklungszeit</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">~1 Stunde Live-Stream
-Grund: Stream-Format, MVP-Fokus</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Open Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MIT License, GitHub Repository
-Grund: Community-Projekt, Lernzweck</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Keine externen Dependencies</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Vanilla JavaScript, keine Frameworks
-Grund: Einfachheit, Nachvollziehbarkeit</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Live-Entwicklung</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transparenter Entwicklungsprozess
-Grund: Bildungszweck, Community</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_2_3_konventionen">2.3 Konventionen</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Bereich</th>
-<th class="tableblock halign-left valign-top">Konvention</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dokumentation</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">arc42 Template mit AsciiDoc
-docToolchain für Generierung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Code Style</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ES6+ Standards
-Kommentare in Englisch</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Versionierung</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Git Flow, semantische Versionierung
-GitHub Issues für Features</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Diagramme</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML für Architektur-Diagramme</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_2_4_wardley_map_spezifische_constraints">2.4 Wardley Map Spezifische Constraints</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Constraint</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Koordinatensystem</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">X-Achse: Evolution (Genesis → Commodity)
-Y-Achse: Value Chain (High → Low)
-Werte: 0-1 normalisiert</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Komponenten-Typen</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Standard Wardley Map Elemente:
-- Components (Rechtecke)
-- Dependencies (Linien)
-- Annotations (Text)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>draw.io Mapping</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wardley Koordinaten → draw.io Pixel-Koordinaten
-Erhaltung der relationalen Positionen</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="_3_kontextabgrenzung">3. Kontextabgrenzung</h2>
 <div class="sectionbody">
@@ -892,33 +508,6 @@ LocalStorage-Zugriff</p></td>
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::04_solution_strategy.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::05_building_block_view.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::06_runtime_view.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::07_deployment_view.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::08_concepts.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::09_architecture_decisions.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::10_quality_requirements.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::11_risks_and_technical_debt.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::12_glossary.adoc[]</p>
-</div>
 </div>
 </div>
 </div>
@@ -950,11 +539,11 @@ LocalStorage-Zugriff</p></td>
     <button class="feedback--answer feedback--answer-yes">Yes</button>
     <button class="feedback--answer feedback--answer-no">No</button>
     <p class="feedback--response feedback--response-yes">
-        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27Architecture+Documentation%3A+Wardley+Map+Editor%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/arc42.adoc">tell us
+        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%273.+Kontextabgrenzung%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/03_system_scope_and_context.adoc">tell us
     how we can improve</a>.
     </p>
     <p class="feedback--response feedback--response-no">
-        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27Architecture+Documentation%3A+Wardley+Map+Editor%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/arc42.adoc">tell
+        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%273.+Kontextabgrenzung%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/03_system_scope_and_context.adoc">tell
     us how we can improve</a>.
     </p>
 </div>

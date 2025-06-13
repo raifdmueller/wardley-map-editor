@@ -24,8 +24,8 @@ microsite.with {
     // CRITICAL: Use our custom landing page
     landingPage = 'landingpage.gsp'
     
-    // Footer configuration
-    footerText = '<small class="text-white">built with <a href="https://doctoolchain.org">docToolchain</a> and <a href="https://jbake.org">jBake</a> <br /> Human-AI Collaboration in Software Architecture</small>'
+    // Footer configuration (NO HTML tags - causes serialization issues)
+    footerText = 'Built with docToolchain and jBake - Human-AI Collaboration in Software Architecture'
     
     // Context path for deployment
     contextPath = '/wardley-map-editor'

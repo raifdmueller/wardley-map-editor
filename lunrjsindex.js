@@ -26,6 +26,14 @@ var documents = [
 
 {
     "id": 3,
+    "uri": "arc42/adr-002-architecture-pattern.html",
+    "menu": "arc42",
+    "title": "ADR-002: Architecture Pattern Selection - Simple Event Handlers",
+    "text": " Table of Contents ADR-002: Architecture Pattern Selection - Simple Event Handlers Problem Description and Context Alternative Evaluation (Pugh Matrix) Decision Consequences ADR-002: Architecture Pattern Selection - Simple Event Handlers Date: 2025-06-13 Authors: Ralf D. Müller, Claude (AI Assistant) Status: Final Problem Description and Context We need to choose an architecture pattern for organizing the Wardley Map Editor code. The solution must be implementable within 25 minutes while providing clean separation of concerns for: - User interface interactions - Data management - Rendering logic - Export functionality Alternative Evaluation (Pugh Matrix) Criterion Simple Event Handlers (Baseline) MVC Pattern Component Architecture Implementation Speed 0 -2 -2 Code Complexity 0 -1 -2 Maintainability 0 +1 +2 Learning Curve 0 -1 -2 Demo Suitability 0 -1 -1 Total Score 0 -4 -5 Rejected Alternatives: MVC Pattern: Would require separate Model, View, Controller classes and event bus implementation - too much boilerplate for 25-minute implementation. Component Architecture: Modern but requires careful design of component interfaces and lifecycle management - complexity not justified for demo scope. Decision We choose Simple Event Handlers with direct DOM manipulation. Rationale: - Minimal Boilerplate: Direct addEventListener() calls, no framework overhead - Fast Implementation: Straightforward JavaScript without architectural complexity - Easy Debugging: Clear event flow, no hidden abstractions - Demo Focus: Code remains readable and explainable during live stream Consequences Positive Effects Rapid Development: Minimal setup, direct implementation Clear Code Flow: Easy to follow during live demonstration No Dependencies: Pure JavaScript, no architectural libraries needed Risks Code Organization: May become messy if scope grows beyond demo Event Management: Manual event cleanup required Technical Debt None. Simple event handlers are appropriate for our demo scope and timeline. "
+},
+
+{
+    "id": 4,
     "uri": "arc42/arc42.html",
     "menu": "arc42",
     "title": "Architecture Documentation: Wardley Map Editor",
@@ -33,7 +41,7 @@ var documents = [
 },
 
 {
-    "id": 4,
+    "id": 5,
     "uri": "arc42/03_system_scope_and_context.html",
     "menu": "arc42",
     "title": "3. Kontextabgrenzung",
@@ -41,7 +49,7 @@ var documents = [
 },
 
 {
-    "id": 5,
+    "id": 6,
     "uri": "search.html",
     "menu": "-",
     "title": "search",
@@ -49,7 +57,7 @@ var documents = [
 },
 
 {
-    "id": 6,
+    "id": 7,
     "uri": "lunrjsindex.html",
     "menu": "-",
     "title": "null",

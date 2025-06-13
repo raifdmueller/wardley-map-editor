@@ -1,0 +1,75 @@
+== ADR-003: Data Persistence Strategy - LocalStorage Only
+
+|===
+| Date:    h| 2025-06-13
+| Authors: h| Ralf D. Müller, Claude (AI Assistant)
+| Status:  h| Final
+|===
+
+=== Problem Description and Context
+
+We need to decide how to persist Wardley Map data between browser sessions. The solution must work without server infrastructure and be implementable within our time constraints.
+
+=== Alternative Evaluation (Pugh Matrix)
+
+|===
+| Criterion | LocalStorage (Baseline) | IndexedDB | No Persistence
+| Implementation Speed | 0 | -2 | +1
+| Data Capacity | 0 | +1 | -2
+| Browser Support | 0 | -1 | +1
+| API Complexity | 0 | -2 | +1
+| Demo Value | 0 | 0 | -2
+| **Total Score** | 0 | -4 | -1
+|===
+
+**Rejected Alternatives:**
+
+**IndexedDB:** More powerful but asynchronous API adds complexity. 5-10MB capacity not needed for demo maps.
+
+**No Persistence:** Would frustrate demo users who lose work on page refresh.
+
+=== Decision
+
+**We choose LocalStorage** for map data persistence.
+
+**Rationale:**
+- **Simple API:** Synchronous JSON.stringify/parse operations
+- **Sufficient Capacity:** 5MB limit more than adequate for demo maps
+- **Universal Support:** Available in all target browsers
+- **Immediate Implementation:** No complex async handling required
+
+=== Consequences
+
+==== Positive Effects
+
+- **Fast Implementation:** Simple key-value storage, no complex data modeling
+- **User Experience:** Maps persist across browser sessions
+- **No Infrastructure:** Client-side only, no server dependencies
+
+==== Risks
+
+- **Storage Limits:** 5MB browser limit (not relevant for demo scope)
+- **Browser Clearing:** Data lost if user clears browser storage (acceptable for demo)
+
+==== Technical Debt
+
+**None.** LocalStorage meets all demo requirements without over-engineering.
+
+=== Implementation Notes
+
+**Data Structure:**
+```javascript
+const mapData = {
+  id: crypto.randomUUID(),
+  title: "My Wardley Map",
+  components: [
+    {id: "comp1", label: "User Needs", x: 0.2, y: 0.9}
+  ],
+  dependencies: [
+    {from: "comp1", to: "comp2"}
+  ],
+  lastModified: new Date().toISOString()
+};
+
+localStorage.setItem('wardley-map', JSON.stringify(mapData));
+```

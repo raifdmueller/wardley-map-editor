@@ -304,6 +304,11 @@
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
                                 <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                   href="../arc42/05_building_block_view.html" title="5. Bausteinsicht">5. Bausteinsicht</a>
+                                
+                            </li>
+                            <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
                                    href="../arc42/09_architecture_decisions.html" title="9. Architekturentscheidungen">9. Architekturentscheidungen</a>
                                 
                             </li>
@@ -385,6 +390,13 @@
 <li><a href="#_4_4_implementierungsstrategie">4.4 Implementierungsstrategie</a></li>
 <li><a href="#_4_5_qualitätssicherung">4.5 Qualitätssicherung</a></li>
 <li><a href="#_4_6_risiko_mitigation">4.6 Risiko-Mitigation</a></li>
+</ul>
+</li>
+<li><a href="#_5_bausteinsicht">5. Bausteinsicht</a>
+<ul class="sectlevel2">
+<li><a href="#_5_1_whitebox_gesamtsystem">5.1 Whitebox Gesamtsystem</a></li>
+<li><a href="#_5_2_whitebox_map_engine">5.2 Whitebox Map Engine</a></li>
+<li><a href="#_5_3_whitebox_event_handler">5.3 Whitebox Event Handler</a></li>
 </ul>
 </li>
 <li><a href="#_9_architekturentscheidungen">9. Architekturentscheidungen</a>
@@ -1176,8 +1188,130 @@ LocalStorage-Zugriff</p></td>
 <strong>Komplexitäts-Risiko:</strong> Bewusst einfache Implementierung ohne Over-Engineering
 <strong>Demo-Risiko:</strong> Schritt-für-Schritt Entwicklung mit funktionsfähigen Zwischenstände</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_5_bausteinsicht">5. Bausteinsicht</h2>
+<div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::05_building_block_view.adoc[]</p>
+<p>Diese Sicht zeigt die statische Zerlegung des Systems in Bausteine (Module, Komponenten, Subsysteme, Klassen, Interfaces, Pakete, Bibliotheken, Frameworks, Schichten, Partitionen, Tiers, Funktionen, Makros, Operationen, Datenstrukturen, &#8230;&#8203;) sowie deren Beziehungen.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_1_whitebox_gesamtsystem">5.1 Whitebox Gesamtsystem</h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/building-blocks.svg" alt="building blocks" width="446" height="807">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Bausteine der Ebene 1:</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Baustein</th>
+<th class="tableblock halign-left valign-top">Verantwortung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User Interface</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG-Canvas für Wardley Map Darstellung, Toolbar für Aktionen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Map Engine</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verwaltung der Map-Datenstruktur, Koordinaten-Transformation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Event Handler</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mouse-Events verarbeiten, Drag &amp; Drop Koordination</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Storage Manager</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persistierung in LocalStorage, JSON Serialisierung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Export Engine</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">draw.io XML-Format Generierung, Download-Funktionalität</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_5_2_whitebox_map_engine">5.2 Whitebox Map Engine</h3>
+<div class="paragraph">
+<p><strong>Zweck/Verantwortung:</strong>
+Zentrale Komponente für Wardley Map Logik und Datenmanagement.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/map-engine-detail.svg" alt="map engine detail" width="532" height="399">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Enthaltene Bausteine:</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Baustein</th>
+<th class="tableblock halign-left valign-top">Verantwortung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>MapData</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hauptdatenstruktur, CRUD-Operationen für Components/Dependencies</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Component</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Einzelne Wardley Map Komponente mit Position und Label</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dependency</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verbindung zwischen zwei Komponenten</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>CoordinateSystem</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transformation zwischen Wardley-Koordinaten (0-1) und Pixel-Koordinaten</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_5_3_whitebox_event_handler">5.3 Whitebox Event Handler</h3>
+<div class="paragraph">
+<p><strong>Zweck/Verantwortung:</strong>
+Verarbeitung aller Benutzerinteraktionen und UI-Events.</p>
+</div>
+<div class="paragraph">
+<p><strong>Schnittstellen:</strong>
+- <strong>Input:</strong> Mouse Events (mousedown, mousemove, mouseup, click)
+- <strong>Output:</strong> Map Engine Updates (addComponent, moveComponent)</p>
+</div>
+<div class="paragraph">
+<p><strong>Algorithmus:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code>Mouse Click auf Canvas → neue Komponente erstellen
+Mouse Down auf Komponente → Drag-Modus starten
+Mouse Move (während Drag) → Komponente Position updaten
+Mouse Up → Drag-Modus beenden, Position speichern</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Unresolved directive in &lt;stdin&gt; - include::06_runtime_view.adoc[]</p>

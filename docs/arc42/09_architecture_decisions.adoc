@@ -1,0 +1,47 @@
+== 9. Architekturentscheidungen
+
+[role="arc42help"]
+****
+Wichtige, teure, große oder riskante Architektur- oder Entwurfsentscheidungen inklusive der jeweiligen Begründungen. Mit "Entscheidungen" meinen wir hier die Auswahl einer von mehreren Alternativen unter vorgegebenen Kriterien.
+****
+
+Alle Architekturentscheidungen für den Wardley Map Editor sind als Architecture Decision Records (ADRs) dokumentiert. Diese wurden während der Live-Session basierend auf unserem 1-Stunden Zeitbudget getroffen.
+
+=== Übersicht der Entscheidungen
+
+[cols="1,2,2" options="header"]
+|===
+| ADR | Entscheidung | Begründung
+
+| ADR-001 
+| SVG für Rendering (vs. Canvas)
+| Einfacheres Event-Handling, besseres Debugging
+
+| ADR-002 
+| Simple Event Handlers (vs. MVC/Frameworks)
+| Minimaler Boilerplate, schnelle Implementierung
+
+| ADR-003 
+| LocalStorage (vs. IndexedDB/No Persistence)
+| Einfache API, ausreichend für Demo-Scope
+
+| ADR-004 
+| Mouse-Only Interaction (vs. Touch/Keyboard)
+| Reduzierte Komplexität, Desktop-Demo fokussiert
+|===
+
+=== Architecture Decision Records
+
+include::adr-001-svg-rendering.adoc[]
+
+'''
+
+include::adr-002-architecture-pattern.adoc[]
+
+'''
+
+include::adr-003-data-persistence.adoc[]
+
+'''
+
+include::adr-004-user-interaction.adoc[]

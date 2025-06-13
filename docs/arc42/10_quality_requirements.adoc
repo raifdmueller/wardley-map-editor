@@ -1,0 +1,83 @@
+== 10. Qualitätsanforderungen
+
+[role="arc42help"]
+****
+Hier konkretisieren Sie die (in Kapitel 1.2 genannten) Qualitätsziele durch Qualitätsszenarien, messbar oder zumindest objektiv bewertbar.
+****
+
+=== 10.1 Qualitätsbaum
+
+[plantuml, quality-tree, svg]
+----
+@startmindmap
+* Wardley Map Editor\nQualität
+** Demo-Fähigkeit
+*** Zeitbudget 1h
+*** Funktionsfähig
+*** Stream-tauglich
+** Verständlichkeit
+*** Code-Klarheit
+*** Architektur-Nachvollziehbarkeit
+*** Live-Debugging
+** Lernwert
+*** AI-Collaboration
+*** Architektur-Methoden
+*** Praktische Umsetzung
+@endmindmap
+----
+
+=== 10.2 Qualitätsszenarien
+
+[cols="1,2,2,2" options="header"]
+|===
+| Qualitätsziel | Szenario | Stimulus | Antwort
+
+| **Demo-Fähigkeit** 
+| Stream-Präsentation
+| Zuschauer sieht live Demo
+| Funktionierender Editor in 1 Stunde implementiert
+
+| **Verständlichkeit** 
+| Code-Review während Stream
+| Zuschauer fragt nach Implementierung
+| Code ist ohne Erklärung nachvollziehbar
+
+| **Lernwert** 
+| AI-Architektur Demonstration
+| Zuschauer will AI-Kollaboration verstehen
+| Strukturierte ADRs, klare Entscheidungsprozesse
+|===
+
+=== 10.3 Bewertungsszenarien
+
+**Demo-Fähigkeit:**
+- ✅ **Erfolgreich:** Wardley Map mit 3 Komponenten erstellbar
+- ✅ **Akzeptabel:** SVG-Rendering funktioniert
+- ❌ **Fehlschlag:** Keine visuellen Komponenten
+
+**Verständlichkeit:**
+- ✅ **Erfolgreich:** Code unter 200 Zeilen, selbsterklärend
+- ✅ **Akzeptabel:** Kommentare notwendig für Verständnis
+- ❌ **Fehlschlag:** Architektur nicht nachvollziehbar
+
+**Lernwert:**
+- ✅ **Erfolgreich:** ADR-Prozess demonstriert, Entscheidungen begründet
+- ✅ **Akzeptabel:** Grundlegende AI-Collaboration gezeigt
+- ❌ **Fehlschlag:** Keine strukturierte Zusammenarbeit erkennbar
+
+=== 10.4 Metriken
+
+**Demo-Metriken:**
+- Implementierungszeit: ≤ 60 Minuten
+- Funktionsfähige Komponenten: ≥ 3
+- Browser-Kompatibilität: Chrome, Firefox
+
+**Code-Qualität:**
+- Codebase-Größe: ≤ 300 Zeilen (HTML+CSS+JS)
+- Event-Handler: ≤ 5 verschiedene
+- Dependencies: 0 externe Libraries
+
+**Architektur-Dokumentation:**
+- arc42 Kapitel: ≥ 6 Kapitel
+- ADRs: ≥ 4 Entscheidungen
+- Dokumentationszeit: ≤ 40 Minuten

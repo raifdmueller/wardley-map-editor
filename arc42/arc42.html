@@ -309,6 +309,11 @@
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
                                 <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                   href="../arc42/10_quality_requirements.html" title="10. Qualitätsanforderungen">10. Qualitätsanforderungen</a>
+                                
+                            </li>
+                            <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
                                    href="../arc42/11_risks_and_technical_debt.html" title="11. Risiken und technische Schulden">11. Risiken und technische Schulden</a>
                                 
                             </li>
@@ -445,6 +450,14 @@
 </ul>
 </li>
 <li><a href="#_implementation_notes_3">Implementation Notes</a></li>
+</ul>
+</li>
+<li><a href="#_10_qualitätsanforderungen">10. Qualitätsanforderungen</a>
+<ul class="sectlevel2">
+<li><a href="#_10_1_qualitätsbaum">10.1 Qualitätsbaum</a></li>
+<li><a href="#_10_2_qualitätsszenarien">10.2 Qualitätsszenarien</a></li>
+<li><a href="#_10_3_bewertungsszenarien">10.3 Bewertungsszenarien</a></li>
+<li><a href="#_10_4_metriken">10.4 Metriken</a></li>
 </ul>
 </li>
 <li><a href="#_11_risiken_und_technische_schulden">11. Risiken und technische Schulden</a>
@@ -1931,8 +1944,106 @@ canvas.addEventListener('click', addComponent);</code></pre>
 }</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_10_qualitätsanforderungen">10. Qualitätsanforderungen</h2>
+<div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::10_quality_requirements.adoc[]</p>
+<p>Hier konkretisieren Sie die (in Kapitel 1.2 genannten) Qualitätsziele durch Qualitätsszenarien, messbar oder zumindest objektiv bewertbar.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_1_qualitätsbaum">10.1 Qualitätsbaum</h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/quality-tree.svg" alt="quality tree" width="636" height="528">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_2_qualitätsszenarien">10.2 Qualitätsszenarien</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Qualitätsziel</th>
+<th class="tableblock halign-left valign-top">Szenario</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+<th class="tableblock halign-left valign-top">Antwort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Demo-Fähigkeit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stream-Präsentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zuschauer sieht live Demo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Funktionierender Editor in 1 Stunde implementiert</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Verständlichkeit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code-Review während Stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zuschauer fragt nach Implementierung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code ist ohne Erklärung nachvollziehbar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Lernwert</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AI-Architektur Demonstration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zuschauer will AI-Kollaboration verstehen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Strukturierte ADRs, klare Entscheidungsprozesse</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_10_3_bewertungsszenarien">10.3 Bewertungsszenarien</h3>
+<div class="paragraph">
+<p><strong>Demo-Fähigkeit:</strong>
+- ✅ <strong>Erfolgreich:</strong> Wardley Map mit 3 Komponenten erstellbar
+- ✅ <strong>Akzeptabel:</strong> SVG-Rendering funktioniert
+- ❌ <strong>Fehlschlag:</strong> Keine visuellen Komponenten</p>
+</div>
+<div class="paragraph">
+<p><strong>Verständlichkeit:</strong>
+- ✅ <strong>Erfolgreich:</strong> Code unter 200 Zeilen, selbsterklärend
+- ✅ <strong>Akzeptabel:</strong> Kommentare notwendig für Verständnis
+- ❌ <strong>Fehlschlag:</strong> Architektur nicht nachvollziehbar</p>
+</div>
+<div class="paragraph">
+<p><strong>Lernwert:</strong>
+- ✅ <strong>Erfolgreich:</strong> ADR-Prozess demonstriert, Entscheidungen begründet
+- ✅ <strong>Akzeptabel:</strong> Grundlegende AI-Collaboration gezeigt
+- ❌ <strong>Fehlschlag:</strong> Keine strukturierte Zusammenarbeit erkennbar</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_4_metriken">10.4 Metriken</h3>
+<div class="paragraph">
+<p><strong>Demo-Metriken:</strong>
+- Implementierungszeit: ≤ 60 Minuten
+- Funktionsfähige Komponenten: ≥ 3
+- Browser-Kompatibilität: Chrome, Firefox</p>
+</div>
+<div class="paragraph">
+<p><strong>Code-Qualität:</strong>
+- Codebase-Größe: ≤ 300 Zeilen (HTML+CSS+JS)
+- Event-Handler: ≤ 5 verschiedene
+- Dependencies: 0 externe Libraries</p>
+</div>
+<div class="paragraph">
+<p><strong>Architektur-Dokumentation:</strong>
+- arc42 Kapitel: ≥ 6 Kapitel
+- ADRs: ≥ 4 Entscheidungen
+- Dokumentationszeit: ≤ 40 Minuten</p>
 </div>
 </div>
 </div>

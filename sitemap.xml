@@ -7,6 +7,11 @@
     </url>
 
     <url>
+    	<loc>http://jbake.org/arc42/adr-004-user-interaction.html</loc>
+    	<lastmod>2025-06-13</lastmod>
+    </url>
+
+    <url>
     	<loc>http://jbake.org/arc42/adr-001-svg-rendering.html</loc>
     	<lastmod>2025-06-13</lastmod>
     </url>
@@ -23,6 +28,11 @@
 
     <url>
     	<loc>http://jbake.org/arc42/adr-002-architecture-pattern.html</loc>
+    	<lastmod>2025-06-13</lastmod>
+    </url>
+
+    <url>
+    	<loc>http://jbake.org/arc42/04_solution_strategy.html</loc>
     	<lastmod>2025-06-13</lastmod>
     </url>
 

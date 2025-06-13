@@ -2,14 +2,14 @@
 <html lang="de">
 <head>
     
-    <!-- sourceuri: arc42/adr-003-data-persistence.html -->
+    <!-- sourceuri: arc42/04_solution_strategy.html -->
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <meta content="jbake" name="generator">
     <meta content="INDEX, FOLLOW" name="ROBOTS">
 
-    <title>ADR-003: Data Persistence Strategy - LocalStorage Only</title>
+    <title>4. Lösungsstrategie</title>
     <meta content="docToolchain" property="og:title">
     <meta content="build your dev docs the easy way..." property="og:description">
     <meta content="website" property="og:type">
@@ -268,7 +268,7 @@
                                 
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
                                    href="../arc42/adr-003-data-persistence.html" title="ADR-003: Data Persistence Strategy - LocalStorage Only">ADR-003: Data Persistence Strategy - LocalStorage Only</a>
                                 
                             </li>
@@ -298,7 +298,7 @@
                                 
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
-                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
                                    href="../arc42/04_solution_strategy.html" title="4. Lösungsstrategie">4. Lösungsstrategie</a>
                                 
                             </li>
@@ -314,11 +314,11 @@
 				<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 					
 
-        <a href="##git-repo-url##/arc42/adr-003-data-persistence.adoc"
+        <a href="##git-repo-url##/arc42/04_solution_strategy.adoc"
            target="_blank"><i class="fa fa-edit fa-fw"></i> Improve this doc</a>
 
 
-        <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-003%3A+Data+Persistence+Strategy+-+LocalStorage+Only%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/adr-003-data-persistence.adoc%0A%23branch:%20main" target="_blank"><i
+        <a href="##issue-url##?title=Docs%3A+Feedback+for+%274.+L%C3%B6sungsstrategie%27&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:%20##git-repo-url##/arc42/04_solution_strategy.adoc%0A%23branch:%20main" target="_blank"><i
                 class="fab fa-github fa-fw"></i> Create an issue</a>
 
         
@@ -328,13 +328,14 @@
         <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_adr_003_data_persistence_strategy_localstorage_only">ADR-003: Data Persistence Strategy - LocalStorage Only</a>
+<li><a href="#_4_lösungsstrategie">4. Lösungsstrategie</a>
 <ul class="sectlevel2">
-<li><a href="#_problem_description_and_context">Problem Description and Context</a></li>
-<li><a href="#_alternative_evaluation_pugh_matrix">Alternative Evaluation (Pugh Matrix)</a></li>
-<li><a href="#_decision">Decision</a></li>
-<li><a href="#_consequences">Consequences</a></li>
-<li><a href="#_implementation_notes">Implementation Notes</a></li>
+<li><a href="#_4_1_überblick">4.1 Überblick</a></li>
+<li><a href="#_4_2_zentrale_architekturentscheidungen">4.2 Zentrale Architekturentscheidungen</a></li>
+<li><a href="#_4_3_technologie_stack">4.3 Technologie-Stack</a></li>
+<li><a href="#_4_4_implementierungsstrategie">4.4 Implementierungsstrategie</a></li>
+<li><a href="#_4_5_qualitätssicherung">4.5 Qualitätssicherung</a></li>
+<li><a href="#_4_6_risiko_mitigation">4.6 Risiko-Mitigation</a></li>
 </ul>
 </li>
 </ul>
@@ -360,170 +361,120 @@
         <p>
             
 <div class="sect1">
-<h2 id="_adr_003_data_persistence_strategy_localstorage_only">ADR-003: Data Persistence Strategy - LocalStorage Only</h2>
+<h2 id="_4_lösungsstrategie">4. Lösungsstrategie</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Date:</p></td>
-<th class="tableblock halign-left valign-top"><p class="tableblock">2025-06-13</p></th>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Authors:</p></td>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Ralf D. Müller, Claude (AI Assistant)</p></th>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status:</p></td>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Final</p></th>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="_problem_description_and_context">Problem Description and Context</h3>
-<div class="paragraph">
-<p>We need to decide how to persist Wardley Map data between browser sessions. The solution must work without server infrastructure and be implementable within our time constraints.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_alternative_evaluation_pugh_matrix">Alternative Evaluation (Pugh Matrix)</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Criterion</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LocalStorage (Baseline)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IndexedDB</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No Persistence</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation Speed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Data Capacity</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Browser Support</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">API Complexity</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Demo Value</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total Score</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-1</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><strong>Rejected Alternatives:</strong></p>
-</div>
-<div class="paragraph">
-<p><strong>IndexedDB:</strong> More powerful but asynchronous API adds complexity. 5-10MB capacity not needed for demo maps.</p>
-</div>
-<div class="paragraph">
-<p><strong>No Persistence:</strong> Would frustrate demo users who lose work on page refresh.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_decision">Decision</h3>
-<div class="paragraph">
-<p><strong>We choose LocalStorage</strong> for map data persistence.</p>
-</div>
-<div class="paragraph">
-<p><strong>Rationale:</strong>
-- <strong>Simple API:</strong> Synchronous JSON.stringify/parse operations
-- <strong>Sufficient Capacity:</strong> 5MB limit more than adequate for demo maps
-- <strong>Universal Support:</strong> Available in all target browsers
-- <strong>Immediate Implementation:</strong> No complex async handling required</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_consequences">Consequences</h3>
-<div class="sect3">
-<h4 id="_positive_effects">Positive Effects</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Fast Implementation:</strong> Simple key-value storage, no complex data modeling</p>
-</li>
-<li>
-<p><strong>User Experience:</strong> Maps persist across browser sessions</p>
-</li>
-<li>
-<p><strong>No Infrastructure:</strong> Client-side only, no server dependencies</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_risks">Risks</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Storage Limits:</strong> 5MB browser limit (not relevant for demo scope)</p>
-</li>
-<li>
-<p><strong>Browser Clearing:</strong> Data lost if user clears browser storage (acceptable for demo)</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_technical_debt">Technical Debt</h4>
-<div class="paragraph">
-<p><strong>None.</strong> LocalStorage meets all demo requirements without over-engineering.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_implementation_notes">Implementation Notes</h3>
-<div class="paragraph">
-<p><strong>Data Structure:</strong></p>
-</div>
-<div class="listingblock">
+<div class="sidebarblock arc42help">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="javascript">const mapData = {
-  id: crypto.randomUUID(),
-  title: "My Wardley Map",
-  components: [
-    {id: "comp1", label: "User Needs", x: 0.2, y: 0.9}
-  ],
-  dependencies: [
-    {from: "comp1", to: "comp2"}
-  ],
-  lastModified: new Date().toISOString()
-};
-
-localStorage.setItem('wardley-map', JSON.stringify(mapData));</code></pre>
+<div class="paragraph">
+<p>Kurzer Überblick über die grundlegenden Entscheidungen und Lösungsansätze, die Entwurf und Implementierung des Systems prägen.</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_1_überblick">4.1 Überblick</h3>
+<div class="paragraph">
+<p>Die Lösungsstrategie für den Wardley Map Editor basiert auf <strong>Einfachheit und Geschwindigkeit</strong> der Implementierung, um in der verfügbaren Zeit von ~25 Minuten einen funktionsfähigen Demonstrator zu erstellen.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_2_zentrale_architekturentscheidungen">4.2 Zentrale Architekturentscheidungen</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entscheidung</th>
+<th class="tableblock halign-left valign-top">Lösung</th>
+<th class="tableblock halign-left valign-top">ADR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Rendering-Technologie</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG für Visualisierung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-001</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Architektur-Pattern</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simple Event Handlers, keine Frameworks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-002</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Daten-Persistierung</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browser LocalStorage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-003</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User Interaction</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mouse-Only (kein Touch/Keyboard)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-004</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_4_3_technologie_stack">4.3 Technologie-Stack</h3>
+<div class="paragraph">
+<p><strong>Frontend:</strong>
+- HTML5 + CSS3 für Layout
+- Vanilla JavaScript ES6+ für Logik
+- SVG für Wardley Map Rendering
+- LocalStorage für Datenpersistierung</p>
+</div>
+<div class="paragraph">
+<p><strong>Export:</strong>
+- draw.io XML Format für Interoperabilität</p>
+</div>
+<div class="paragraph">
+<p><strong>Entwicklung:</strong>
+- Keine Build-Tools oder Dependencies
+- Direkte Implementierung in Browser</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_4_implementierungsstrategie">4.4 Implementierungsstrategie</h3>
+<div class="paragraph">
+<p><strong>Phase 1: Basis-Framework (10 Min)</strong>
+1. HTML-Struktur mit SVG-Container
+2. CSS-Styling für Wardley Map Layout
+3. Grundlegende Event-Handler Setup</p>
+</div>
+<div class="paragraph">
+<p><strong>Phase 2: Core Funktionalität (10 Min)</strong>
+4. Komponenten-Erstellung per Klick
+5. Drag &amp; Drop für Positionierung
+6. LocalStorage Save/Load</p>
+</div>
+<div class="paragraph">
+<p><strong>Phase 3: Export (5 Min)</strong>
+7. draw.io XML-Generierung
+8. Download-Funktionalität</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_5_qualitätssicherung">4.5 Qualitätssicherung</h3>
+<div class="paragraph">
+<p><strong>Live-Demo Fokus:</strong>
+- Einfacher, nachvollziehbarer Code
+- Debugging-freundliche Implementierung
+- Visuell ansprechende Demo</p>
+</div>
+<div class="paragraph">
+<p><strong>Technische Qualität:</strong>
+- Browser DevTools Integration (SVG DOM)
+- Error Handling für User Inputs
+- Responsive Layout für Stream-Darstellung</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_6_risiko_mitigation">4.6 Risiko-Mitigation</h3>
+<div class="paragraph">
+<p><strong>Zeit-Risiko:</strong> Fokus auf MVP-Features, keine Nice-to-Haves
+<strong>Komplexitäts-Risiko:</strong> Bewusst einfache Implementierung ohne Over-Engineering
+<strong>Demo-Risiko:</strong> Schritt-für-Schritt Entwicklung mit funktionsfähigen Zwischenstände</p>
 </div>
 </div>
 </div>
@@ -555,11 +506,11 @@ localStorage.setItem('wardley-map', JSON.stringify(mapData));</code></pre>
     <button class="feedback--answer feedback--answer-yes">Yes</button>
     <button class="feedback--answer feedback--answer-no">No</button>
     <p class="feedback--response feedback--response-yes">
-        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-003%3A+Data+Persistence+Strategy+-+LocalStorage+Only%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/adr-003-data-persistence.adoc">tell us
+        Glad to hear it! Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%274.+L%C3%B6sungsstrategie%27%20%F0%9F%91%8D&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/04_solution_strategy.adoc">tell us
     how we can improve</a>.
     </p>
     <p class="feedback--response feedback--response-no">
-        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%27ADR-003%3A+Data+Persistence+Strategy+-+LocalStorage+Only%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/adr-003-data-persistence.adoc">tell
+        Sorry to hear that. Please <a href="##issue-url##?title=Docs%3A+Feedback+for+%274.+L%C3%B6sungsstrategie%27%20%F0%9F%91%8E&body=%0A%0A%5BEnter%20feedback%20here%5D%0A%0A%0A---%0A%23page:arc42/04_solution_strategy.adoc">tell
     us how we can improve</a>.
     </p>
 </div>

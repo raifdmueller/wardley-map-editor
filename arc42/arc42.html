@@ -273,6 +273,11 @@
                                 
                             </li>
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                   href="../arc42/adr-004-user-interaction.html" title="ADR-004: User Interface Strategy - Mouse-Only Interaction">ADR-004: User Interface Strategy - Mouse-Only Interaction</a>
+                                
+                            </li>
+                            <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
                                 <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section active"
                                    href="../arc42/arc42.html" title="Architecture Documentation: Wardley Map Editor">Architecture Documentation: Wardley Map Editor</a>
                                 
@@ -290,6 +295,11 @@
                             <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
                                 <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
                                    href="../arc42/03_system_scope_and_context.html" title="3. Kontextabgrenzung">3. Kontextabgrenzung</a>
+                                
+                            </li>
+                            <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child">
+                                <a class="align-left pl-0 pr-2 pt-2 td-sidebar-link td-sidebar-link__section "
+                                   href="../arc42/04_solution_strategy.html" title="4. Lösungsstrategie">4. Lösungsstrategie</a>
                                 
                             </li>
                         </ul>
@@ -350,6 +360,16 @@
 <li><a href="#_browser_localstorage">Browser LocalStorage</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#_4_lösungsstrategie">4. Lösungsstrategie</a>
+<ul class="sectlevel2">
+<li><a href="#_4_1_überblick">4.1 Überblick</a></li>
+<li><a href="#_4_2_zentrale_architekturentscheidungen">4.2 Zentrale Architekturentscheidungen</a></li>
+<li><a href="#_4_3_technologie_stack">4.3 Technologie-Stack</a></li>
+<li><a href="#_4_4_implementierungsstrategie">4.4 Implementierungsstrategie</a></li>
+<li><a href="#_4_5_qualitätssicherung">4.5 Qualitätssicherung</a></li>
+<li><a href="#_4_6_risiko_mitigation">4.6 Risiko-Mitigation</a></li>
 </ul>
 </li>
 </ul>
@@ -940,8 +960,125 @@ LocalStorage-Zugriff</p></td>
 }</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_4_lösungsstrategie">4. Lösungsstrategie</h2>
+<div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::04_solution_strategy.adoc[]</p>
+<p>Kurzer Überblick über die grundlegenden Entscheidungen und Lösungsansätze, die Entwurf und Implementierung des Systems prägen.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_1_überblick">4.1 Überblick</h3>
+<div class="paragraph">
+<p>Die Lösungsstrategie für den Wardley Map Editor basiert auf <strong>Einfachheit und Geschwindigkeit</strong> der Implementierung, um in der verfügbaren Zeit von ~25 Minuten einen funktionsfähigen Demonstrator zu erstellen.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_2_zentrale_architekturentscheidungen">4.2 Zentrale Architekturentscheidungen</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entscheidung</th>
+<th class="tableblock halign-left valign-top">Lösung</th>
+<th class="tableblock halign-left valign-top">ADR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Rendering-Technologie</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG für Visualisierung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-001</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Architektur-Pattern</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simple Event Handlers, keine Frameworks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-002</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Daten-Persistierung</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browser LocalStorage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-003</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User Interaction</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mouse-Only (kein Touch/Keyboard)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR-004</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_4_3_technologie_stack">4.3 Technologie-Stack</h3>
+<div class="paragraph">
+<p><strong>Frontend:</strong>
+- HTML5 + CSS3 für Layout
+- Vanilla JavaScript ES6+ für Logik
+- SVG für Wardley Map Rendering
+- LocalStorage für Datenpersistierung</p>
+</div>
+<div class="paragraph">
+<p><strong>Export:</strong>
+- draw.io XML Format für Interoperabilität</p>
+</div>
+<div class="paragraph">
+<p><strong>Entwicklung:</strong>
+- Keine Build-Tools oder Dependencies
+- Direkte Implementierung in Browser</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_4_implementierungsstrategie">4.4 Implementierungsstrategie</h3>
+<div class="paragraph">
+<p><strong>Phase 1: Basis-Framework (10 Min)</strong>
+1. HTML-Struktur mit SVG-Container
+2. CSS-Styling für Wardley Map Layout
+3. Grundlegende Event-Handler Setup</p>
+</div>
+<div class="paragraph">
+<p><strong>Phase 2: Core Funktionalität (10 Min)</strong>
+4. Komponenten-Erstellung per Klick
+5. Drag &amp; Drop für Positionierung
+6. LocalStorage Save/Load</p>
+</div>
+<div class="paragraph">
+<p><strong>Phase 3: Export (5 Min)</strong>
+7. draw.io XML-Generierung
+8. Download-Funktionalität</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_5_qualitätssicherung">4.5 Qualitätssicherung</h3>
+<div class="paragraph">
+<p><strong>Live-Demo Fokus:</strong>
+- Einfacher, nachvollziehbarer Code
+- Debugging-freundliche Implementierung
+- Visuell ansprechende Demo</p>
+</div>
+<div class="paragraph">
+<p><strong>Technische Qualität:</strong>
+- Browser DevTools Integration (SVG DOM)
+- Error Handling für User Inputs
+- Responsive Layout für Stream-Darstellung</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_6_risiko_mitigation">4.6 Risiko-Mitigation</h3>
+<div class="paragraph">
+<p><strong>Zeit-Risiko:</strong> Fokus auf MVP-Features, keine Nice-to-Haves
+<strong>Komplexitäts-Risiko:</strong> Bewusst einfache Implementierung ohne Over-Engineering
+<strong>Demo-Risiko:</strong> Schritt-für-Schritt Entwicklung mit funktionsfähigen Zwischenstände</p>
 </div>
 <div class="paragraph">
 <p>Unresolved directive in &lt;stdin&gt; - include::05_building_block_view.adoc[]</p>
@@ -966,7 +1103,6 @@ LocalStorage-Zugriff</p></td>
 </div>
 <div class="paragraph">
 <p>Unresolved directive in &lt;stdin&gt; - include::12_glossary.adoc[]</p>
-</div>
 </div>
 </div>
 </div>

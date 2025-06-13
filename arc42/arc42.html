@@ -309,7 +309,7 @@
 <li><a href="#_1_1_aufgabenstellung">1.1 Aufgabenstellung</a>
 <ul class="sectlevel3">
 <li><a href="#_was_ist_der_wardley_map_editor">Was ist der Wardley Map Editor?</a></li>
-<li><a href="#_wesentliche_features_mvp">Wesentliche Features (MVP)</a></li>
+<li><a href="#_wesentliche_features_mvp_für_demo">Wesentliche Features (MVP für Demo)</a></li>
 </ul>
 </li>
 <li><a href="#_1_2_qualitätsziele">1.2 Qualitätsziele</a></li>
@@ -406,47 +406,44 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_wesentliche_features_mvp">Wesentliche Features (MVP)</h4>
+<h4 id="_wesentliche_features_mvp_für_demo">Wesentliche Features (MVP für Demo)</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Visuelle Map-Erstellung</strong></p>
+<p><strong>Basis-Canvas</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Drag &amp; Drop für Komponenten</p>
+<p>Wardley Map Koordinatensystem (Evolution/Value-Achsen)</p>
 </li>
 <li>
-<p>Positionierung auf Evolution/Value-Achsen</p>
-</li>
-<li>
-<p>Abhängigkeiten zwischen Komponenten</p>
+<p>Einfache Komponenten-Platzierung</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>draw.io Export</strong></p>
+<p><strong>Minimaler Export</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>XML-Generierung für draw.io Import</p>
+<p>JSON-Export der Map-Daten</p>
 </li>
 <li>
-<p>Erhaltung der Map-Struktur</p>
+<p>Grundlegende draw.io XML-Generierung</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Browser-basiert</strong></p>
+<p><strong>Live-Demo tauglich</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Keine Installation erforderlich</p>
+<p>Funktioniert im Browser</p>
 </li>
 <li>
-<p>LocalStorage für Persistierung</p>
+<p>Visuell ansprechend für Stream</p>
 </li>
 </ul>
 </div>
@@ -481,27 +478,24 @@ Maximal fünf Ziele sollten hier genannt werden.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Usability</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ein Wardley Map-Neuling kann in &lt;10 Minuten eine Map mit 5 Komponenten erstellen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Demo-Fähigkeit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Funktionierender Prototyp präsentierbar in 1 Stunde Live-Stream</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Performance</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rendering von Maps mit 100 Komponenten in &lt;200ms auf Standard-Hardware</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Verständlichkeit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zuschauer können den Architektur-Ansatz nachvollziehen und diskutieren</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Kompatibilität</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exportierte draw.io-Dateien sind 100% kompatibel und bearbeitbar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Lernwert</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Demonstration von Human-AI Collaboration in der praktischen Architekturarbeit</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>KRITISCHE ANMERKUNG:</strong>
-Diese Ziele sind noch zu vage! Wir brauchen konkretere Metriken:
-* Was ist "Standard-Hardware"?
-* Wie messen wir "100% kompatibel"?
-* Welche Browser-Versionen unterstützen wir?</p>
+<p><strong>Demo-Fokus:</strong>
+Diese Qualitätsziele spiegeln den experimentellen Charakter der Live-Session wider. Das Ziel ist nicht ein produktionsreifes System, sondern ein funktionierender Demonstrator für Architektur-Methoden.</p>
 </div>
 </div>
 <div class="sect2">

@@ -1,0 +1,82 @@
+== 4. Lösungsstrategie
+
+[role="arc42help"]
+****
+Kurzer Überblick über die grundlegenden Entscheidungen und Lösungsansätze, die Entwurf und Implementierung des Systems prägen.
+****
+
+=== 4.1 Überblick
+
+Die Lösungsstrategie für den Wardley Map Editor basiert auf **Einfachheit und Geschwindigkeit** der Implementierung, um in der verfügbaren Zeit von ~25 Minuten einen funktionsfähigen Demonstrator zu erstellen.
+
+=== 4.2 Zentrale Architekturentscheidungen
+
+[cols="1,2,1" options="header"]
+|===
+| Entscheidung | Lösung | ADR
+
+| **Rendering-Technologie** 
+| SVG für Visualisierung
+| ADR-001
+
+| **Architektur-Pattern** 
+| Simple Event Handlers, keine Frameworks
+| ADR-002
+
+| **Daten-Persistierung** 
+| Browser LocalStorage
+| ADR-003
+
+| **User Interaction** 
+| Mouse-Only (kein Touch/Keyboard)
+| ADR-004
+|===
+
+=== 4.3 Technologie-Stack
+
+**Frontend:**
+- HTML5 + CSS3 für Layout
+- Vanilla JavaScript ES6+ für Logik
+- SVG für Wardley Map Rendering
+- LocalStorage für Datenpersistierung
+
+**Export:**
+- draw.io XML Format für Interoperabilität
+
+**Entwicklung:**
+- Keine Build-Tools oder Dependencies
+- Direkte Implementierung in Browser
+
+=== 4.4 Implementierungsstrategie
+
+**Phase 1: Basis-Framework (10 Min)**
+1. HTML-Struktur mit SVG-Container
+2. CSS-Styling für Wardley Map Layout
+3. Grundlegende Event-Handler Setup
+
+**Phase 2: Core Funktionalität (10 Min)**
+4. Komponenten-Erstellung per Klick
+5. Drag & Drop für Positionierung
+6. LocalStorage Save/Load
+
+**Phase 3: Export (5 Min)**
+7. draw.io XML-Generierung
+8. Download-Funktionalität
+
+=== 4.5 Qualitätssicherung
+
+**Live-Demo Fokus:**
+- Einfacher, nachvollziehbarer Code
+- Debugging-freundliche Implementierung
+- Visuell ansprechende Demo
+
+**Technische Qualität:**
+- Browser DevTools Integration (SVG DOM)
+- Error Handling für User Inputs
+- Responsive Layout für Stream-Darstellung
+
+=== 4.6 Risiko-Mitigation
+
+**Zeit-Risiko:** Fokus auf MVP-Features, keine Nice-to-Haves
+**Komplexitäts-Risiko:** Bewusst einfache Implementierung ohne Over-Engineering
+**Demo-Risiko:** Schritt-für-Schritt Entwicklung mit funktionsfähigen Zwischenstände

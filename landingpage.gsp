@@ -6,14 +6,14 @@
                 <div class="col-lg-8">
                     <h1 class="display-4 fw-bold">🗺️ Wardley Map Editor</h1>
                     <p class="lead mb-4">
-                        Professional strategic mapping tool with AI-powered architecture documentation
+                        Professionelles strategisches Mapping-Tool mit KI-gestützter Architekturdokumentation
                     </p>
                     <p class="fs-5 mb-4">
-                        Create, visualize, and export Wardley Maps with seamless draw.io integration. 
-                        Built through <strong>Human-AI collaboration</strong> and documented with arc42 best practices.
+                        Erstellen, visualisieren und exportieren Sie Wardley Maps mit nahtloser draw.io-Integration. 
+                        Entwickelt durch <strong>Mensch-KI-Kollaboration</strong> und dokumentiert nach arc42-Best-Practices.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="arc42/arc42.html" class="btn btn-light btn-lg">📋 View Architecture</a>
+                        <a href="arc42/arc42.html" class="btn btn-light btn-lg">📋 Architektur ansehen</a>
                         <a href="https://github.com/raifdmueller/wardley-map-editor" class="btn btn-outline-light btn-lg">
                             <i class="fab fa-github"></i> GitHub Repository
                         </a>
@@ -21,9 +21,9 @@
                 </div>
                 <div class="col-lg-4 text-center">
                     <div class="bg-white bg-opacity-10 p-4 rounded">
-                        <h5 class="text-white-50">Live Demo Results</h5>
+                        <h5 class="text-white-50">Live Demo Ergebnis</h5>
                         <div class="display-6 fw-bold">50min</div>
-                        <small class="text-white-50">Complete architecture in live stream</small>
+                        <small class="text-white-50">Vollständige Architektur im Live-Stream</small>
                     </div>
                 </div>
             </div>
@@ -34,44 +34,44 @@
             <div class="col">
                 <div class="card mb-4 shadow-sm h-100">
                     <div class="card-header bg-success text-white">
-                        <h4 class="my-0 fw-normal">🎯 Demo-Focused Architecture</h4>
+                        <h4 class="my-0 fw-normal">🎯 Demo-fokussierte Architektur</h4>
                     </div>
                     <div class="card-body d-flex flex-column">
                         <p class="flex-grow-1">
-                            Built for live demonstration with realistic quality goals: 
-                            <strong>Demo-ready in 1 hour</strong>, verständlich für Zuschauer, 
-                            maximaler Lernwert für AI-Collaboration.
+                            Entwickelt für Live-Präsentationen mit realistischen Qualitätszielen: 
+                            <strong>Demo-bereit in 1 Stunde</strong>, verständlich für Zuschauer, 
+                            maximaler Lernwert für KI-Kollaboration.
                         </p>
-                        <small class="text-muted">Quality Goal #1</small>
+                        <small class="text-muted">Qualitätsziel #1</small>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card mb-4 shadow-sm h-100">
                     <div class="card-header bg-info text-white">
-                        <h4 class="my-0 fw-normal">🤖 AI-Human Collaboration</h4>
+                        <h4 class="my-0 fw-normal">🤖 KI-Mensch-Kollaboration</h4>
                     </div>
                     <div class="card-body d-flex flex-column">
                         <p class="flex-grow-1">
-                            Demonstrates real-time collaboration between human expertise and AI assistance. 
-                            <strong>4 Architecture Decision Records</strong> created with structured Pugh Matrix evaluation.
+                            Demonstriert Echtzeit-Zusammenarbeit zwischen menschlicher Expertise und KI-Unterstützung. 
+                            <strong>4 Architekturentscheidungen</strong> erstellt mit strukturierter Pugh-Matrix-Bewertung.
                         </p>
-                        <small class="text-muted">Educational Value</small>
+                        <small class="text-muted">Bildungswert</small>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card mb-4 shadow-sm h-100">
                     <div class="card-header bg-warning text-dark">
-                        <h4 class="my-0 fw-normal">📐 Professional Documentation</h4>
+                        <h4 class="my-0 fw-normal">📐 Professionelle Dokumentation</h4>
                     </div>
                     <div class="card-body d-flex flex-column">
                         <p class="flex-grow-1">
-                            Complete <strong>arc42 documentation</strong> with all 12 chapters, 
-                            PlantUML diagrams, and docToolchain integration. 
-                            Ready for production environments.
+                            Vollständige <strong>arc42-Dokumentation</strong> mit allen 12 Kapiteln, 
+                            PlantUML-Diagrammen und docToolchain-Integration. 
+                            Bereit für Produktionsumgebungen.
                         </p>
-                        <small class="text-muted">Documentation Quality</small>
+                        <small class="text-muted">Dokumentationsqualität</small>
                     </div>
                 </div>
             </div>
@@ -82,15 +82,15 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="mb-0">🛠️ Technology Stack</h4>
+                        <h4 class="mb-0">🛠️ Technologie-Stack</h4>
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled">
                             <li class="mb-2"><strong>Frontend:</strong> Vanilla JavaScript ES6+, HTML5, CSS3</li>
-                            <li class="mb-2"><strong>Rendering:</strong> SVG for map visualization</li>
-                            <li class="mb-2"><strong>Storage:</strong> Browser LocalStorage</li>
-                            <li class="mb-2"><strong>Export:</strong> draw.io XML format</li>
-                            <li class="mb-2"><strong>Documentation:</strong> arc42 + docToolchain + AsciiDoc</li>
+                            <li class="mb-2"><strong>Rendering:</strong> SVG für Map-Visualisierung</li>
+                            <li class="mb-2"><strong>Speicherung:</strong> Browser LocalStorage</li>
+                            <li class="mb-2"><strong>Export:</strong> draw.io XML-Format</li>
+                            <li class="mb-2"><strong>Dokumentation:</strong> arc42 + docToolchain + AsciiDoc</li>
                         </ul>
                     </div>
                 </div>
@@ -98,15 +98,15 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="mb-0">🎓 Learning Outcomes</h4>
+                        <h4 class="mb-0">🎓 Lernergebnisse</h4>
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled">
-                            <li class="mb-2">✅ Structured architecture documentation practices</li>
-                            <li class="mb-2">✅ AI-assisted software design workflows</li>
-                            <li class="mb-2">✅ Architecture Decision Records (ADRs) with Pugh Matrix</li>
-                            <li class="mb-2">✅ arc42 template implementation</li>
-                            <li class="mb-2">✅ docs-as-code methodology</li>
+                            <li class="mb-2">✅ Strukturierte Architekturdokumentations-Praktiken</li>
+                            <li class="mb-2">✅ KI-unterstützte Software-Design-Workflows</li>
+                            <li class="mb-2">✅ Architecture Decision Records (ADRs) mit Pugh-Matrix</li>
+                            <li class="mb-2">✅ arc42-Template-Implementierung</li>
+                            <li class="mb-2">✅ docs-as-code Methodologie</li>
                         </ul>
                     </div>
                 </div>
@@ -115,47 +115,47 @@
 
         <!-- Architecture Decisions Preview -->
         <div class="bg-light p-4 rounded mb-5">
-            <h3 class="mb-4">📋 Key Architecture Decisions</h3>
+            <h3 class="mb-4">📋 Wichtige Architekturentscheidungen</h3>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="card border-success">
                         <div class="card-body">
                             <h6 class="card-title text-success">ADR-001: SVG vs Canvas</h6>
-                            <p class="card-text small">SVG chosen for simpler event handling and better debugging capabilities in demo context.</p>
+                            <p class="card-text small">SVG gewählt für einfachere Event-Behandlung und bessere Debug-Möglichkeiten im Demo-Kontext.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="card border-info">
                         <div class="card-body">
-                            <h6 class="card-title text-info">ADR-002: Simple Event Handlers</h6>
-                            <p class="card-text small">No frameworks needed - direct JavaScript for 1-hour implementation timeline.</p>
+                            <h6 class="card-title text-info">ADR-002: Einfache Event-Handler</h6>
+                            <p class="card-text small">Keine Frameworks erforderlich - direktes JavaScript für 1-Stunden-Implementierungs-Timeline.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
                 <a href="arc42/09_architecture_decisions.html" class="btn btn-outline-primary">
-                    View All Architecture Decisions →
+                    Alle Architekturentscheidungen ansehen →
                 </a>
             </div>
         </div>
 
         <!-- Call to Action -->
         <div class="text-center py-5">
-            <h3 class="mb-4">Ready to explore structured architecture work?</h3>
+            <h3 class="mb-4">Bereit für strukturierte Architekturarbeit?</h3>
             <p class="lead mb-4">
-                This project showcases how Human-AI collaboration can accelerate professional software architecture documentation.
+                Dieses Projekt zeigt, wie Mensch-KI-Kollaboration professionelle Software-Architekturdokumentation beschleunigen kann.
             </p>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
                 <a href="arc42/arc42.html" class="btn btn-primary btn-lg">
-                    📖 Read Complete Documentation
+                    📖 Vollständige Dokumentation lesen
                 </a>
                 <a href="https://github.com/raifdmueller/wardley-map-editor" class="btn btn-outline-primary btn-lg">
-                    🔧 View Source Code
+                    🔧 Quellcode ansehen
                 </a>
                 <a href="https://software-architektur.tv" class="btn btn-outline-secondary btn-lg">
-                    📺 Watch the Stream
+                    📺 Stream anschauen
                 </a>
             </div>
         </div>
@@ -166,14 +166,14 @@
                 <div class="col-md-8">
                     <p class="text-muted mb-0">
                         <small>
-                            Created during <strong>"Software Architektur im Stream"</strong> - 
-                            demonstrating real Human-AI collaboration in architecture work.
+                            Erstellt während <strong>"Software Architektur im Stream"</strong> - 
+                            demonstriert echte Mensch-KI-Kollaboration in der Architekturarbeit.
                         </small>
                     </p>
                 </div>
                 <div class="col-md-4 text-md-end">
                     <small class="text-muted">
-                        Built with ❤️ by Ralf D. Müller & Claude (AI)
+                        Entwickelt mit ❤️ von Ralf D. Müller & Claude (KI)
                     </small>
                 </div>
             </div>

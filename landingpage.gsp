@@ -19,11 +19,21 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 text-center">
-                    <div class="bg-white bg-opacity-10 p-4 rounded">
-                        <h5 class="text-white-50">Live Demo Ergebnis</h5>
-                        <div class="display-6 fw-bold">50min</div>
-                        <small class="text-white-50">Vollständige Architektur im Live-Stream</small>
+                <div class="col-lg-4">
+                    <!-- Responsive YouTube Video -->
+                    <div class="ratio ratio-16x9 rounded overflow-hidden shadow-lg">
+                        <iframe 
+                            src="https://www.youtube.com/embed/WD_3w1nne8M" 
+                            title="Software Architektur im Stream - Wardley Map Editor Live Demo"
+                            allowfullscreen
+                            style="border: 3px solid rgba(255,255,255,0.2);">
+                        </iframe>
+                    </div>
+                    <div class="text-center mt-3">
+                        <small class="text-white-75">
+                            <strong>Live Demo Session</strong><br>
+                            50 Min. vollständige Architektur-Entwicklung
+                        </small>
                     </div>
                 </div>
             </div>
@@ -154,8 +164,8 @@
                 <a href="https://github.com/raifdmueller/wardley-map-editor" class="btn btn-outline-primary btn-lg">
                     🔧 Quellcode ansehen
                 </a>
-                <a href="https://software-architektur.tv" class="btn btn-outline-secondary btn-lg">
-                    📺 Stream anschauen
+                <a href="https://software-architektur.tv/2025/06/13/folge267.html" class="btn btn-outline-secondary btn-lg">
+                    📺 Stream-Details ansehen
                 </a>
             </div>
         </div>

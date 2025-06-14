@@ -4,6 +4,10 @@
 
 > This project demonstrates Human-AI collaboration in software architecture, created live during a "Software Architecture in Stream" session.
 
+## 🌐 **[➡️ View Project Website](https://raifdmueller.github.io/wardley-map-editor/)**
+
+---
+
 ## 🎯 Project Overview
 
 This Wardley Map Editor is a **demo project** showcasing:
@@ -48,7 +52,7 @@ This project demonstrates professional architecture documentation:
 
 ```
 docs/
-├── arc42/                  # Complete architecture documentation
+├── arc42/                     # Complete architecture documentation
 │   ├── 01_introduction_and_goals.adoc
 │   ├── 02_architecture_constraints.adoc
 │   ├── 03_system_scope_and_context.adoc

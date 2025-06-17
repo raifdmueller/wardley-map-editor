@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardley Map Editor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="toolbar">
+            <button id="btn-new">New Map</button>
+            <button id="btn-save">Save Map</button>
+            <button id="btn-load">Load Map</button>
+            <button id="btn-export">Export to draw.io</button>
+            <input type="file" id="file-input" style="display: none;" accept=".json">
+        </nav>
+    </header>
+
+    <main>
+        <div id="canvas-container">
+            <svg id="wardley-canvas" viewBox="0 0 1200 800">
+                <!-- Achsen-Gruppe -->
+                <g id="axes">
+                    <!-- Evolution-Achse (horizontal) -->
+                    <line x1="100" y1="700" x2="1100" y2="700" class="axis" />
+                    <!-- Visibility-Achse (vertikal) -->
+                    <line x1="100" y1="100" x2="100" y2="700" class="axis" />
+                    
+                    <!-- Evolution-Labels -->
+                    <text x="200" y="720" class="axis-label">Genesis</text>
+                    <text x="400" y="720" class="axis-label">Custom</text>
+                    <text x="600" y="720" class="axis-label">Product</text>
+                    <text x="800" y="720" class="axis-label">Commodity</text>
+                    
+                    <!-- Visibility-Labels -->
+                    <text x="80" y="650" class="axis-label" text-anchor="end">Invisible</text>
+                    <text x="80" y="150" class="axis-label" text-anchor="end">Visible</text>
+                </g>
+                
+                <!-- Komponenten-Gruppe -->
+                <g id="components"></g>
+                
+                <!-- Abhängigkeiten-Gruppe -->
+                <g id="dependencies"></g>
+            </svg>
+        </div>
+    </main>
+
+    <!-- Einfaches Test-Framework für TDD -->
+    <script src="js/test-utils.js"></script>
+
+    <!-- JavaScript Module in korrekter Reihenfolge -->
+    <script src="js/mapEngine.js"></script>
+    <script src="js/eventHandler.js"></script>
+    <script src="js/storageManager.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Tests -->
+    <script src="js/mapEngine.test.js"></script>
+    
+    <!-- Test Runner -->
+    <script>
+        // Führe Tests aus wenn im Development-Modus
+        if (window.location.search.includes('test=true')) {
+            console.log('🚀 Running Tests...');
+            // Tests werden automatisch in mapEngine.test.js ausgeführt
+        }
+    </script>
+</body>
+</html>

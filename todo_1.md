@@ -72,118 +72,118 @@
 - [x] Führe Test aus und prüfe, dass er erfolgreich ist
 
 ### 1.3.2 MapEngine addComponent Methode - Test First
-- [ ] Schreibe Test: "should add component with unique ID"
-- [ ] Schreibe Test: "should validate component position (x,y between 0-1)"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
-- [ ] Implementiere `addComponent(label, x, y)` Methode
-- [ ] Generiere unique ID mit `crypto.randomUUID()`
-- [ ] Validiere x,y Koordinaten (0-1 Range)
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Schreibe Test: "should add component with unique ID"
+- [x] Schreibe Test: "should validate component position (x,y between 0-1)"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Implementiere `addComponent(label, x, y)` Methode
+- [x] Generiere unique ID mit `crypto.randomUUID()`
+- [x] Validiere x,y Koordinaten (0-1 Range)
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ### 1.3.3 MapEngine removeComponent Methode - Test First
-- [ ] Schreibe Test: "should remove component by ID"
-- [ ] Schreibe Test: "should remove associated dependencies when component removed"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
-- [ ] Implementiere `removeComponent(id)` Methode
-- [ ] Entferne component aus components array
-- [ ] Entferne alle dependencies die component referenzieren
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Schreibe Test: "should remove component by ID"
+- [x] Schreibe Test: "should remove associated dependencies when component removed"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Implementiere `removeComponent(id)` Methode
+- [x] Entferne component aus components array
+- [x] Entferne alle dependencies die component referenzieren
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ### 1.3.4 EventHandler-Klasse - Test First
-- [ ] Erstelle `js/eventHandler.test.js` Test-Datei
-- [ ] Schreibe Test: "should initialize with SVG canvas reference"
-- [ ] Führe Test aus und prüfe, dass er fehlschlägt
-- [ ] Erstelle `js/eventHandler.js` mit EventHandler-Klasse
-- [ ] Implementiere constructor mit canvas parameter
-- [ ] Speichere canvas reference als this.canvas
-- [ ] Führe Test aus und prüfe, dass er erfolgreich ist
+- [x] Erstelle `js/eventHandler.test.js` Test-Datei
+- [x] Schreibe Test: "should initialize with SVG canvas reference"
+- [x] Führe Test aus und prüfe, dass er fehlschlägt
+- [x] Erstelle `js/eventHandler.js` mit EventHandler-Klasse
+- [x] Implementiere constructor mit canvas parameter
+- [x] Speichere canvas reference als this.canvas
+- [x] Führe Test aus und prüfe, dass er erfolgreich ist
 
 ### 1.3.5 EventHandler attachListeners Methode - Test First
-- [ ] Schreibe Test: "should attach click listener to canvas"
-- [ ] Schreibe Test: "should call mapEngine.addComponent on canvas click"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
-- [ ] Implementiere `attachListeners(mapEngine)` Methode
-- [ ] Füge canvas click event listener hinzu
-- [ ] Berechne relative Koordinaten aus mouse event
-- [ ] Rufe mapEngine.addComponent auf mit berechneten Koordinaten
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Schreibe Test: "should attach click listener to canvas"
+- [x] Schreibe Test: "should call mapEngine.addComponent on canvas click"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Implementiere `attachListeners(mapEngine)` Methode
+- [x] Füge canvas click event listener hinzu
+- [x] Berechne relative Koordinaten aus mouse event
+- [x] Rufe mapEngine.addComponent auf mit berechneten Koordinaten
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ### 1.3.6 StorageManager-Klasse - Test First
-- [ ] Erstelle `js/storageManager.test.js` Test-Datei
-- [ ] Schreibe Test: "should save map data to localStorage"
-- [ ] Schreibe Test: "should load map data from localStorage"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
-- [ ] Erstelle `js/storageManager.js` mit StorageManager-Klasse
-- [ ] Implementiere `saveMap(mapData)` mit localStorage.setItem
-- [ ] Implementiere `loadMap()` mit localStorage.getItem und JSON.parse
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Erstelle `js/storageManager.test.js` Test-Datei
+- [x] Schreibe Test: "should save map data to localStorage"
+- [x] Schreibe Test: "should load map data from localStorage"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Erstelle `js/storageManager.js` mit StorageManager-Klasse
+- [x] Implementiere `saveMap(mapData)` mit localStorage.setItem
+- [x] Implementiere `loadMap()` mit localStorage.getItem und JSON.parse
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ## 1.4 LocalStorage-Integration
 
 ### 1.4.1 JSON-Serialisierung Tests
-- [ ] Schreibe Test: "should serialize complete map data to JSON"
-- [ ] Schreibe Test: "should handle empty components array"
-- [ ] Schreibe Test: "should include metadata (title, lastModified)"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Schreibe Test: "should serialize complete map data to JSON"
+- [x] Schreibe Test: "should handle empty components array"
+- [x] Schreibe Test: "should include metadata (title, lastModified)"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
 
 ### 1.4.2 JSON-Serialisierung Implementation
-- [ ] Implementiere `toJSON()` Methode in MapEngine
-- [ ] Erstelle Datenstruktur: `{ id, title, components, dependencies, lastModified }`
-- [ ] Verwende `JSON.stringify()` für Serialisierung
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Implementiere `toJSON()` Methode in MapEngine
+- [x] Erstelle Datenstruktur: `{ id, title, components, dependencies, lastModified }`
+- [x] Verwende `JSON.stringify()` für Serialisierung
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ### 1.4.3 JSON-Deserialisierung Tests
-- [ ] Schreibe Test: "should deserialize JSON to MapEngine instance"
-- [ ] Schreibe Test: "should handle invalid JSON gracefully"
-- [ ] Schreibe Test: "should restore all components and dependencies"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Schreibe Test: "should deserialize JSON to MapEngine instance"
+- [x] Schreibe Test: "should handle invalid JSON gracefully"
+- [x] Schreibe Test: "should restore all components and dependencies"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
 
 ### 1.4.4 JSON-Deserialisierung Implementation
-- [ ] Implementiere `fromJSON(jsonString)` static Methode in MapEngine
-- [ ] Parse JSON mit try/catch error handling
-- [ ] Erstelle neue MapEngine Instanz mit parsed data
-- [ ] Validiere geladene Datenstruktur
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Implementiere `fromJSON(jsonString)` static Methode in MapEngine
+- [x] Parse JSON mit try/catch error handling
+- [x] Erstelle neue MapEngine Instanz mit parsed data
+- [x] Validiere geladene Datenstruktur
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ### 1.4.5 Auto-Save Funktionalität Tests
-- [ ] Schreibe Test: "should auto-save after component changes"
-- [ ] Schreibe Test: "should debounce rapid changes"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Schreibe Test: "should auto-save after component changes"
+- [x] Schreibe Test: "should debounce rapid changes"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
 
 ### 1.4.6 Auto-Save Implementation
-- [ ] Implementiere `enableAutoSave()` Methode in MapEngine
-- [ ] Verwende `setTimeout` für debouncing (500ms delay)
-- [ ] Rufe StorageManager.saveMap automatisch auf bei Änderungen
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Implementiere `enableAutoSave()` Methode in MapEngine
+- [x] Verwende `setTimeout` für debouncing (500ms delay)
+- [x] Rufe StorageManager.saveMap automatisch auf bei Änderungen
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ## 1.5 Integration und Basis-Tests
 
 ### 1.5.1 Haupt-App Integration Test
-- [ ] Erstelle `js/app.test.js` für Integration Tests
-- [ ] Schreibe Test: "should initialize all modules successfully"
-- [ ] Schreibe Test: "should create component on canvas click"
-- [ ] Führe Tests aus und prüfe, dass sie fehlschlagen
+- [x] Erstelle `js/app.test.js` für Integration Tests
+- [x] Schreibe Test: "should initialize all modules successfully"
+- [x] Schreibe Test: "should create component on canvas click"
+- [x] Führe Tests aus und prüfe, dass sie fehlschlagen
 
 ### 1.5.2 Haupt-App Implementation
-- [ ] Erstelle `js/app.js` als main entry point
-- [ ] Initialisiere MapEngine Instanz
-- [ ] Initialisiere EventHandler mit SVG canvas
-- [ ] Initialisiere StorageManager
-- [ ] Verbinde alle Module miteinander
-- [ ] Führe Tests aus und prüfe, dass sie erfolgreich sind
+- [x] Erstelle `js/app.js` als main entry point
+- [x] Initialisiere MapEngine Instanz
+- [x] Initialisiere EventHandler mit SVG canvas
+- [x] Initialisiere StorageManager
+- [x] Verbinde alle Module miteinander
+- [x] Führe Tests aus und prüfe, dass sie erfolgreich sind
 
 ### 1.5.3 Browser-Test Setup
-- [ ] Öffne `index.html` im Browser
-- [ ] Prüfe, dass SVG Canvas korrekt dargestellt wird
-- [ ] Prüfe, dass Achsen und Labels sichtbar sind
-- [ ] Prüfe, dass Toolbar Buttons funktional sind
-- [ ] Prüfe Console auf JavaScript Fehler
+- [x] Öffne `index.html` im Browser
+- [x] Prüfe, dass SVG Canvas korrekt dargestellt wird
+- [x] Prüfe, dass Achsen und Labels sichtbar sind
+- [x] Prüfe, dass Toolbar Buttons funktional sind
+- [x] Prüfe Console auf JavaScript Fehler
 
 ### 1.5.4 End-to-End Test
-- [ ] Klicke auf Canvas und prüfe, ob Komponente erstellt wird
-- [ ] Prüfe, ob Komponente in browser dev tools im SVG DOM sichtbar ist
-- [ ] Prüfe, ob Map-Daten in localStorage gespeichert werden
-- [ ] Lade Seite neu und prüfe, ob Map wiederhergestellt wird
+- [x] Klicke auf Canvas und prüfe, ob Komponente erstellt wird
+- [x] Prüfe, ob Komponente in browser dev tools im SVG DOM sichtbar ist
+- [x] Prüfe, ob Map-Daten in localStorage gespeichert werden
+- [x] Lade Seite neu und prüfe, ob Map wiederhergestellt wird
 
 ## Deliverables Phase 1
 
@@ -196,23 +196,3 @@ Nach Abschluss aller TODO Items sollten folgende Ergebnisse vorliegen:
 - [x] **Basis-Funktionalität** für Komponenten-Erstellung per Mausklick
 - [x] **Auto-Save** Mechanismus für Map-Änderungen
 - [x] **Browser-kompatible** Implementation (Chrome, Firefox, Safari)
-
-## Test-Framework Setup
-
-Für TDD Implementation verwende folgende Test-Setup:
-
-```html
-<!-- Füge zu index.html für Testing hinzu -->
-<script src="https://unpkg.com/mocha/mocha.js"></script>
-<script src="https://unpkg.com/chai/chai.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
-```
-
-```javascript
-// Test-Runner Setup
-mocha.setup('bdd');
-const { expect } = chai;
-
-// Nach allen Tests
-mocha.run();
-```

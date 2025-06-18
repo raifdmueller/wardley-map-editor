@@ -1,4 +1,5 @@
-/* 1.2.1 Reset und Basis-Styles */
+/* Wardley Map Editor Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,165 +7,236 @@
 }
 
 body {
-    font-family: "Arial", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
-/* CSS-Variablen für Farben */
-:root {
-    --primary-color: #9673a6;
-    --secondary-color: #e1d5e7;
-    --background-color: #ffffff;
-    --text-color: #333333;
-    --border-color: #cccccc;
-    --hover-color: #e9e9e9;
-}
-
-/* 1.2.2 Layout-Container */
-main {
-    width: 100vw;
+.container {
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "main sidebar";
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto 1fr;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
-#canvas-container {
-    flex: 1;
+/* Header */
+header {
+    grid-area: header;
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.toolbar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+/* Main Map Container */
+.map-container {
+    grid-area: main;
+    background: white;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow: hidden;
 }
 
-#wardley-canvas {
+.map-canvas {
     width: 100%;
     height: 100%;
-    border: 1px solid var(--border-color);
-    background-color: var(--background-color);
+    cursor: crosshair;
 }
 
-/* 1.2.3 Toolbar-Styling */
-.toolbar {
-    background: #f5f5f5;
-    padding: 10px;
-    display: flex;
-    gap: 10px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.toolbar button {
-    padding: 8px 16px;
-    border: 1px solid var(--border-color);
-    background: var(--background-color);
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-    color: var(--text-color);
-    transition: background-color 0.2s ease;
-}
-
-.toolbar button:hover {
-    background: var(--hover-color);
-}
-
-.toolbar button:active {
-    background: #d9d9d9;
-}
-
-/* 1.2.4 Wardley Map spezifische Styles */
-.axis {
-    stroke: var(--text-color);
-    stroke-width: 2;
-}
-
+/* SVG Styling */
 .axis-label {
+    font-size: 14px;
+    fill: #333;
+    font-weight: 600;
+}
+
+.evolution-label,
+.value-label {
     font-size: 12px;
     fill: #666;
-    text-anchor: middle;
-    font-family: "Arial", sans-serif;
 }
 
-.component {
-    fill: var(--secondary-color);
-    stroke: var(--primary-color);
-    stroke-width: 2;
+.grid {
+    opacity: 0.5;
+}
+
+/* Component Styles */
+.wardley-component {
     cursor: move;
-    transition: fill 0.2s ease;
+    transition: opacity 0.2s;
 }
 
-.component:hover {
-    fill: #d4c5db;
+.wardley-component:hover {
+    opacity: 0.8;
 }
 
-.component-label {
-    font-size: 11px;
-    text-anchor: middle;
-    pointer-events: none;
-    fill: var(--text-color);
-    font-family: "Arial", sans-serif;
-}
-
-.dependency {
-    stroke: var(--primary-color);
+.wardley-component rect {
+    fill: #3498db;
+    stroke: #2980b9;
     stroke-width: 2;
-    fill: none;
+    rx: 4;
+}
+
+.wardley-component.selected rect {
+    fill: #e74c3c;
+    stroke: #c0392b;
+}
+
+.wardley-component text {
+    fill: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+}
+
+/* Dependency Lines */
+.dependency-line {
+    stroke: #666;
+    stroke-width: 2;
     marker-end: url(#arrowhead);
+    fill: none;
 }
 
-/* Pfeilspitze für Dependencies */
-#wardley-canvas defs marker {
-    fill: var(--primary-color);
+/* Properties Panel */
+.properties-panel {
+    grid-area: sidebar;
+    background: white;
+    padding: 1.5rem;
+    border-left: 1px solid #ddd;
+    overflow-y: auto;
 }
 
-/* 1.2.5 Responsive Design */
-@media (max-width: 768px) {
-    .toolbar {
-        flex-wrap: wrap;
-        gap: 5px;
-    }
-    
-    .toolbar button {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-    
-    #wardley-canvas {
-        height: calc(100vh - 80px);
-    }
-    
-    .axis-label {
-        font-size: 10px;
-    }
-    
-    .component-label {
-        font-size: 9px;
-    }
+.properties-panel h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
 }
 
-@media (max-width: 480px) {
-    .toolbar {
-        padding: 5px;
-    }
-    
-    .toolbar button {
-        padding: 4px 8px;
-        font-size: 11px;
-    }
-    
-    #wardley-canvas {
-        height: calc(100vh - 70px);
-    }
+.properties-panel label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
 }
 
-/* Utilities */
+.properties-panel input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.properties-panel input[type="range"] {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.properties-panel .btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Utility Classes */
 .hidden {
     display: none;
 }
 
-.dragging {
-    opacity: 0.7;
-    transform: scale(1.05);
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-areas: 
+            "header"
+            "main"
+            "sidebar";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+    }
+    
+    .properties-panel {
+        border-left: none;
+        border-top: 1px solid #ddd;
+        max-height: 200px;
+    }
+    
+    .toolbar {
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
 }
 
-/* Grid-Linien (optional, für bessere Orientierung) */
-.grid-line {
-    stroke: #f0f0f0;
-    stroke-width: 1;
-    stroke-dasharray: 2,2;
+/* Loading and Error States */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.error {
+    border-color: #e74c3c !important;
+}
+
+.success {
+    border-color: #27ae60 !important;
 }

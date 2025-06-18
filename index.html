@@ -7,65 +7,82 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav class="toolbar">
-            <button id="btn-new">New Map</button>
-            <button id="btn-save">Save Map</button>
-            <button id="btn-load">Load Map</button>
-            <button id="btn-export">Export to draw.io</button>
-            <input type="file" id="file-input" style="display: none;" accept=".json">
-        </nav>
-    </header>
-
-    <main>
-        <div id="canvas-container">
-            <svg id="wardley-canvas" viewBox="0 0 1200 800">
-                <!-- Achsen-Gruppe -->
-                <g id="axes">
-                    <!-- Evolution-Achse (horizontal) -->
-                    <line x1="100" y1="700" x2="1100" y2="700" class="axis" />
-                    <!-- Visibility-Achse (vertikal) -->
-                    <line x1="100" y1="100" x2="100" y2="700" class="axis" />
-                    
-                    <!-- Evolution-Labels -->
-                    <text x="200" y="720" class="axis-label">Genesis</text>
-                    <text x="400" y="720" class="axis-label">Custom</text>
-                    <text x="600" y="720" class="axis-label">Product</text>
-                    <text x="800" y="720" class="axis-label">Commodity</text>
-                    
-                    <!-- Visibility-Labels -->
-                    <text x="80" y="650" class="axis-label" text-anchor="end">Invisible</text>
-                    <text x="80" y="150" class="axis-label" text-anchor="end">Visible</text>
+    <div class="container">
+        <header>
+            <h1>Wardley Map Editor</h1>
+            <div class="toolbar">
+                <button id="add-component-btn" class="btn btn-primary">Add Component</button>
+                <button id="export-btn" class="btn btn-secondary">Export to draw.io</button>
+                <button id="save-btn" class="btn btn-secondary">Save Map</button>
+                <button id="load-btn" class="btn btn-secondary">Load Map</button>
+            </div>
+        </header>
+        
+        <main class="map-container">
+            <svg id="wardley-map" viewBox="0 0 1200 800" class="map-canvas">
+                <!-- Axes -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                            refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+                    </marker>
+                </defs>
+                
+                <!-- Evolution Axis (X) -->
+                <line x1="100" y1="700" x2="1100" y2="700" stroke="#333" stroke-width="2" />
+                <text x="600" y="730" text-anchor="middle" class="axis-label">Evolution →</text>
+                <text x="150" y="720" class="evolution-label">Genesis</text>
+                <text x="1050" y="720" class="evolution-label">Commodity</text>
+                
+                <!-- Value Chain Axis (Y) -->
+                <line x1="100" y1="100" x2="100" y2="700" stroke="#333" stroke-width="2" />
+                <text x="80" y="400" text-anchor="middle" class="axis-label" transform="rotate(-90, 80, 400)">← Value Chain</text>
+                <text x="80" y="120" class="value-label">Visible</text>
+                <text x="80" y="690" class="value-label">Invisible</text>
+                
+                <!-- Grid -->
+                <g class="grid">
+                    <defs>
+                        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#eee" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect x="100" y="100" width="1000" height="600" fill="url(#grid)" />
                 </g>
                 
-                <!-- Komponenten-Gruppe -->
-                <g id="components"></g>
+                <!-- Components Container -->
+                <g id="components-container"></g>
                 
-                <!-- Abhängigkeiten-Gruppe -->
-                <g id="dependencies"></g>
+                <!-- Dependencies Container -->
+                <g id="dependencies-container"></g>
             </svg>
-        </div>
-    </main>
-
-    <!-- Einfaches Test-Framework für TDD -->
-    <script src="js/test-utils.js"></script>
-
-    <!-- JavaScript Module in korrekter Reihenfolge -->
+        </main>
+        
+        <aside class="properties-panel">
+            <h3>Properties</h3>
+            <div id="component-properties" class="hidden">
+                <label for="component-name">Name:</label>
+                <input type="text" id="component-name" />
+                
+                <label for="component-x">Evolution (X):</label>
+                <input type="range" id="component-x" min="100" max="1100" />
+                
+                <label for="component-y">Value Chain (Y):</label>
+                <input type="range" id="component-y" min="100" max="700" />
+                
+                <button id="delete-component-btn" class="btn btn-danger">Delete Component</button>
+            </div>
+            
+            <div id="map-properties">
+                <label for="map-title">Map Title:</label>
+                <input type="text" id="map-title" value="New Wardley Map" />
+                
+                <label for="map-author">Author:</label>
+                <input type="text" id="map-author" />
+            </div>
+        </aside>
+    </div>
+    
     <script src="js/mapEngine.js"></script>
-    <script src="js/eventHandler.js"></script>
-    <script src="js/storageManager.js"></script>
-    <script src="js/app.js"></script>
-    
-    <!-- Tests -->
-    <script src="js/mapEngine.test.js"></script>
-    
-    <!-- Test Runner -->
-    <script>
-        // Führe Tests aus wenn im Development-Modus
-        if (window.location.search.includes('test=true')) {
-            console.log('🚀 Running Tests...');
-            // Tests werden automatisch in mapEngine.test.js ausgeführt
-        }
-    </script>
 </body>
 </html>

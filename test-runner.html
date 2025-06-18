@@ -1,0 +1,89 @@
+<\!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardley Map Editor - Test Runner</title>
+    <style>
+        body { font-family: monospace; background: #1a1a1a; color: #00ff00; padding: 20px; }
+        .console { background: #000; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        pre { margin: 0; }
+        .header { color: #fff; background: #333; padding: 10px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 Wardley Map Editor - Test Suite</h1>
+        <p>Running comprehensive tests with 85% coverage target...</p>
+    </div>
+    
+    <div class="console" id="console">
+        <pre id="output">Loading test framework...</pre>
+    </div>
+    
+    <script src="js/test-utils.js"></script>
+    <script>
+        // Redirect console to our display
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalGroup = console.group;
+        const originalGroupEnd = console.groupEnd;
+        
+        const output = document.getElementById('output');
+        let indent = 0;
+        
+        function addToOutput(message, type = 'log') {
+            const line = document.createElement('div');
+            line.style.marginLeft = (indent * 20) + 'px';
+            line.style.color = type === 'error' ? '#ff6b6b' : 
+                              type === 'group' ? '#4ecdc4' : '#00ff00';
+            line.textContent = message;
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        console.log = (message) => {
+            addToOutput(message, 'log');
+            originalLog(message);
+        };
+        
+        console.error = (message) => {
+            addToOutput(message, 'error');
+            originalError(message);
+        };
+        
+        console.group = (message) => {
+            addToOutput(message, 'group');
+            indent++;
+            originalGroup(message);
+        };
+        
+        console.groupEnd = () => {
+            indent = Math.max(0, indent - 1);
+            originalGroupEnd();
+        };
+        
+        // Mock DOM for testing
+        DOMTestUtils.setupMockDOM();
+        
+        console.log('✅ Test framework loaded');
+        console.log('🔧 Setting up mock environment...');
+    </script>
+    
+    <script src="js/mapEngine.js"></script>
+    <script>
+        console.log('✅ MapEngine loaded');
+        console.log('🎯 Starting test execution...');
+    </script>
+    
+    <script src="js/mapEngine.test.js"></script>
+    
+    <script>
+        setTimeout(() => {
+            console.log('\n🏁 Test execution completed\!');
+            console.log('📊 Check results above for coverage metrics');
+        }, 2000);
+    </script>
+</body>
+</html>
+EOF < /dev/null

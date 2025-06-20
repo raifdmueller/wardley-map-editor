@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardley Map Editor - Tests</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 4px; }
+        .test-pass { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .test-fail { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        #test-results { margin-top: 20px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Wardley Map Editor - Test Suite</h1>
+    <button onclick="runTests()">Run All Tests</button>
+    <div id="test-results"></div>
+
+    <script type="module">
+        import { MapStateManager } from '../js/MapStateManager.js';
+        import { DSLParser } from '../js/DSLParser.js';
+        import { ExportManager } from '../js/ExportManager.js';
+
+        let testResults = [];
+
+        function assert(condition, message) {
+            if (condition) {
+                testResults.push({ status: 'pass', message });
+            } else {
+                testResults.push({ status: 'fail', message });
+                throw new Error(message);
+            }
+        }
+
+        function assertEquals(actual, expected, message) {
+            assert(actual === expected, `${message}: expected ${expected}, got ${actual}`);
+        }
+
+        function runTest(name, testFunction) {
+            try {
+                console.log(`Running test: ${name}`);
+                testFunction();
+                testResults.push({ status: 'pass', message: `✓ ${name}` });
+            } catch (error) {
+                testResults.push({ status: 'fail', message: `✗ ${name}: ${error.message}` });
+            }
+        }
+
+        window.runTests = function() {
+            testResults = [];
+            
+            // MapStateManager Tests
+            runTest('MapStateManager - Initial State', () => {
+                const manager = new MapStateManager();
+                assert(manager.state.title === 'Untitled Map', 'Default title should be set');
+                assert(Array.isArray(manager.state.components), 'Components should be array');
+                assert(Array.isArray(manager.state.connections), 'Connections should be array');
+            });
+
+            runTest('MapStateManager - Add Component', () => {
+                const manager = new MapStateManager();
+                const component = manager.addComponent({ label: 'Test Component', x: 0.5, y: 0.5 });
+                
+                assert(component.id, 'Component should have ID');
+                assertEquals(component.label, 'Test Component', 'Component label should match');
+                assertEquals(manager.state.components.length, 1, 'Should have one component');
+            });
+
+            runTest('MapStateManager - Update Component', () => {
+                const manager = new MapStateManager();
+                const component = manager.addComponent({ label: 'Test', x: 0.5, y: 0.5 });
+                
+                manager.updateComponent(component.id, { label: 'Updated Test', x: 0.8 });
+                const updated = manager.state.components.find(c => c.id === component.id);
+                
+                assertEquals(updated.label, 'Updated Test', 'Label should be updated');
+                assertEquals(updated.x, 0.8, 'X position should be updated');
+                assertEquals(updated.y, 0.5, 'Y position should remain unchanged');
+            });
+
+            runTest('MapStateManager - Remove Component', () => {
+                const manager = new MapStateManager();
+                const comp1 = manager.addComponent({ label: 'Test1', x: 0.5, y: 0.5 });
+                const comp2 = manager.addComponent({ label: 'Test2', x: 0.7, y: 0.7 });
+                manager.addConnection(comp1.id, comp2.id);
+                
+                assertEquals(manager.state.components.length, 2, 'Should have two components');
+                assertEquals(manager.state.connections.length, 1, 'Should have one connection');
+                
+                manager.removeComponent(comp1.id);
+                
+                assertEquals(manager.state.components.length, 1, 'Should have one component after removal');
+                assertEquals(manager.state.connections.length, 0, 'Connections should be removed with component');
+            });
+
+            // DSLParser Tests
+            runTest('DSLParser - Parse Valid Component', () => {
+                const parser = new DSLParser();
+                const dsl = 'component TestComponent [0.5, 0.7]';
+                const result = parser.parse(dsl);
+                
+                assertEquals(result.components.length, 1, 'Should parse one component');
+                assertEquals(result.components[0].label, 'TestComponent', 'Component name should match');
+                assertEquals(result.components[0].x, 0.5, 'X coordinate should match');
+                assertEquals(result.components[0].y, 0.7, 'Y coordinate should match');
+            });
+
+            runTest('DSLParser - Parse Valid Connection', () => {
+                const parser = new DSLParser();
+                const dsl = `component A [0.5, 0.5]
+component B [0.7, 0.7]
+A->B`;
+                const result = parser.parse(dsl);
+                
+                assertEquals(result.components.length, 2, 'Should parse two components');
+                assertEquals(result.connections.length, 1, 'Should parse one connection');
+                
+                const conn = result.connections[0];
+                const compA = result.components.find(c => c.label === 'A');
+                const compB = result.components.find(c => c.label === 'B');
+                
+                assertEquals(conn.from, compA.id, 'Connection from should match component A');
+                assertEquals(conn.to, compB.id, 'Connection to should match component B');
+            });
+
+            runTest('DSLParser - Handle Invalid Syntax', () => {
+                const parser = new DSLParser();
+                const dsl = 'invalid syntax here';
+                const result = parser.parse(dsl);
+                
+                assertEquals(result.components.length, 0, 'Should not parse invalid components');
+                assertEquals(result.connections.length, 0, 'Should not parse invalid connections');
+            });
+
+            runTest('DSLParser - Generate DSL from State', () => {
+                const parser = new DSLParser();
+                const state = {
+                    title: 'Test Map',
+                    components: [
+                        { id: '1', label: 'ComponentA', x: 0.5, y: 0.6 },
+                        { id: '2', label: 'ComponentB', x: 0.7, y: 0.8 }
+                    ],
+                    connections: [
+                        { from: '1', to: '2', type: 'dependency' }
+                    ]
+                };
+                
+                const dsl = parser.generateDSL(state);
+                assert(dsl.includes('component ComponentA [0.50, 0.60]'), 'Should include component A');
+                assert(dsl.includes('component ComponentB [0.70, 0.80]'), 'Should include component B');
+                assert(dsl.includes('ComponentA->ComponentB'), 'Should include connection');
+            });
+
+            // ExportManager Tests
+            runTest('ExportManager - Generate DrawIO XML', () => {
+                const exporter = new ExportManager();
+                const state = {
+                    title: 'Test Map',
+                    components: [
+                        { id: '1', label: 'Test Component', x: 0.5, y: 0.5 }
+                    ],
+                    connections: []
+                };
+                
+                const xml = exporter.exportToDrawIO(state);
+                assert(xml.includes('<mxfile'), 'Should generate valid mxfile XML');
+                assert(xml.includes('Test Component'), 'Should include component label');
+                assert(xml.includes('Test Map'), 'Should include map title');
+            });
+
+            runTest('ExportManager - JSON Export/Import', () => {
+                const exporter = new ExportManager();
+                const originalState = {
+                    title: 'Test Map',
+                    components: [
+                        { id: '1', label: 'Test Component', x: 0.5, y: 0.5 }
+                    ],
+                    connections: [],
+                    selectedComponent: null,
+                    version: '1.0'
+                };
+                
+                const json = exporter.exportToJSON(originalState);
+                const importedState = exporter.importFromJSON(json);
+                
+                assertEquals(importedState.title, originalState.title, 'Title should match');
+                assertEquals(importedState.components.length, originalState.components.length, 'Component count should match');
+                assertEquals(importedState.components[0].label, originalState.components[0].label, 'Component label should match');
+            });
+
+            // Integration Tests
+            runTest('Integration - Full Workflow', () => {
+                const manager = new MapStateManager();
+                const parser = new DSLParser();
+                const exporter = new ExportManager();
+                
+                // Add components via state manager
+                const comp1 = manager.addComponent({ label: 'Users', x: 0.9, y: 0.8 });
+                const comp2 = manager.addComponent({ label: 'Website', x: 0.7, y: 0.6 });
+                manager.addConnection(comp1.id, comp2.id);
+                
+                // Generate DSL
+                const dsl = parser.generateDSL(manager.state);
+                
+                // Parse DSL back
+                const parsed = parser.parse(dsl);
+                assert(parsed.components.length === 2, 'DSL round-trip should preserve components');
+                assert(parsed.connections.length === 1, 'DSL round-trip should preserve connections');
+                
+                // Export to DrawIO
+                const xml = exporter.exportToDrawIO(manager.state);
+                assert(xml.includes('Users'), 'Export should include Users component');
+                assert(xml.includes('Website'), 'Export should include Website component');
+            });
+
+            // Display results
+            displayResults();
+        };
+
+        function displayResults() {
+            const resultsDiv = document.getElementById('test-results');
+            resultsDiv.innerHTML = '';
+            
+            const summary = document.createElement('div');
+            const passed = testResults.filter(r => r.status === 'pass').length;
+            const failed = testResults.filter(r => r.status === 'fail').length;
+            summary.innerHTML = `<h2>Test Results: ${passed} passed, ${failed} failed</h2>`;
+            resultsDiv.appendChild(summary);
+            
+            testResults.forEach(result => {
+                const div = document.createElement('div');
+                div.className = `test-result test-${result.status}`;
+                div.textContent = result.message;
+                resultsDiv.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>

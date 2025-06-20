@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardley Map Editor - Demo</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Wardley Map Editor - Core Functionality Demo</h1>
+        
+        <div class="demo-section">
+            <h2>1. Map State Management</h2>
+            <button onclick="testStateManager()">Test State Manager</button>
+            <div id="state-results" class="results"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>2. DSL Parser</h2>
+            <textarea id="dsl-demo" placeholder="Enter DSL here...">component Users [0.9, 0.8]
+component Website [0.7, 0.6]
+component Database [0.3, 0.4]
+Users->Website
+Website->Database</textarea>
+            <button onclick="testDSLParser()">Parse DSL</button>
+            <div id="dsl-results" class="results"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>3. Export Manager</h2>
+            <button onclick="testExportManager()">Test Export to DrawIO</button>
+            <div id="export-results" class="results"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>4. Full Integration Demo</h2>
+            <button onclick="runFullDemo()">Run Complete Demo</button>
+            <div id="full-demo-results" class="results"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { MapStateManager } from './js/MapStateManager.js';
+        import { DSLParser } from './js/DSLParser.js';
+        import { ExportManager } from './js/ExportManager.js';
+
+        let stateManager, dslParser, exportManager;
+
+        function init() {
+            stateManager = new MapStateManager();
+            dslParser = new DSLParser();
+            exportManager = new ExportManager();
+        }
+
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+            element.innerHTML += `<div class="${className}">${message}</div>`;
+        }
+
+        window.testStateManager = function() {
+            const results = document.getElementById('state-results');
+            results.innerHTML = '';
+            
+            try {
+                // Test basic state operations
+                log('state-results', '✓ Creating MapStateManager...', 'success');
+                
+                const comp1 = stateManager.addComponent({ 
+                    label: 'User Needs', 
+                    x: 0.9, 
+                    y: 0.8 
+                });
+                log('state-results', `✓ Added component: ${comp1.label} at (${comp1.x}, ${comp1.y})`, 'success');
+                
+                const comp2 = stateManager.addComponent({ 
+                    label: 'Website', 
+                    x: 0.7, 
+                    y: 0.6 
+                });
+                log('state-results', `✓ Added component: ${comp2.label} at (${comp2.x}, ${comp2.y})`, 'success');
+                
+                stateManager.addConnection(comp1.id, comp2.id);
+                log('state-results', '✓ Added connection between components', 'success');
+                
+                stateManager.updateComponent(comp1.id, { label: 'Customer Needs' });
+                log('state-results', '✓ Updated component label', 'success');
+                
+                log('state-results', `Current state: ${stateManager.state.components.length} components, ${stateManager.state.connections.length} connections`, 'info');
+                
+            } catch (error) {
+                log('state-results', `✗ Error: ${error.message}`, 'error');
+            }
+        };
+
+        window.testDSLParser = function() {
+            const results = document.getElementById('dsl-results');
+            results.innerHTML = '';
+            
+            try {
+                const dslText = document.getElementById('dsl-demo').value;
+                log('dsl-results', '✓ Parsing DSL...', 'info');
+                
+                const parsed = dslParser.parse(dslText);
+                
+                if (parsed.errors.length > 0) {
+                    parsed.errors.forEach(error => {
+                        log('dsl-results', `✗ Line ${error.line}: ${error.message}`, 'error');
+                    });
+                } else {
+                    log('dsl-results', `✓ Successfully parsed: ${parsed.components.length} components, ${parsed.connections.length} connections`, 'success');
+                    
+                    parsed.components.forEach(comp => {
+                        log('dsl-results', `  - Component: ${comp.label} at (${comp.x}, ${comp.y})`, 'info');
+                    });
+                    
+                    parsed.connections.forEach(conn => {
+                        const fromComp = parsed.components.find(c => c.id === conn.from);
+                        const toComp = parsed.components.find(c => c.id === conn.to);
+                        log('dsl-results', `  - Connection: ${fromComp.label} → ${toComp.label}`, 'info');
+                    });
+                }
+                
+            } catch (error) {
+                log('dsl-results', `✗ Error: ${error.message}`, 'error');
+            }
+        };
+
+        window.testExportManager = function() {
+            const results = document.getElementById('export-results');
+            results.innerHTML = '';
+            
+            try {
+                const testState = {
+                    title: 'Demo Wardley Map',
+                    components: [
+                        { id: '1', label: 'Users', x: 0.9, y: 0.8 },
+                        { id: '2', label: 'Website', x: 0.7, y: 0.6 },
+                        { id: '3', label: 'Database', x: 0.3, y: 0.4 }
+                    ],
+                    connections: [
+                        { from: '1', to: '2', type: 'dependency' },
+                        { from: '2', to: '3', type: 'dependency' }
+                    ]
+                };
+                
+                log('export-results', '✓ Generating DrawIO XML...', 'info');
+                
+                const xml = exportManager.exportToDrawIO(testState);
+                log('export-results', '✓ DrawIO XML generated successfully', 'success');
+                log('export-results', `XML length: ${xml.length} characters`, 'info');
+                
+                // Validate XML structure
+                if (xml.includes('<mxfile') && xml.includes('</mxfile>')) {
+                    log('export-results', '✓ Valid mxfile XML structure', 'success');
+                } else {
+                    log('export-results', '✗ Invalid XML structure', 'error');
+                }
+                
+                // Check for components in XML
+                testState.components.forEach(comp => {
+                    if (xml.includes(comp.label)) {
+                        log('export-results', `✓ Found component "${comp.label}" in XML`, 'success');
+                    } else {
+                        log('export-results', `✗ Component "${comp.label}" missing from XML`, 'error');
+                    }
+                });
+                
+            } catch (error) {
+                log('export-results', `✗ Error: ${error.message}`, 'error');
+            }
+        };
+
+        window.runFullDemo = function() {
+            const results = document.getElementById('full-demo-results');
+            results.innerHTML = '';
+            
+            try {
+                log('full-demo-results', '🚀 Starting Full Integration Demo...', 'info');
+                
+                // Step 1: Create a new map
+                const newStateManager = new MapStateManager();
+                log('full-demo-results', '✓ Step 1: Created new map state manager', 'success');
+                
+                // Step 2: Add components programmatically
+                const users = newStateManager.addComponent({ label: 'Users', x: 0.95, y: 0.85 });
+                const website = newStateManager.addComponent({ label: 'Website', x: 0.75, y: 0.65 });
+                const api = newStateManager.addComponent({ label: 'API', x: 0.55, y: 0.45 });
+                const database = newStateManager.addComponent({ label: 'Database', x: 0.25, y: 0.25 });
+                
+                log('full-demo-results', '✓ Step 2: Added 4 components to the map', 'success');
+                
+                // Step 3: Add connections
+                newStateManager.addConnection(users.id, website.id);
+                newStateManager.addConnection(website.id, api.id);
+                newStateManager.addConnection(api.id, database.id);
+                
+                log('full-demo-results', '✓ Step 3: Added connections between components', 'success');
+                
+                // Step 4: Export to DSL
+                const generatedDSL = dslParser.generateDSL(newStateManager.state);
+                log('full-demo-results', '✓ Step 4: Generated DSL from map state', 'success');
+                log('full-demo-results', 'Generated DSL:', 'info');
+                log('full-demo-results', `<pre>${generatedDSL}</pre>`, 'info');
+                
+                // Step 5: Parse DSL back
+                const parsedFromDSL = dslParser.parse(generatedDSL);
+                log('full-demo-results', `✓ Step 5: Parsed DSL back - ${parsedFromDSL.components.length} components, ${parsedFromDSL.connections.length} connections`, 'success');
+                
+                // Step 6: Export to DrawIO
+                const drawioXML = exportManager.exportToDrawIO(newStateManager.state);
+                log('full-demo-results', '✓ Step 6: Exported to DrawIO XML format', 'success');
+                log('full-demo-results', `DrawIO XML size: ${drawioXML.length} characters`, 'info');
+                
+                // Step 7: Validate round-trip
+                const originalComponents = newStateManager.state.components.length;
+                const originalConnections = newStateManager.state.connections.length;
+                const parsedComponents = parsedFromDSL.components.length;
+                const parsedConnections = parsedFromDSL.connections.length;
+                
+                if (originalComponents === parsedComponents && originalConnections === parsedConnections) {
+                    log('full-demo-results', '✓ Step 7: Round-trip validation successful - data integrity maintained', 'success');
+                } else {
+                    log('full-demo-results', '✗ Step 7: Round-trip validation failed', 'error');
+                }
+                
+                log('full-demo-results', '🎉 Full Integration Demo Completed Successfully!', 'success');
+                
+            } catch (error) {
+                log('full-demo-results', `✗ Demo failed: ${error.message}`, 'error');
+                console.error('Full demo error:', error);
+            }
+        };
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

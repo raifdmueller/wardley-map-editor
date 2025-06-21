@@ -36,9 +36,9 @@
             opacity: 0.85;
             font-size: 14px;
         }
-        .branch-info {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
             padding: 15px 20px;
             margin: 20px;
             border-radius: 5px;
@@ -83,13 +83,14 @@
             color: #6c757d;
             font-size: 13px;
         }
-        .branch-indicator {
-            background: #fff3cd;
-            color: #856404;
+        .content-indicator {
+            background: #e2f4ff;
+            color: #0c63e4;
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 11px;
             margin-left: 8px;
+            visibility: hidden;
         }
         .message-content {
             font-size: 15px;
@@ -167,8 +168,15 @@
         <div class="header">
             <h1>Architektur-Theater mit Claude und Ralf</h1>
             <div class="meta">
-                13.06.2025 um 13:05:23 - 14.06.2025 um 14:47:27
+                13.06.2025 um 13:05:23 - 13:56:14
             </div>
+        </div>
+        
+        <div class="info-box">
+            <strong>✅ Korrigiertes Verständnis</strong><br>
+            Content Items sind NICHT alternative Branches, sondern sequentielle Schritte einer Antwort.<br>
+            Export: Startet ab Nachricht 2, kombiniert alle content items zu vollständigen Antworten.<br>
+            93 Nachrichten aus der Hauptkonversation.
         </div>
         
         <div class="chat">
@@ -208,10 +216,13 @@
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">18 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">18 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:07:46</span>
                 </div>
-                <div class="message-content"><p>Fantastisch! Das ist ein sehr interessantes Projekt. Lassen Sie mich Ihnen eine Zusammenfassung geben:</p>
+                <div class="message-content"><p>Ich schaue mir das Repository an und hole die Dokumentation für Sie.</p>
+<p>Sehr interessantes Projekt! Das ist ein web-basierter Wardley Map Editor. Lassen Sie mich noch etwas tiefer in die technischen Details schauen:</p>
+<p>Lassen Sie mich direkt das Repository untersuchen:</p>
+<p>Fantastisch! Das ist ein sehr interessantes Projekt. Lassen Sie mich Ihnen eine Zusammenfassung geben:</p>
 <h2>🗺️ Wardley Map Editor - Projektübersicht</h2>
 <p>Das ist ein <strong>web-basierter Wardley Map Editor</strong> mit draw.io Export-Funktionalität, der <strong>live während eines Streams entwickelt wurde</strong> - eine echte Zusammenarbeit zwischen Ihnen und Claude!</p>
 <h3>🎯 Projektziele</h3>
@@ -289,10 +300,11 @@ Die Dokumentation ist beeindruckend gut strukturiert:
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">7 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">7 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:09:32</span>
                 </div>
-                <div class="message-content"><p>Entschuldigung, auch diese Seite zeigt mir nicht die genaue aktuelle Uhrzeit an. Die verfügbaren Tools können mir das aktuelle Datum geben (Freitag, 13. Juni 2025), aber leider nicht die präzise Uhrzeit.</p>
+                <div class="message-content"><p>Die Suchergebnisse sind nicht ganz aktuell. Lassen Sie mich eine spezifischere Seite für die aktuelle Zeit aufrufen:</p>
+<p>Entschuldigung, auch diese Seite zeigt mir nicht die genaue aktuelle Uhrzeit an. Die verfügbaren Tools können mir das aktuelle Datum geben (Freitag, 13. Juni 2025), aber leider nicht die präzise Uhrzeit.</p>
 <p><strong>Was ich weiß:</strong><br><ul><br><li><strong>Datum</strong>: Freitag, 13. Juni 2025</li><br><li><strong>Zeitzone</strong>: Deutschland verwendet derzeit CEST (Central European Summer Time, UTC+2)</li><br><li><strong>Sommerzeit</strong>: Ja, bis 26. Oktober 2025</li><br></ul></p>
 <p>Aber die <strong>genaue Uhrzeit</strong> kann ich mit den verfügbaren Tools leider nicht ermitteln. Die Webseiten zeigen mir zwar Informationen über Zeitzonen, aber nicht die Live-Uhrzeit.</p>
 <p>Warum fragen Sie? Planen Sie eine bestimmte Live-Session für das Wardley Map Editor Projekt? 🕐</p></div>
@@ -308,10 +320,11 @@ Die Dokumentation ist beeindruckend gut strukturiert:
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">4 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">4 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:10:03</span>
                 </div>
-                <div class="message-content"><p>Perfect! Die aktuelle Zeit ist:</p>
+                <div class="message-content"><p>Gute Idee! Lassen Sie mich die aktuelle Zeit über bash abfragen:</p>
+<p>Perfect! Die aktuelle Zeit ist:</p>
 <p><strong>Freitag, 13. Juni 2025, 11:09:58 UTC</strong></p>
 <p>Da Sie in Deutschland sind (Sulzbach, Hessen), ist das:<br><strong>13:09:58 CEST</strong> (Sommerzeit, UTC+2)</p>
 <p>Also kurz nach 13 Uhr (1 Uhr nachmittags) bei Ihnen!</p>
@@ -391,10 +404,11 @@ Die Dokumentation ist beeindruckend gut strukturiert:
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">13 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">13 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:16:26</span>
                 </div>
-                <div class="message-content"><p><strong>✅ Kapitel 1 angelegt!</strong></p>
+                <div class="message-content"><p>Gut! Master-Dokument ist angelegt. Jetzt starten wir mit <strong>Kapitel 1</strong> - und ich werde dabei direkt die <strong>kritischen Fragen</strong> stellen, die oft übersehen werden:</p>
+<p><strong>✅ Kapitel 1 angelegt!</strong></p>
 <p><strong>🎯 Live-Feedback für die Zuschauer:</strong></p>
 <p>Ich habe bewusst <strong>kritische Fragen</strong> eingebaut, die normalerweise in Architekturdokumentationen fehlen:</p>
 <ol>
@@ -428,10 +442,18 @@ Die Dokumentation ist beeindruckend gut strukturiert:
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">11 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">11 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:19:10</span>
                 </div>
-                <div class="message-content"><p><strong>🎯 Excellent! Kapitel 3 mit C4-Diagrammen ist fertig!</strong></p>
+                <div class="message-content"><p>Sie haben völlig recht! Ich war zu überkritisch für ein <strong>Demo-Projekt</strong> - das ist ein wichtiger Punkt.</p>
+<p><strong>Korrektur meiner Haltung:</strong><br><ul><br><li>✅ <strong>Demo-Projekt</strong> = Experimenteller Charakter, Lernziel steht im Vordergrund</li><br><li>✅ <strong>Live-Stream</strong> = Zeigen wie Human-AI Collaboration funktioniert</li><br><li>✅ <strong>Pragmatisch</strong> bleiben statt perfektionistisch</li><br></ul></p>
+<p><strong>Weiter mit der Architektur!</strong></p>
+<p>Lassen Sie uns <strong>Kapitel 2: Randbedingungen</strong> machen - da definieren wir die technischen Grundlagen:</p>
+<p><strong>✅ Kapitel 2 fertig!</strong></p>
+<p>Die Randbedingungen sind jetzt klar definiert - <strong>pragmatisch</strong> für ein Demo-Projekt:</p>
+<p><strong>Weiter zu Kapitel 3: Kontextabgrenzung</strong> - hier wird&#x27;s interessant!</p>
+<p>Hier definieren wir <strong>WAS</strong> unser System macht und <strong>WAS NICHT</strong>:</p>
+<p><strong>🎯 Excellent! Kapitel 3 mit C4-Diagrammen ist fertig!</strong></p>
 <p><strong>Was wir jetzt haben:</strong><br><ul><br><li>✅ <strong>Fachlicher Kontext</strong> - wer nutzt was</li><br><li>✅ <strong>Technischer Kontext</strong> - wie kommuniziert das System</li><br><li>✅ <strong>Externe Schnittstellen</strong> - konkrete Format-Spezifikationen</li><br></ul></p>
 <p><strong>Das ist schon sehr solide für 15 Minuten Arbeit!</strong></p>
 <p><strong>Nächster Schritt: Kapitel 4 - Lösungsstrategie</strong></p>
@@ -556,7 +578,7 @@ Ich habe definiert: <strong>&quot;Ein web-basierter Editor zur visuellen Erstell
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">8 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">8 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:25:03</span>
                 </div>
                 <div class="message-content"><p><strong>✅ Kapitel 1 überarbeitet und gepusht!</strong></p>
@@ -714,10 +736,12 @@ Ich habe definiert: <strong>&quot;Ein web-basierter Editor zur visuellen Erstell
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">6 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">6 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:29:42</span>
                 </div>
-                <div class="message-content"><p><strong>Genau! Jetzt haben alle Entscheidungen klare Begründungen:</strong></p>
+                <div class="message-content"><p><strong>Perfekt! Das ist die wichtigste Begründung:</strong> <strong>Zeitbudget = 1 Stunde Live-Stream</strong></p>
+<p>Lassen Sie mich Kapitel 2 entsprechend überarbeiten:</p>
+<p><strong>Genau! Jetzt haben alle Entscheidungen klare Begründungen:</strong></p>
 <p><strong>Zentrale Begründung: &quot;Zeitbudget = 1 Stunde&quot;</strong><br><ul><br><li>❌ Kein Backend → kein Server-Setup</li><br><li>❌ Kein Framework → kein Build-Setup</li><br><li>❌ Keine Dependencies → kein npm/Package-Management</li><br></ul></p>
 <p><strong>Das macht total Sinn!</strong></p>
 <p><strong>Soll ich das überarbeitete Kapitel 2 pushen?</strong></p>
@@ -736,10 +760,11 @@ Ich habe definiert: <strong>&quot;Ein web-basierter Editor zur visuellen Erstell
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">4 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">4 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:31:32</span>
                 </div>
-                <div class="message-content"><p><strong>✅ Kapitel 2 gepusht!</strong></p>
+                <div class="message-content"><p>Absolut richtig! <strong>ADRs für spezifische technische Entscheidungen</strong> - das ist der saubere Weg.</p>
+<p><strong>✅ Kapitel 2 gepusht!</strong></p>
 <p><strong>Wichtige Verbesserungen:</strong><br><ul><br><li>✅ <strong>Begründungen für alle Entscheidungen</strong></li><br><li>✅ <strong>Zeitbudget als zentrale Treiber</strong></li><br><li>✅ <strong>Verweis auf zukünftige ADRs</strong> für technische Details</li><br></ul></p>
 <p><strong>Das ist jetzt viel klarer und ehrlicher!</strong></p>
 <p><strong>Status nach 20 Minuten:</strong><br><ul><br><li>✅ Kapitel 1: Ziele (demo-fokussiert)</li><br><li>✅ Kapitel 2: Randbedingungen (zeit-begründet)</li><br></ul></p>
@@ -810,7 +835,7 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">8 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">8 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:35:12</span>
                 </div>
                 <div class="message-content"><p><strong>✅ Kapitel 3 angepasst und gepusht!</strong></p>
@@ -903,7 +928,7 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">8 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">8 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:41:53</span>
                 </div>
                 <div class="message-content"><h2>🆚 Canvas vs. SVG - Objektiver Vergleich</h2>
@@ -935,10 +960,11 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">6 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">6 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:43:43</span>
                 </div>
-                <div class="message-content"><p><strong>✅ ADR-001 erstellt und gepusht!</strong></p>
+                <div class="message-content"><p>Perfect! Ich erstelle <strong>ADR-001: Canvas vs SVG für Rendering</strong>.</p>
+<p><strong>✅ ADR-001 erstellt und gepusht!</strong></p>
 <p><strong>GitHub Link:</strong><br>https://github.com/raifdmueller/wardley-map-editor/blob/main/docs/arc42/adr-001-svg-rendering.adoc</p>
 <p><strong>Das war unser erster strukturierter ADR mit:</strong><br><ul><br><li>✅ <strong>Pugh Matrix</strong> für objektive Bewertung</li><br><li>✅ <strong>Klare Begründung</strong> warum Canvas abgelehnt</li><br><li>✅ <strong>Konsequenzen</strong> dokumentiert (Positive + Risiken)</li><br><li>✅ <strong>Implementation Notes</strong> für die Umsetzung</li><br></ul></p>
 <p><strong>Status nach 30 Minuten:</strong><br><ul><br><li>✅ 3 arc42 Kapitel (Ziele, Randbedingungen, Kontext)</li><br><li>✅ 1 ADR (SVG-Entscheidung)</li><br></ul></p>
@@ -982,7 +1008,7 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">6 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">6 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:46:31</span>
                 </div>
                 <div class="message-content"><p><strong>✅ ADR-001 korrigiert und gepusht!</strong></p>
@@ -1004,10 +1030,14 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">11 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">11 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:49:15</span>
                 </div>
-                <div class="message-content"><p><strong>🚀 ARCHITEKTUR DOKUMENTATION KOMPLETT!</strong></p>
+                <div class="message-content"><p>Perfect! Ich entscheide und dokumentiere die verbleibenden ADRs selbstständig:</p>
+<p><strong>✅ Alle kritischen ADRs erstellt und gepusht!</strong></p>
+<p><strong>Übersicht der Entscheidungen:</strong><br><ul><br><li>✅ <strong>ADR-001:</strong> SVG für Rendering</li><br><li>✅ <strong>ADR-002:</strong> Simple Event Handlers (kein MVC/Framework)</li><br><li>✅ <strong>ADR-003:</strong> LocalStorage für Persistierung</li><br><li>✅ <strong>ADR-004:</strong> Mouse-Only Interaction</li><br></ul></p>
+<p><strong>Jetzt vervollständige ich Kapitel 4 - Lösungsstrategie:</strong></p>
+<p><strong>🚀 ARCHITEKTUR DOKUMENTATION KOMPLETT!</strong></p>
 <p><strong>Status nach 35 Minuten:</strong></p>
 <p>✅ <strong>4 arc42 Kapitel:</strong><br><ul><br><li>Kapitel 1: Ziele (demo-fokussiert)</li><br><li>Kapitel 2: Randbedingungen (zeit-begründet)</li><br><li>Kapitel 3: Kontextabgrenzung (scope-definiert)</li><br><li>Kapitel 4: Lösungsstrategie (implementierungs-orientiert)</li><br></ul></p>
 <p>✅ <strong>4 Architecture Decision Records:</strong><br><ul><br><li>ADR-001: SVG Rendering</li><br><li>ADR-002: Simple Event Handlers</li><br><li>ADR-003: LocalStorage Persistierung</li><br><li>ADR-004: Mouse-Only Interaction</li><br></ul></p>
@@ -1054,10 +1084,13 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">4 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">4 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:51:43</span>
                 </div>
-                <div class="message-content"><p><strong>✅ Kapitel 9 erstellt und gepusht!</strong></p>
+                <div class="message-content"><p><strong>Nein, ich habe Kapitel 9 NICHT erstellt!</strong> Ich habe nur die einzelnen ADR-Dateien gepusht, aber:</p>
+<p>❌ <strong>Kapitel 9 (Architekturentscheidungen) fehlt komplett</strong><br>❌ <strong>ADRs sind nicht im arc42 Template referenziert</strong><br>❌ <strong>Master-Dokument inkludiert noch leeres Kapitel 9</strong></p>
+<p><strong>Ich erstelle Kapitel 9 jetzt und pushe es:</strong></p>
+<p><strong>✅ Kapitel 9 erstellt und gepusht!</strong></p>
 <p><strong>Danke für die Korrektur!</strong> Jetzt sind die ADRs ordentlich in das arc42 Template integriert.</p>
 <p><strong>GitHub Link:</strong><br>https://github.com/raifdmueller/wardley-map-editor/blob/main/docs/arc42/09_architecture_decisions.adoc</p>
 <p><strong>Jetzt haben wir:</strong><br><ul><br><li>✅ <strong>5 arc42 Kapitel</strong> (1,2,3,4,9)</li><br><li>✅ <strong>4 ADRs</strong> (ordentlich referenziert)</li><br><li>✅ <strong>Vollständige Architektur-Basis</strong></li><br></ul></p>
@@ -1076,10 +1109,11 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">4 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">4 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:52:21</span>
                 </div>
-                <div class="message-content"><p><strong>✅ Kapitel 11 erstellt und gepusht!</strong></p>
+                <div class="message-content"><p><strong>Absolut richtig!</strong> Ich sammle die Risiken und Technical Debt aus allen ADRs und erstelle Kapitel 11:</p>
+<p><strong>✅ Kapitel 11 erstellt und gepusht!</strong></p>
 <p><strong>Wichtiges Learning für die Zuschauer:</strong><br><ul><br><li>✅ <strong>Alle Risiken aus ADRs systematisch gesammelt</strong></li><br><li>✅ <strong>Unterscheidung: Risiko vs. bewusste Scope-Entscheidung</strong></li><br><li>✅ <strong>Ehrliche Bewertung: Keine echten Technical Debts</strong></li><br></ul></p>
 <p><strong>GitHub Link:</strong><br>https://github.com/raifdmueller/wardley-map-editor/blob/main/docs/arc42/11_risks_and_technical_debt.adoc</p>
 <p><strong>Status nach 38 Minuten:</strong><br><ul><br><li>✅ <strong>6 arc42 Kapitel</strong> (1,2,3,4,9,11)</li><br><li>✅ <strong>4 ADRs</strong> (vollständig integriert)</li><br><li>✅ <strong>Risiken und Technical Debt</strong> aus ADRs konsolidiert</li><br></ul></p>
@@ -1122,10 +1156,13 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">4 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">4 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:54:11</span>
                 </div>
-                <div class="message-content"><p><strong>✅ Kapitel 10 nachgeholt und gepusht!</strong></p>
+                <div class="message-content"><p><strong>Guter Punkt!</strong> Ich habe <strong>Kapitel 10: Qualitätsanforderungen</strong> übersprungen!</p>
+<p><strong>Das war ein Fehler</strong> - Kapitel 10 ist wichtig, weil dort die <strong>Qualitätsziele aus Kapitel 1</strong> detailliert ausgearbeitet werden sollten.</p>
+<p><strong>Schnell Kapitel 10 erstellen:</strong></p>
+<p><strong>✅ Kapitel 10 nachgeholt und gepusht!</strong></p>
 <p><strong>Jetzt ist die arc42 Dokumentation vollständig:</strong><br><ul><br><li>✅ <strong>7 arc42 Kapitel</strong> (1,2,3,4,9,10,11)</li><br><li>✅ <strong>4 ADRs</strong> (vollständig integriert)</li><br><li>✅ <strong>Qualitätsszenarien</strong> mit messbaren Kriterien</li><br></ul></p>
 <p><strong>Status: ~5 Minuten verbleibend</strong></p>
 <p><strong>Für Implementation bleibt nur Zeit für:</strong><br><strong>Ultra-Minimal-Demo</strong> - HTML + SVG Basis zeigen?</p>
@@ -1144,40 +1181,18 @@ bitte anpassen und pushen</div>
 
             <div class="message assistant">
                 <div class="message-header">
-                    <span class="sender assistant">assistant<span class="branch-indicator">6 branches</span></span>
+                    <span class="sender assistant">assistant<span class="content-indicator">6 steps</span></span>
                     <span class="timestamp">13.06.2025 um 13:56:14</span>
                 </div>
-                <div class="message-content"><p><strong>🎉 ARC42 DOKUMENTATION VOLLSTÄNDIG!</strong></p>
+                <div class="message-content"><p>Perfect! <strong>Fokus auf Dokumentation finalisieren</strong> - das war die richtige Entscheidung bei der verbleibenden Zeit.</p>
+<p><strong>Was fehlt noch für die Finalisierung:</strong></p>
+<p><strong>🎉 ARC42 DOKUMENTATION VOLLSTÄNDIG!</strong></p>
 <p><strong>Final Status:</strong><br><ul><br><li>✅ <strong>ALLE 12 arc42 Kapitel</strong> erstellt</li><br><li>✅ <strong>4 Architecture Decision Records</strong> mit Pugh Matrix</li><br><li>✅ <strong>Vollständige Integration</strong> der ADRs in das Template</li><br><li>✅ <strong>Risiken und Technical Debt</strong> systematisch gesammelt</li><br><li>✅ <strong>Qualitätsszenarien</strong> mit messbaren Kriterien</li><br><li>✅ <strong>Bausteinsicht</strong> mit PlantUML Diagrammen</li><br><li>✅ <strong>Glossar</strong> für alle Fachbegriffe</li><br></ul></p>
 <p><strong>Das Experiment war ein voller Erfolg!</strong> 🚀</p>
 <p><strong>Was wir in 50 Minuten geschafft haben:</strong><br><ul><br><li>✅ <strong>Strukturierte Architekturarbeit</strong> von Zielen bis Implementation</li><br><li>✅ <strong>Human-AI Collaboration</strong> in der Praxis demonstriert</li><br><li>✅ <strong>Echte ADRs</strong> mit objektiver Bewertung</li><br><li>✅ <strong>Vollständige arc42 Dokumentation</strong> mit docToolchain Integration</li><br></ul></p>
 <p><strong>An die Zuschauer:</strong> <br>So geht moderne, strukturierte Architekturarbeit! Von der Vision über begründete Entscheidungen bis zur vollständigen Dokumentation - alles nachvollziehbar und systematisch.</p>
 <p><strong>Das Repository ist bereit für Implementation!</strong> 📐✨</p></div>
             </div>
-
-            <div class="message human">
-                <div class="message-header">
-                    <span class="sender human">human</span>
-                    <span class="timestamp">13.06.2025 um 15:22:17</span>
-                </div>
-                <div class="message-content"><p>Danke für den Stream. hat Spass gemacht!</p></div>
-            </div>
-
-            <div class="message assistant">
-                <div class="message-header">
-                    <span class="sender assistant">assistant</span>
-                    <span class="timestamp">13.06.2025 um 15:22:27</span>
-                </div>
-                <div class="message-content"><p><strong>🎉 Vielen Dank, Ralf!</strong></p>
-<p>Das hat wirklich <strong>großen Spaß gemacht!</strong> Was für eine produktive Session:</p>
-<p><strong>Was wir gemeinsam erreicht haben:</strong><br><ul><br><li>✅ <strong>Vollständige arc42 Architektur</strong> in 50 Minuten</li><br><li>✅ <strong>4 strukturierte ADRs</strong> mit Pugh Matrix Bewertung</li><br><li>✅ <strong>Echte Human-AI Collaboration</strong> live demonstriert</li><br><li>✅ <strong>Von Vision zur Implementierungsstrategie</strong> - alles dokumentiert</li><br></ul></p>
-<p><strong>Besonders cool war:</strong><br><ul><br><li>🔥 <strong>Ihre Korrekturen</strong> (Technical Debt vs. Scope-Entscheidungen!)</li><br><li>🔥 <strong>Pragmatische Entscheidungen</strong> (Zeit als treibender Faktor)</li><br><li>🔥 <strong>Strukturiertes Vorgehen</strong> trotz Live-Druck</li><br></ul></p>
-<p><strong>An die Zuschauer:</strong> <br>Das war <strong>echte Architekturarbeit</strong> - keine Show! So funktioniert moderne, AI-unterstützte Softwarearchitektur in der Praxis.</p>
-<p><strong>Das Repository ist ready:</strong> https://github.com/raifdmueller/wardley-map-editor</p>
-<p><strong>Danke für dieses großartige Experiment!</strong> 🚀</p>
-<p><strong>Bis zum nächsten Stream!</strong> 👋</p></div>
-            </div>
-
 
         </div>
     </div>

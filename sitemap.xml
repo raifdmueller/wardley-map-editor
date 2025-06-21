@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
     <url>
+    	<loc>http://jbake.org/images/architektur-theater-session.html</loc>
+    	<lastmod>2025-06-21</lastmod>
+    </url>
+
+    <url>
     	<loc>http://jbake.org/arc42/adr-003-data-persistence.html</loc>
     	<lastmod>2025-06-21</lastmod>
     </url>

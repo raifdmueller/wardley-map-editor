@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardley Map Editor</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="toolbar">
+            <h1>Wardley Map Editor</h1>
+            <div class="toolbar-actions">
+                <button id="add-component-btn" class="btn">Add Component</button>
+                <button id="export-btn" class="btn">Export to draw.io</button>
+                <button id="save-btn" class="btn">Save</button>
+                <button id="load-btn" class="btn">Load</button>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="editor-layout">
+                <aside class="properties-panel">
+                    <h3>Properties</h3>
+                    <div id="map-properties">
+                        <label>Map Title:</label>
+                        <input type="text" id="map-title" placeholder="Untitled Map">
+                    </div>
+                    <div id="component-properties" style="display: none;">
+                        <h4>Component Details</h4>
+                        <label>Label:</label>
+                        <input type="text" id="component-label">
+                        <label>Evolution (X):</label>
+                        <input type="range" id="component-x" min="0" max="100" step="1">
+                        <label>Visibility (Y):</label>
+                        <input type="range" id="component-y" min="0" max="100" step="1">
+                        <button id="delete-component-btn" class="btn btn-danger">Delete</button>
+                    </div>
+                </aside>
+                
+                <div class="canvas-container">
+                    <canvas id="wardley-canvas" width="800" height="600"></canvas>
+                    <div class="canvas-controls">
+                        <button id="zoom-in-btn">+</button>
+                        <button id="zoom-out-btn">-</button>
+                        <button id="reset-view-btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dsl-input-panel">
+                <h3>DSL Input</h3>
+                <textarea id="dsl-input" placeholder="Enter Wardley Map DSL here...
+Example:
+component Users [0.9, 0.8]
+component Website [0.7, 0.6]
+component Database [0.3, 0.4]
+Users->Website
+Website->Database"></textarea>
+                <button id="parse-dsl-btn" class="btn">Parse DSL</button>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

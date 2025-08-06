@@ -20,7 +20,7 @@ This Wardley Map Editor is a **demo project** showcasing:
 
 The project follows the [arc42](https://arc42.org) template for architecture documentation and uses Architecture Decision Records (ADRs) for transparent decision tracking.
 
-**📋 [Complete Architecture Documentation](docs/arc42/arc42.html)** *(generated with docToolchain)*
+**📋 [Complete Architecture Documentation]([docs/arc42/arc42.html](https://raifdmueller.github.io/wardley-map-editor/))** *(generated with docToolchain)*
 
 ### Key Architectural Decisions
 
